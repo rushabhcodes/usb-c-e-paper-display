@@ -1,0 +1,56 @@
+{
+  "result": "PASS",
+  "router": "tscircuit",
+  "solver": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+  "routing_mode": "TSX-authored paths plus built-in native autorouting",
+  "existing_trace_count": 5,
+  "source_authored_trace_count": 5,
+  "source_authored_traces": [
+    "BUSY_CHANNEL",
+    "CS_CHANNEL",
+    "DC_CHANNEL",
+    "RUN_CHANNEL",
+    "SCK_CHANNEL"
+  ],
+  "imported_trace_count": 0,
+  "source_paths_refined_by_native_router": [
+    "BUSY_CHANNEL",
+    "CS_CHANNEL",
+    "DC_CHANNEL",
+    "RUN_CHANNEL",
+    "SCK_CHANNEL"
+  ],
+  "cache_status": "disabled",
+  "connection_count": 42,
+  "obstacle_count": 251,
+  "trace_count": 165,
+  "via_count": 151,
+  "elapsed_ms": 40844,
+  "phases": [
+    {
+      "phaseName": "CLOCK",
+      "autorouterName": "bus_lanes",
+      "solverName": "BusLanesPipelineSolver",
+      "cacheStatus": "disabled",
+      "previousTraceCount": 5,
+      "elapsedMs": 1066
+    },
+    {
+      "phaseName": "MAIN",
+      "autorouterName": "tscircuit",
+      "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
+      "cacheStatus": "disabled",
+      "previousTraceCount": 10,
+      "elapsedMs": 39778
+    }
+  ],
+  "source_sha256": "332d6cf332ab0036aa2039fa0df31071417ead51cdc44dde8d19aaf18677b926",
+  "circuit_sha256": "a798852a44626dafc46e6036857799215f7d65de044ba5bfcc1ed0fff3ce6988",
+  "config_sha256": "c5b775e8dee27067a0ba14dd9b933a72a910f32e07dd40047b0e2380b9d6df18",
+  "routing_input_sha256": "bf8a8382b2d2eac4dd91ef23db7e13e199ac0d00eb801c638d7aac43d8750141",
+  "tscircuit_version": "0.0.3277",
+  "autorouter_version": "0.0.1153",
+  "external_router_used": false,
+  "kicad_used": false,
+  "saved_board_routes_used": false
+}

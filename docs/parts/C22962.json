@@ -1,0 +1,17 @@
+{
+  "query": "C22962",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 22962,
+      "mfr": "0603WAF2200T5E",
+      "package": "0603",
+      "description": "-55\u2103~+155\u2103 100mW 220\u03a9 75V Thick Film Resistor \u00b11% \u00b1100ppm/\u2103 0603 Chip Resistor - Surface Mount ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0019,
+      "stock_checked_at": "2026-11-10T09:32:07.000Z"
+    }
+  ]
+}

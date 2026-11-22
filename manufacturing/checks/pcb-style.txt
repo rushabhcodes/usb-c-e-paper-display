@@ -1,0 +1,2 @@
+No PCB style issues detected in circuit.json
+PCB style overview written to /home/rushabh/tscircuit/usb-c-e-paper-display/manufacturing/checks/pcb-style.svg

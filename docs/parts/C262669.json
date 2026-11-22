@@ -1,0 +1,17 @@
+{
+  "query": "C262669",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 262669,
+      "mfr": "AFC01-S24FCA-00",
+      "package": "SMD,P=0.5mm,Surface Mount\uff0cRight Angle",
+      "description": "-45\u2103~+85\u2103 0.3mm 0.5mm 24P 2mm 500mA 50V Bottom Contact Copper alloy Hinged Lid Surface Mount, Right Angle Tin SMD,P=0.5mm,\u5367\u8d34 FFC, FPC (Flat Flexible) Connector Assemblies ROHS",
+      "is_basic": false,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.1208,
+      "stock_checked_at": "2026-11-10T12:37:49.000Z"
+    }
+  ]
+}

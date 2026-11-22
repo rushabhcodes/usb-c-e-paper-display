@@ -1,0 +1,17 @@
+{
+  "query": "C7519",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 7519,
+      "mfr": "USBLC6-2SC6",
+      "package": "SOT-23-6L",
+      "description": "-40\u2103~+125\u2103 150nA 17V 2 3.5pF 5.25V 5A 6V ESD IEC 61000-4-2 Unidirectional SOT-23-6L ESD and Surge Protection (TVS/ESD) ROHS",
+      "is_basic": false,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.18,
+      "stock_checked_at": "2026-11-04T01:33:02.000Z"
+    }
+  ]
+}

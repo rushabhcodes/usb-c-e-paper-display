@@ -1,0 +1,17 @@
+{
+  "query": "C165948",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 165948,
+      "mfr": "TYPE-C-31-M-12",
+      "package": "SMD",
+      "description": "-30\u2103~+80\u2103 1 10,000 cycles 16P 20V 5A 7.35mm Female Surface Mount, Right Angle Type-C SMD USB Connectors ROHS",
+      "is_basic": false,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.1873,
+      "stock_checked_at": "2026-11-03T21:34:15.000Z"
+    }
+  ]
+}

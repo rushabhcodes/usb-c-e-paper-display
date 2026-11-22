@@ -1,0 +1,17 @@
+{
+  "query": "C22935",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 22935,
+      "mfr": "0603WAF1004T5E",
+      "package": "0603",
+      "description": "-55\u2103~+155\u2103 100mW 1M\u03a9 75V Thick Film Resistor \u00b11% \u00b1100ppm/\u2103 0603 Chip Resistor - Surface Mount ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0018,
+      "stock_checked_at": "2026-11-10T05:31:34.000Z"
+    }
+  ]
+}

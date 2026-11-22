@@ -1,0 +1,115 @@
+{
+  "query": "1206L050",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 19193043,
+      "mfr": "1206L050/33NR",
+      "package": "1206",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+85\u2103 1.9mm 100ms 150m\u03a9 1A 1W 1mm 3.6mm 33V 40A 500mA 850m\u03a9 1206 Resettable Fuses ROHS",
+      "stock": 117616,
+      "price": 0.0489
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 7542947,
+      "mfr": "1206L050/30NR",
+      "package": "1206",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+85\u2103 1.9mm 100ms 150m\u03a9 1A 1W 1mm 3.6mm 30V 40A 500mA 850m\u03a9 1206 Resettable Fuses ROHS",
+      "stock": 113840,
+      "price": 0.0522
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 42369219,
+      "mfr": "1206L050/48NR",
+      "package": "1206",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+85\u2103 1.4mm 1.9mm 100ms 150m\u03a9 1A 1W 3.6mm 40A 48V 500mA 850m\u03a9 1206 Resettable Fuses ROHS",
+      "stock": 69018,
+      "price": 0.1045
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 20616702,
+      "mfr": "1206L050/36NR",
+      "package": "1206",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+85\u2103 1.2mm 1.9mm 100ms 10A 150m\u03a9 1A 1W 3.6mm 36V 500mA 850m\u03a9 1206 Resettable Fuses ROHS",
+      "stock": 51632,
+      "price": 0.0601
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 7542945,
+      "mfr": "1206L050/16NR",
+      "package": "1206",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+85\u2103 1.9mm 100A 100ms 150m\u03a9 16V 1A 1mm 3.6mm 500mA 700m\u03a9 800mW 1206 Resettable Fuses ROHS",
+      "stock": 36732,
+      "price": 0.045
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 7542942,
+      "mfr": "1206L050/6NR",
+      "package": "1206",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+85\u2103 1.9mm 100A 100ms 150m\u03a9 1A 1mm 3.6mm 500mA 6V 700m\u03a9 800mW 1206 Resettable Fuses ROHS",
+      "stock": 33242,
+      "price": 0.042
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 151162,
+      "mfr": "1206L050/15YR",
+      "package": "1206",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+85\u2103 0.75mm 1.8mm 100A 100ms 150m\u03a9 15V 1A 3.4mm 500mA 600mW 750m\u03a9 1206 Resettable Fuses ROHS",
+      "stock": 21604,
+      "price": 0.1048
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 49318361,
+      "mfr": "1206L050/24V",
+      "package": "1206",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "",
+      "stock": 13407,
+      "price": 0.0538
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 7542944,
+      "mfr": "1206L050/13.2NR",
+      "package": "1206",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+85\u2103 1.9mm 100A 100ms 13.2V 150m\u03a9 1A 1mm 3.6mm 500mA 700m\u03a9 800mW 1206 Resettable Fuses ROHS",
+      "stock": 11395,
+      "price": 0.0409
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 7542943,
+      "mfr": "1206L050/8NR",
+      "package": "1206",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+85\u2103 1.9mm 100A 100ms 150m\u03a9 1A 1mm 3.6mm 500mA 700m\u03a9 800mW 8V 1206 Resettable Fuses ROHS",
+      "stock": 9967,
+      "price": 0.0459
+    }
+  ]
+}

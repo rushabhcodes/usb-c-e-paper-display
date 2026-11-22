@@ -1,0 +1,18 @@
+{
+  "query": "C82046",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 82046,
+      "mfr": "MBR0530T1G",
+      "package": "SOD-123",
+      "description": "-65\u2103~+125\u2103 1 Independent 130uA@30V 30V 430mV@500mA 5.5A 500mA SOD-123 Schottky Diodes ROHS",
+      "is_basic": false,
+      "is_preferred": false,
+      "is_standard_only": false,
+      "stock": null,
+      "price": 0.0629,
+      "stock_checked_at": "2026-11-12T08:33:28.000Z"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "query": "Si1308EDL",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 469327,
+      "mfr": "SI1308EDL-T1-GE3",
+      "package": "SOT-323",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-55\u2103~+150\u2103 1 N-channel 1.4nC@10V 1.5A 1.5V 105pF 11pF 132m\u03a9@10V 23pF 30V 400mW N-Channel SOT-323 MOSFETs ROHS",
+      "stock": 39315,
+      "price": 0.2207
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 7603347,
+      "mfr": "SI1308EDL",
+      "package": "SOT-323",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "",
+      "stock": 9206,
+      "price": 0.0991
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 4355112,
+      "mfr": "SI1308EDL-VB",
+      "package": "SOT-323(SC-70)",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-55\u2103~+150\u2103 1 N-channel 1.3V 2.8W 20V 36m\u03a9@10V\u300140m\u03a9@4.5V\u300148m\u03a9@2.5V 4A 8.8nC@10V N-Channel SOT-323(SC-70) MOSFETs ROHS",
+      "stock": 867,
+      "price": 0.1239
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 3289597,
+      "mfr": "SI1308EDL-T1-BE3",
+      "package": "SC-70-3",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-55\u2103~+150\u2103 1 N-channel 1.4nC@10V 1.5A 1.5V 105pF 11pF 132m\u03a9@10V 30V 500mW N-Channel SC-70-3 MOSFETs ROHS",
+      "stock": 285,
+      "price": 0.3988
+    }
+  ]
+}

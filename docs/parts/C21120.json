@@ -1,0 +1,17 @@
+{
+  "query": "C21120",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 21120,
+      "mfr": "CL10B224KA8NNNC",
+      "package": "0603",
+      "description": "220nF 25V X7R \u00b110% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0093,
+      "stock_checked_at": "2026-11-01T17:34:03.000Z"
+    }
+  ]
+}

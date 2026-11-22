@@ -1,0 +1,27 @@
+{
+  "query": "MBR0530",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 475718,
+      "mfr": "MBR0530",
+      "package": "SOD-123",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-65℃~+125℃ 2A 30V 350mA 5uA@20V 600mV@200mA Independent SOD-123 Schottky Diodes ROHS",
+      "stock": 12668,
+      "price": 0.0204
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 42388518,
+      "mfr": "MBR0530-TP",
+      "package": "SOD-123",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "",
+      "stock": 4346,
+      "price": 0.0395
+    }
+  ]
+}

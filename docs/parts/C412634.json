@@ -1,0 +1,18 @@
+{
+  "query": "C412634",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 412634,
+      "mfr": "UMK212BBJ475KG-T",
+      "package": "0805",
+      "description": "4.7uF 50V X5R \u00b110% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "is_basic": false,
+      "is_preferred": false,
+      "is_standard_only": false,
+      "stock": null,
+      "price": 0.0911,
+      "stock_checked_at": "2026-11-19T20:31:15.000Z"
+    }
+  ]
+}

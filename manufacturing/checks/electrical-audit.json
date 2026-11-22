@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "electrical_components": 68,
+  "assembled_components": 62,
+  "source_nets": 45,
+  "pcb_traces": 165,
+  "pcb_vias": 151,
+  "copper_pours": 3,
+  "schematic_sheets": 3
+}

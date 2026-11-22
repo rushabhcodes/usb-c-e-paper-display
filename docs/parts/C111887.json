@@ -1,0 +1,17 @@
+{
+  "query": "C111887",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 111887,
+      "mfr": "L7805CV",
+      "package": "TO-220",
+      "description": "0\u2103~+125\u2103@(Tj) 1 1.5A 2V@(1A) 35V 5V 68dB@(120Hz) 8mA Fixed Over Current Protection\u3001Over Temperature Protection\u3001Short Circuit Protection Positive TO-220 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS",
+      "is_basic": false,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.3123,
+      "stock_checked_at": "2026-11-04T08:30:04.000Z"
+    }
+  ]
+}

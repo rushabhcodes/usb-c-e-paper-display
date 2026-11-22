@@ -1,0 +1,17 @@
+{
+  "query": "C20625731",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 20625731,
+      "mfr": "ABM8-272-T3",
+      "package": "SMD3225-4P",
+      "description": "-40\u2103~+85\u2103 10pF 12MHz 50\u03a9 SMD crystal oscillator \u00b130ppm \u00b130ppm SMD3225-4P Crystals ROHS",
+      "is_basic": false,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.6561,
+      "stock_checked_at": "2026-11-03T22:32:28.000Z"
+    }
+  ]
+}

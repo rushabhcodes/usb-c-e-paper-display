@@ -1,0 +1,17 @@
+{
+  "query": "C1525",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 1525,
+      "mfr": "CL05B104KO5NNNC",
+      "package": "0402",
+      "description": "100nF 16V X7R \u00b110% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0031,
+      "stock_checked_at": "2026-11-10T05:34:38.000Z"
+    }
+  ]
+}

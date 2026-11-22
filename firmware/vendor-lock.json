@@ -1,0 +1,18 @@
+{
+  "repository": "https://github.com/ZinggJM/GxEPD2",
+  "commit": "de82887e77a78528ea386e68bba2cb0291d2c319",
+  "vendored_sha256": {
+    "GxEPD2.h": "43128c5f58cc48085ee880bb6fac251637cdc117b9f7c2a3c784e7c7f9be41b2",
+    "GxEPD2_EPD.h": "5bb561247615b4a68416ec584aeaf21a4a63846f8acc80549f960d9cbfe16b3b",
+    "GxEPD2_EPD.cpp": "8a291ea8ffe1d9db747c29dc400dbdf06033c82905891ef311d5d4eb8d0e00df",
+    "LICENSE": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "GxEPD2_EPD_friends.h": "b3f4e9db2fc319bb65bbf7dbde7919cd378ee16837fc6064634a17fb46622009",
+    "gdey/GxEPD2_750_GDEY075T7.h": "7f975580ba927c0e896682bd63abb137f95bb3c5597d2751c3079b4fa2fb0a00",
+    "gdey/GxEPD2_750_GDEY075T7.cpp": "79680cc24fcc7556607450a0e206aeb2c31e7fc7e1683484e43ae91872d84b8a"
+  },
+  "local_patches": [
+    "Relative include for self-contained driver subset",
+    "Sticky BUSY timeout flag instead of ASCII USB diagnostics; subsequent waits return on fault",
+    "useFastFullUpdate=false for normal clean full waveform; fast partial OTP retained"
+  ]
+}

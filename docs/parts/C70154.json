@@ -1,0 +1,16 @@
+{
+  "query": "C70154",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 70154,
+      "mfr": "SL0805110",
+      "package": "0805",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+70\u2103 1.1A 120m\u03a9 1W 2.2A 50A 8m\u03a9 8s 0805 Resettable Fuses ROHS",
+      "stock": 1563,
+      "price": 0.069
+    }
+  ]
+}

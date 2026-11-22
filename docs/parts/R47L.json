@@ -1,0 +1,38 @@
+{
+  "query": "R47L",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 20160596,
+      "mfr": "PE1206FRF470R47L",
+      "package": "1206",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "",
+      "stock": 3949,
+      "price": 0.0609
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 2089288,
+      "mfr": "PE0402FRF7W0R47L",
+      "package": "0402",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "125mW 470m\u03a9 Metal Film Resistor \u00b11% \u00b1100ppm/\u2103 0402 Current Sense Resistors / Shunt Resistors ROHS",
+      "stock": 4,
+      "price": 0.0306
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 2837903,
+      "mfr": "RC050MR47LO5*11-8A1C",
+      "package": "\u63d2\u4ef6,D5xL11mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+105\u2103 11mm 2mm 470nF 50V 5mm 68mA@100kHz \u00b120% \u63d2\u4ef6,D5xL11mm Aluminum Electrolytic Capacitors - Leaded ROHS",
+      "stock": 1,
+      "price": 0.0225
+    }
+  ]
+}

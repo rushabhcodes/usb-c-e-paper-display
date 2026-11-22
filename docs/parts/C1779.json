@@ -1,0 +1,17 @@
+{
+  "query": "C1779",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 1779,
+      "mfr": "CL21A475KAQNNNE",
+      "package": "0805",
+      "description": "25V 4.7uF X5R \u00b110% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0342,
+      "stock_checked_at": "2026-11-10T19:33:13.000Z"
+    }
+  ]
+}

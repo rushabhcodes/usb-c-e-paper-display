@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "circuit_sha256": "a798852a44626dafc46e6036857799215f7d65de044ba5bfcc1ed0fff3ce6988",
+  "issue_count": 0,
+  "long_angled_runs": 0,
+  "short_staircases": 0,
+  "continuous_chain_check": "PASS",
+  "continuous_chain_count": 238,
+  "physical_clearances_and_shorts": "PASS",
+  "rules": "Default unmodified tscircuit PCB style rules",
+  "routing": "Five paths authored in TSX with standard trace primitives and refined by the built-in local tscircuit router; all other connections routed natively. No imported board routes or external router."
+}

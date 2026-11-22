@@ -1,0 +1,18 @@
+{
+  "query": "C602018",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 602018,
+      "mfr": "FHD252012S-100MT",
+      "package": "1008",
+      "description": "1.35A 10uH 1A 435m\u03a9 \u00b120% 1008 Power Inductors ROHS",
+      "is_basic": false,
+      "is_preferred": false,
+      "is_standard_only": false,
+      "stock": null,
+      "price": 0.0468,
+      "stock_checked_at": "2026-11-21T09:29:47.000Z"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "query": "C131337",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 131337,
+      "mfr": "B2B-PH-K-S(LF)(SN)",
+      "package": "Plugin,P=2mm",
+      "description": "-25\u2103~+85\u2103 1 100V 1x2P 2 2A 2P 2mm 4.5mm 5.9mm 6mm Brass K Pin PA66 PH Through Hole Tin UL94V-0 White \u63d2\u4ef6,P=2mm Wire To Board Connector ROHS",
+      "is_basic": false,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0356,
+      "stock_checked_at": "2026-11-04T00:46:29.000Z"
+    }
+  ]
+}

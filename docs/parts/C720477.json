@@ -1,0 +1,17 @@
+{
+  "query": "C720477",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 720477,
+      "mfr": "TS-1088-AR02016",
+      "package": "SMD,4x3mm",
+      "description": "-30\u2103~+80\u2103 1.6N 100,000 cycles 12V 2mm 3.9mm 3mm 50mA Black Round Button SMD(SMT) Tab SPST Surface Mount,Vertical Without Bracket SMD,4x3mm Tactile Switches ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0529,
+      "stock_checked_at": "2026-11-03T22:33:33.000Z"
+    }
+  ]
+}

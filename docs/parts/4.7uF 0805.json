@@ -1,0 +1,93 @@
+{
+  "query": "4.7uF 0805",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 412634,
+      "mfr": "UMK212BBJ475KG-T",
+      "package": "0805",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "4.7uF 50V X5R \u00b110% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "stock": 4990,
+      "price": 0.0544
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 329962,
+      "mfr": "CGA4J3X5R1H475KT0Y0N",
+      "package": "0805",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "4.7uF 50V X5R \u00b110% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "stock": 3391,
+      "price": 0.1152
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 107125,
+      "mfr": "CC0805KKX5R6BB475",
+      "package": "0805",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "10V 4.7uF X5R \u00b110% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "stock": 1546,
+      "price": 0.0637
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 412449,
+      "mfr": "EMK212AB7475KGHT",
+      "package": "0805",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "16V 4.7uF X7R \u00b110% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "stock": 1462,
+      "price": 0.1113
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 2162926,
+      "mfr": "865080543009",
+      "package": "SMD,D6.3xL5.5mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-55\u2103~+105\u2103 156mA@120Hz 2000hrs@105\u2103 35V 47uF 5.5mm 6.3mm \u00b120% SMD,D6.3xL5.5mm Aluminum Electrolytic Capacitors - SMD ROHS",
+      "stock": 1286,
+      "price": 0.3405
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 454423,
+      "mfr": "CT4G-0805-2X1-100V-0.047uF-K",
+      "package": "\u63d2\u4ef6,P=5.08mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "100V 47nF 5.08mm \u00b110% \u63d2\u4ef6,P=5.08mm Multilayer Ceramic Capacitors MLCC - Leaded ROHS",
+      "stock": 334,
+      "price": 0.1037
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 84718,
+      "mfr": "CL21F475ZOFNNNE",
+      "package": "0805",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-20%~+80% 16V 4.7uF Y5V 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "stock": 19,
+      "price": 0.0222
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 342753,
+      "mfr": "C2012X6S1H475KT000E",
+      "package": "0805",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "4.7uF 50V X6S \u00b110% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "stock": 4,
+      "price": 0.1442
+    }
+  ]
+}

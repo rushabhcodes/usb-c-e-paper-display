@@ -1,0 +1,17 @@
+{
+  "query": "C1548",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 1548,
+      "mfr": "0402CG150J500NT",
+      "package": "0402",
+      "description": "15pF 50V C0G \u00b15% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0026,
+      "stock_checked_at": "2026-11-10T05:34:27.000Z"
+    }
+  ]
+}

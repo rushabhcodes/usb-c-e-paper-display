@@ -1,0 +1,17 @@
+{
+  "query": "C2480",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 2480,
+      "mfr": "SS14",
+      "package": "SMA(DO-214AC)",
+      "description": "-55\u2103~+150\u2103 1A 25A 300uA@40V 40V 550mV@1A Independent SMA(DO-214AC) Schottky Diodes ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0192,
+      "stock_checked_at": "2026-11-02T06:49:44.000Z"
+    }
+  ]
+}

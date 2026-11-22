@@ -1,0 +1,18 @@
+{
+  "query": "C23848",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 23848,
+      "mfr": "MBR0520LT1G",
+      "package": "SOD-123",
+      "description": "-65\u2103~+125\u2103 1 Independent 20V 250uA@20V 385mV@500mA 5.5A 500mA SOD-123 Schottky Diodes ROHS",
+      "is_basic": false,
+      "is_preferred": false,
+      "is_standard_only": false,
+      "stock": null,
+      "price": 0.0647,
+      "stock_checked_at": "2026-11-16T06:57:56.000Z"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "query": "C25900",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 25900,
+      "mfr": "0402WGF4701TCE",
+      "package": "0402",
+      "description": "-55\u2103~+155\u2103 4.7k\u03a9 50V 62.5mW Thick Film Resistor \u00b11% \u00b1100ppm/\u2103 0402 Chip Resistor - Surface Mount ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.002,
+      "stock_checked_at": "2026-11-03T21:34:10.000Z"
+    }
+  ]
+}

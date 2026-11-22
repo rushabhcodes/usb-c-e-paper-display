@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# tscircuit cache
+.tscircuit/
+.tscircuit-build-history/
+
+# Isolated firmware/CAD tools and Python cache
+.toolchains/
+.venv/
+.venv-host/
+__pycache__/
+.legacy-external-routing/
+/checks/
+logs/
+*.blend1
+USB-C-Epaper-RevA-Complete.zip
+.npmrc
+.agents/
+.claude/
+docs/reference/*
+!docs/reference/README.md

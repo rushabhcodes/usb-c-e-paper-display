@@ -1,0 +1,17 @@
+{
+  "query": "C15725",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 15725,
+      "mfr": "CL10B104KC8NNNC",
+      "package": "0603",
+      "description": "100V 100nF X7R \u00b110% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "is_basic": false,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0097,
+      "stock_checked_at": "2026-11-10T19:35:13.000Z"
+    }
+  ]
+}

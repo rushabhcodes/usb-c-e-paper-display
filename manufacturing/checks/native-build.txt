@@ -1,0 +1,50 @@
+Building 1 file(s)...
+Building index.circuit.tsx...
+Generating circuit JSON...
+Wrote debug artifact: dist/style-source-landings/placement-unrouted.png
+Autorouting <board#379 /> phase 1/2 "CLOCK" start: connections=3, obstacles=251, previous_traces=5, router=bus_lanes, version=beta_pipeline9, solver=BusLanesPipelineSolver, effort=1x, cache=disabled(strategy_not_cacheable)
+  connections: net.XIN, net.XOUT, net.XOSC_OUT
+Wrote debug artifact: dist/style-source-landings/phase-0.input.simple-route.json
+  phase 1/2 "CLOCK" done: routed_traces=10, jumpers=0, errors=0, elapsed=1.1s
+Wrote debug artifact: dist/style-source-landings/phase-0.output.traces.json
+Wrote debug artifact: dist/style-source-landings/phase-0-routed.png
+Saved autorouting paths to .tscircuit/autorouting-artifacts/index-circuit-tsx-2e2764dae4/subcircuit_source_group_0-phase-0-order-0-stage-0.pcb-trace-paths.json (import this JSON into <autoroutingphase pcbTracePaths={...} />).
+Autorouting <board#379 /> phase 2/2 "MAIN" start: connections=42, obstacles=251, previous_traces=10, router=tscircuit, version=beta_pipeline9, solver=AutoroutingPipelineSolver9_PreloadedTraceGraph, effort=1x, cache=disabled(no_cache_engine)
+  connections: net.GND, net.VBUS, net.VSYS, net.V3V3, net.VCORE, net.EPD_3V3, net.EPD_SW, net.EPD_PUMP, net.EPD_VGH, net.EPD_VGL, net.EPD_VSH, net.EPD_VSL, net.EPD_VCOM, net.EPD_VSHR, net.CC1, net.CC2, net.USB_DP, net.USB_DM, net.EPD_EN, net.USB_DM_MCU, net.USB_DP_MCU, net.QSPI_SD3, net.QSPI_SCLK, net.QSPI_SD0, net.QSPI_SD2, net.QSPI_SD1, net.QSPI_SS, net.SWCLK, net.SWDIO, net.RUN, net.EPD_DC, net.EPD_CS, net.SCK_MCU, net.MOSI_MCU, net.EPD_RST, net.EPD_BUSY, net.BOOT_N, net.EPD_GDR, net.EPD_RESE, net.EPD_SCK, net.EPD_MOSI, net.EPD_VDD
+Wrote debug artifact: dist/style-source-landings/phase-1.input.simple-route.json
+  phase 2/2 "MAIN" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=topologyMergingSolver steps=1 progress=20% iterations_per_second=28289 elapsed=271ms
+  phase 2/2 "MAIN" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=29 progress=54% iterations_per_second=4876 elapsed=10.5s
+  phase 2/2 "MAIN" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=traceWidthSolver steps=59 progress=76% iterations_per_second=9192 elapsed=20.8s
+  phase 2/2 "MAIN" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=pipeline9JointDrcRepairSolver steps=80 progress=86% iterations_per_second=2145 elapsed=31.2s
+  phase 2/2 "MAIN" done: routed_traces=165, jumpers=0, errors=0, elapsed=39.8s
+Wrote debug artifact: dist/style-source-landings/phase-1.output.traces.json
+Wrote debug artifact: dist/style-source-landings/phase-1-routed.png
+Saved autorouting paths to .tscircuit/autorouting-artifacts/index-circuit-tsx-2e2764dae4/subcircuit_source_group_0-phase-1-order-1-stage-0.pcb-trace-paths.json (import this JSON into <autoroutingphase pcbTracePaths={...} />).
+Wrote debug artifact: dist/style-source-landings/board.meta.json
+Circuit JSON written to dist/index/circuit.json
+The "Q" prefix is being used with a <chip />, try using it with a <transistor />
+U2 has no pin with requires_power=true
+Q1 has no pin with requires_power=true
+Q1 has no pin with requires_ground=true
+All pins on Q1 are underspecified (no pinAttributes set)
+C1 may not have availability from jlcpcb (C15849).
+C3 may not have availability from jlcpcb (C15849).
+C5 may not have availability from jlcpcb (C15849).
+C15 may not have availability from jlcpcb (C15849).
+C16 may not have availability from jlcpcb (C15849).
+C22 may not have availability from jlcpcb (C15849).
+C23 may not have availability from jlcpcb (C15849).
+C24 may not have availability from jlcpcb (C15849).
+C25 may not have availability from jlcpcb (C15849).
+C2 may not have availability from jlcpcb (C14663).
+Datasheet information for chip "U5" could not be fetched: Datasheet API did not respond within 5 seconds; pin attributes may not be populated. Pin attributes may not be populated.
+jlcpcb_standard: 151 via(s) have a hole diameter below 0.3 mm and incur an extra fabrication charge. Use a hole diameter of at least 0.3 mm to avoid this charge.
+… 52 more source_component_availability_warning not shown
+
+Build complete
+  Circuits  1 passed
+  Options   autorouter-debug, autorouter-dump-srj
+  Output    dist
+
+✓ Done
+Build exiting with code 0: build finished successfully

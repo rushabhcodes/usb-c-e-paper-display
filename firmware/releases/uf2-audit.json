@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "uf2_family": "RP2040 / 0xe48bff56",
+  "blocks": 320,
+  "payload_size": 256,
+  "flash_base": "0x10000000",
+  "uf2_matches_bin": true,
+  "physical_board_tested": false
+}

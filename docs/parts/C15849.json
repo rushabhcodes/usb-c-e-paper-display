@@ -1,0 +1,17 @@
+{
+  "query": "C15849",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 15849,
+      "mfr": "CL10A105KB8NNNC",
+      "package": "0603",
+      "description": "1uF 50V X5R \u00b110% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0145,
+      "stock_checked_at": "2026-11-03T21:33:58.000Z"
+    }
+  ]
+}

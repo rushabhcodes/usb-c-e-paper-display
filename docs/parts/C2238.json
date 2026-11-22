@@ -1,0 +1,16 @@
+{
+  "query": "C2238",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 2238,
+      "mfr": "X49SM36864MSD2SC-1",
+      "package": "HC-49S-SMD",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-20\u2103~+70\u2103 20pF 3.6864MHz Crystal Oscillator \u00b120ppm \u00b130ppm HC-49S-SMD Crystals ROHS",
+      "stock": null,
+      "price": 0.1297
+    }
+  ]
+}

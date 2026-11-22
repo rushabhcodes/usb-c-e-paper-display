@@ -1,0 +1,17 @@
+{
+  "query": "C25080",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 25080,
+      "mfr": "0402WGF1210TCE",
+      "package": "0402",
+      "description": "-55\u2103~+155\u2103 121\u03a9 50V 62.5mW Thick Film Resistor \u00b11% \u00b1100ppm/\u2103 0402 Chip Resistor - Surface Mount ROHS",
+      "is_basic": false,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0022,
+      "stock_checked_at": "2026-11-01T14:30:23.000Z"
+    }
+  ]
+}

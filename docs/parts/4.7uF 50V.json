@@ -1,0 +1,115 @@
+{
+  "query": "4.7uF 50V",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 112512,
+      "mfr": "ERS1HM4R7D11OT",
+      "package": "\u63d2\u4ef6,D5xL11mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "11mm 2mm 4.7uF 5000hrs@105\u2103 50V 5mm \u00b120% \u63d2\u4ef6,D5xL11mm Aluminum Electrolytic Capacitors - Leaded ROHS",
+      "stock": 583140,
+      "price": 0.0192
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 88791,
+      "mfr": "50YXJ47M6.3X11",
+      "package": "\u63d2\u4ef6,D6.3xL11mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "11mm 2.5mm 47uF 50V 6.3mm 7000hrs@105\u2103 \u00b120% \u63d2\u4ef6,D6.3xL11mm Aluminum Electrolytic Capacitors - Leaded ROHS",
+      "stock": 234940,
+      "price": 0.0718
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 112502,
+      "mfr": "ERM1HM4R7D11OT",
+      "package": "\u63d2\u4ef6,D5xL11mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "10000hrs@105\u2103 11mm 2mm 4.7uF 50V 5mm 80mA@100kHz \u00b120% \u63d2\u4ef6,D5xL11mm Aluminum Electrolytic Capacitors - Leaded ROHS",
+      "stock": 207061,
+      "price": 0.0228
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 2873979,
+      "mfr": "KM1H4R7M0405",
+      "package": "\u63d2\u4ef6,D4xL5mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+105\u2103 16mA@120kHz 2000hrs@105\u2103 4.7uF 4mm 50V 5mm \u00b120% \u63d2\u4ef6,D4xL5mm Aluminum Electrolytic Capacitors - Leaded ROHS",
+      "stock": 202467,
+      "price": 0.0127
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 72523,
+      "mfr": "RVT1H470M0607",
+      "package": "SMD,D6.3xL7.7mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+105\u2103 2000hrs@105\u2103 47uF 50V 6.3mm 66mA@120Hz 7.7mm \u00b120% SMD,D6.3xL7.7mm Aluminum Electrolytic Capacitors - SMD ROHS",
+      "stock": 198686,
+      "price": 0.0337
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 7461266,
+      "mfr": "126RV0135",
+      "package": "SMD,D6.3xL5.4mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-55\u2103~+105\u2103 2000hrs@105\u2103 47uF 5.4mm 50V 6.3mm 70mA \u00b120% SMD,D6.3xL5.4mm Aluminum Electrolytic Capacitors - SMD ROHS",
+      "stock": 182467,
+      "price": 0.0479
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 48971023,
+      "mfr": "RV50V47M6X5",
+      "package": "SMD,D6.3xL5.4mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "",
+      "stock": 164987,
+      "price": 0.0478
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 106665,
+      "mfr": "ERS1HM470E110T",
+      "package": "\u63d2\u4ef6,D6.3xL11mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "11mm 2.5mm 47uF 5000hrs@105\u2103 50V 6.3mm \u00b120% \u63d2\u4ef6,D6.3xL11mm Aluminum Electrolytic Capacitors - Leaded ROHS",
+      "stock": 152297,
+      "price": 0.0386
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 106605,
+      "mfr": "ERM1HM470E11OT",
+      "package": "\u63d2\u4ef6,D6.3xL11mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "10000hrs@105\u2103 11mm 190mA@100kHz 2.5mm 47uF 50V 6.3mm \u00b120% \u63d2\u4ef6,D6.3xL11mm Aluminum Electrolytic Capacitors - Leaded ROHS",
+      "stock": 114444,
+      "price": 0.0327
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 46550421,
+      "mfr": "JVJ50V47M6x8",
+      "package": "SMD,D6.3xL7.7mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "",
+      "stock": 99692,
+      "price": 0.0551
+    }
+  ]
+}

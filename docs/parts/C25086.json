@@ -1,0 +1,17 @@
+{
+  "query": "C25086",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 25086,
+      "mfr": "0402WGF100KTCE",
+      "package": "0402",
+      "description": "-55\u2103~+155\u2103 1\u03a9 50V 62.5mW Thick Film Resistor \u00b11% \u00b1200ppm/\u2103 0402 Chip Resistor - Surface Mount ROHS",
+      "is_basic": false,
+      "is_preferred": true,
+      "stock": null,
+      "price": 0.0041,
+      "stock_checked_at": "2026-11-04T00:48:46.000Z"
+    }
+  ]
+}

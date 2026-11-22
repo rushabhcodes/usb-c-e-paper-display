@@ -1,0 +1,16 @@
+{
+  "query": "C30485",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 30485,
+      "mfr": "2.0-2*4P\u5f2f\u7b80\u725b",
+      "package": "\u5f2f\u63d2,P=2mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+105\u2103 1.5A 2 2mm 2mm 2x4P 4 Brass IDC Header Right Angle \u5f2f\u63d2,P=2mm IDC Connectors ROHS",
+      "stock": 238,
+      "price": 0.2093
+    }
+  ]
+}

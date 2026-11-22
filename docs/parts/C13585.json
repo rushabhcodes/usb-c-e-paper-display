@@ -1,0 +1,17 @@
+{
+  "query": "C13585",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 13585,
+      "mfr": "CL31A106KBHNNNE",
+      "package": "1206",
+      "description": "10uF 50V X5R \u00b110% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.1295,
+      "stock_checked_at": "2026-11-10T05:34:40.000Z"
+    }
+  ]
+}

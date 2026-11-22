@@ -1,0 +1,17 @@
+{
+  "query": "C12084",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 12084,
+      "mfr": "SN65HVD230DR",
+      "package": "SOIC-8",
+      "description": "-40\u2103~+85\u2103 1 17mA 1Mbps 370uA 3V~3.6V CAN Transceiver Low-power mode\u3001Wake-up function\u3001ESD protection\u3001Thermal shutdown protection\u3001Bus fault protection\u3001Hot-swap protection SOIC-8 CAN Transceivers ROHS",
+      "is_basic": false,
+      "is_preferred": true,
+      "stock": null,
+      "price": 0.5498,
+      "stock_checked_at": "2026-11-10T19:34:45.000Z"
+    }
+  ]
+}

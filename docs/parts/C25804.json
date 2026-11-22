@@ -1,0 +1,17 @@
+{
+  "query": "C25804",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 25804,
+      "mfr": "0603WAF1002T5E",
+      "package": "0603",
+      "description": "-55\u2103~+155\u2103 100mW 10k\u03a9 75V Thick Film Resistor \u00b11% \u00b1100ppm/\u2103 0603 Chip Resistor - Surface Mount ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0024,
+      "stock_checked_at": "2026-11-03T22:33:32.000Z"
+    }
+  ]
+}

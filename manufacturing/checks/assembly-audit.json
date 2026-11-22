@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "assembled_refs": 62,
+  "bom_cpl_match": true,
+  "all_supplier_codes_match": true,
+  "coordinate_origin": "PCB centre, matching Gerbers; mm",
+  "position_reference": "footprint_origin",
+  "side": "Top",
+  "all_supplier_orientations_resolved": true
+}

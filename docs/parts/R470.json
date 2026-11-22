@@ -1,0 +1,115 @@
+{
+  "query": "R470",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 382278,
+      "mfr": "FBF05FT-R470-00L",
+      "package": "0805",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "250mW 470m\u03a9 Current Sense Resistor SMD \u00b11% \u00b1100ppm/\u2103 0805 Current Sense Resistors / Shunt Resistors ROHS",
+      "stock": 61545,
+      "price": 0.014
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 2090812,
+      "mfr": "UCR01MVPFLR470",
+      "package": "0402",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-55\u2103~+155\u2103 0ppm/\u2103~+200ppm/\u2103 125mW 470m\u03a9 Thick Film Resistor \u00b11% 0402 Chip Resistor - Surface Mount ROHS",
+      "stock": 21768,
+      "price": 0.0532
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 7420029,
+      "mfr": "FRM252WJR470TK",
+      "package": "2512",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "",
+      "stock": 11078,
+      "price": 0.0402
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 47119819,
+      "mfr": "RTF06KR470FTG",
+      "package": "1206",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "",
+      "stock": 6322,
+      "price": 0.0055
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 48951258,
+      "mfr": "3R470A-5S",
+      "package": "SMD,D5xL7.5mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "",
+      "stock": 5182,
+      "price": 0.759
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 2836978,
+      "mfr": "2R470TD-8",
+      "package": "\u63d2\u4ef6,D8xL6mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+90\u2103 1.5pF 2 20kA 470V 6mm 8mm 900V \u00b120% \u63d2\u4ef6,D8xL6mm Gas Discharge Tube Arresters (GDT) ROHS",
+      "stock": 4247,
+      "price": 0.4175
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 22464917,
+      "mfr": "RLH25FEER470",
+      "package": "2512",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "",
+      "stock": 3978,
+      "price": 0.0571
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 52016018,
+      "mfr": "HIXD25LR470F",
+      "package": "2512",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "2W 470m\u03a9 Alloy Resistor SMD \u00b11% \u00b150ppm/\u2103 2512 Current Sense Resistors / Shunt Resistors ROHS",
+      "stock": 3700,
+      "price": 0.0454
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 2836977,
+      "mfr": "2R470TB-8",
+      "package": "\u63d2\u4ef6,D8xL6mm",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "-40\u2103~+90\u2103 1.5pF 10kA 2 470V 6mm 8mm 900V \u00b120% \u63d2\u4ef6,D8xL6mm Gas Discharge Tube Arresters (GDT) ROHS",
+      "stock": 3397,
+      "price": 0.2833
+    },
+    {
+      "source": "jlcpcb",
+      "lcsc": 22464908,
+      "mfr": "RLH12FTCR470",
+      "package": "1206",
+      "is_basic": false,
+      "is_preferred": false,
+      "description": "",
+      "stock": 3197,
+      "price": 0.0273
+    }
+  ]
+}

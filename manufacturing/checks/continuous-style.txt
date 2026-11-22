@@ -1,0 +1,3 @@
+Checking 238 continuous chains with the default tscircuit rules.
+No PCB style issues detected in continuous-style.circuit.json
+PCB style overview written to /home/rushabh/tscircuit/usb-c-e-paper-display/checks/check-pcb-style/pcb.svg

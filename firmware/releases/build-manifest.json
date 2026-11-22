@@ -1,0 +1,11 @@
+{
+  "core": "rp2040:rp2040@6.4.0",
+  "fqbn": "rp2040:rp2040:generic:flash=2097152_0,freq=125,usbstack=picosdk,boot2=boot2_generic_03h_4_padded_checksum,opt=Small",
+  "physical_board_tested": false,
+  "artifacts": {
+    "usb_epaper.ino.bin": "1133f66c8f2612add7bd48294e3f5e95c145bb0f19bbc1242f23e0ee477e1501",
+    "usb_epaper.ino.elf": "b5d391190fae96ecfeaae61cf407c8668cc278a4c5dcb37b6210d6c9d4053c12",
+    "usb_epaper.ino.uf2": "07d16c92d769b7377b6c82be04bdf8f30a21c8360f5e1050707be15de55d9e52",
+    "USB-Epaper-RevA-v1.0.0.uf2": "07d16c92d769b7377b6c82be04bdf8f30a21c8360f5e1050707be15de55d9e52"
+  }
+}

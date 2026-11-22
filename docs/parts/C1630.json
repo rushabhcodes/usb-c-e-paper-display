@@ -1,0 +1,17 @@
+{
+  "query": "C1630",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 1630,
+      "mfr": "0603B681K500NT",
+      "package": "0603",
+      "description": "50V 680pF X7R \u00b110% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "is_basic": false,
+      "is_preferred": true,
+      "stock": null,
+      "price": 0.0052,
+      "stock_checked_at": "2026-11-02T12:35:56.000Z"
+    }
+  ]
+}

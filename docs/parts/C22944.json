@@ -1,0 +1,18 @@
+{
+  "query": "C22944",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 22944,
+      "mfr": "0603WAF2741T5E",
+      "package": "0603",
+      "description": "-55\u2103~+155\u2103 100mW 2.74k\u03a9 75V Thick Film Resistor \u00b11% \u00b1100ppm/\u2103 0603 Chip Resistor - Surface Mount ROHS",
+      "is_basic": false,
+      "is_preferred": false,
+      "is_standard_only": false,
+      "stock": null,
+      "price": 0.0016,
+      "stock_checked_at": "2026-11-12T01:27:49.000Z"
+    }
+  ]
+}

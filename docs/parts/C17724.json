@@ -1,0 +1,17 @@
+{
+  "query": "C17724",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 17724,
+      "mfr": "0805W8F510KT5E",
+      "package": "0805",
+      "description": "-55\u2103~+155\u2103 125mW 150V 5.1\u03a9 Thick Film Resistor \u00b11% \u00b1200ppm/\u2103 0805 Chip Resistor - Surface Mount ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0045,
+      "stock_checked_at": "2026-11-02T16:36:30.000Z"
+    }
+  ]
+}

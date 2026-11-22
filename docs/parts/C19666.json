@@ -1,0 +1,17 @@
+{
+  "query": "C19666",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 19666,
+      "mfr": "CL10A475KO8NNNC",
+      "package": "0603",
+      "description": "16V 4.7uF X5R \u00b110% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.015,
+      "stock_checked_at": "2026-11-10T19:34:57.000Z"
+    }
+  ]
+}

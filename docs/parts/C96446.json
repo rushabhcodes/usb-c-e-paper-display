@@ -1,0 +1,17 @@
+{
+  "query": "C96446",
+  "results": [
+    {
+      "source": "jlcpcb",
+      "lcsc": 96446,
+      "mfr": "CL10A106MA8NRNC",
+      "package": "0603",
+      "description": "10uF 25V X5R \u00b120% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "is_basic": true,
+      "is_preferred": false,
+      "stock": null,
+      "price": 0.0366,
+      "stock_checked_at": "2026-11-01T15:32:03.000Z"
+    }
+  ]
+}
