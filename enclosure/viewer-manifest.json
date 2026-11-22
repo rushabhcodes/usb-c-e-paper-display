@@ -1,0 +1,363 @@
+{
+  "units": "mm",
+  "case_to_pcb_matrix": [
+    [
+      0.0,
+      -1.0,
+      0.0,
+      -8.6
+    ],
+    [
+      -1.0,
+      0.0,
+      0.0,
+      -1.05
+    ],
+    [
+      0.0,
+      0.0,
+      -1.0,
+      11.3
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "parts": [
+    {
+      "name": "BEZEL",
+      "label": "Front bezel",
+      "file": "bezel.glb",
+      "printed": true,
+      "color": "#263238",
+      "bounds_mm": [
+        [
+          -74.199998,
+          -92.149998,
+          -9.45
+        ],
+        [
+          62.999998,
+          90.049998,
+          -0.7
+        ]
+      ],
+      "sha256": "c1c3bead37a8c774c459649e8fa4e5248ea92248adb5ea2fb6c13555d461fa02"
+    },
+    {
+      "name": "CARRIER",
+      "label": "Panel and PCB carrier",
+      "file": "carrier.glb",
+      "printed": true,
+      "color": "#647d7d",
+      "bounds_mm": [
+        [
+          -67.699998,
+          -88.149998,
+          -3.3
+        ],
+        [
+          50.499998,
+          86.049998,
+          -0.8
+        ]
+      ],
+      "sha256": "20673e15edff7be3795bfd3e78a12041ad54e483aa0f046e37f34e0fa9be9729"
+    },
+    {
+      "name": "REAR",
+      "label": "Rear cover",
+      "file": "rear.glb",
+      "printed": true,
+      "color": "#455a64",
+      "bounds_mm": [
+        [
+          -74.199998,
+          -92.149998,
+          -7.05
+        ],
+        [
+          62.999998,
+          90.049998,
+          11.3
+        ]
+      ],
+      "sha256": "6abf9fbbf80be7cec2014e5f3167f7b3c173cc85954769f4df63d43e34019460"
+    },
+    {
+      "name": "STAND",
+      "label": "15 degree desk cradle",
+      "file": "stand.glb",
+      "printed": true,
+      "color": "#455a64",
+      "bounds_mm": [
+        [
+          34.31323,
+          -56.05,
+          -31.588309
+        ],
+        [
+          76.888296,
+          53.95,
+          36.026499
+        ]
+      ],
+      "sha256": "f7ef679b89018577941356be6caad14bb5ff5f8d7a3e8e31077cbb16e8739fa6"
+    },
+    {
+      "name": "PANEL",
+      "label": "GDEY075T7 raw 7.5-inch panel",
+      "file": "panel.glb",
+      "printed": false,
+      "color": null,
+      "bounds_mm": [
+        [
+          -64.2,
+          -86.15,
+          -6.56
+        ],
+        [
+          47.0,
+          84.05,
+          -5.3
+        ]
+      ],
+      "sha256": "bd76d0caa4be585440e6678aea7b6521517286327aed3329be54fd2214ffa583"
+    },
+    {
+      "name": "FLEX",
+      "label": "24-contact panel flex return",
+      "file": "flex.glb",
+      "printed": false,
+      "color": "#c58f32",
+      "bounds_mm": [
+        [
+          41.6,
+          -6.25,
+          -5.375
+        ],
+        [
+          53.925,
+          6.25,
+          2.075
+        ]
+      ],
+      "sha256": "ca99ec868a0721faa472986c8f05d5ec00fcc09589f7adc3d8791cb29414480d"
+    },
+    {
+      "name": "FRONT_FOAM",
+      "label": "0.5 mm front perimeter gasket",
+      "file": "front_foam.glb",
+      "printed": false,
+      "color": "#333333",
+      "bounds_mm": [
+        [
+          -64.2,
+          -86.15,
+          -7.05
+        ],
+        [
+          47.0,
+          84.05,
+          -6.55
+        ]
+      ],
+      "sha256": "d418bac47267469b40ae2aa213bf1ed924f62c71c8b2345b687076f94a43d5e8"
+    },
+    {
+      "name": "REAR_FOAM",
+      "label": "2 mm rear perimeter support",
+      "file": "rear_foam.glb",
+      "printed": false,
+      "color": "#333333",
+      "bounds_mm": [
+        [
+          -64.2,
+          -86.15,
+          -5.3
+        ],
+        [
+          47.0,
+          84.05,
+          -3.3
+        ]
+      ],
+      "sha256": "f197136f7ab30d9007d164682c1695f7fe6051c30e7f8ce52a356f326d24df0f"
+    },
+    {
+      "name": "CASE_SCREW_1",
+      "label": "M3 x 16 case screw",
+      "file": "case_screw_1.glb",
+      "printed": false,
+      "color": "#a4adb8",
+      "bounds_mm": [
+        [
+          54.4,
+          74.15,
+          -4.7
+        ],
+        [
+          60.0,
+          79.75,
+          12.9
+        ]
+      ],
+      "sha256": "698499d5fc1b0497a9e7f674f94629bbb28a6583047eeebac009b528b4c53ecc"
+    },
+    {
+      "name": "CASE_SCREW_2",
+      "label": "M3 x 16 case screw",
+      "file": "case_screw_2.glb",
+      "printed": false,
+      "color": "#a4adb8",
+      "bounds_mm": [
+        [
+          -71.1,
+          74.15,
+          -4.7
+        ],
+        [
+          -65.5,
+          79.75,
+          12.9
+        ]
+      ],
+      "sha256": "4f4ea1d5a07017c85b221eaf83c9a86cb4fcc8425f95b7fce2ed5ecd975dfb88"
+    },
+    {
+      "name": "CASE_SCREW_3",
+      "label": "M3 x 16 case screw",
+      "file": "case_screw_3.glb",
+      "printed": false,
+      "color": "#a4adb8",
+      "bounds_mm": [
+        [
+          54.4,
+          -81.85,
+          -4.7
+        ],
+        [
+          60.0,
+          -76.25,
+          12.9
+        ]
+      ],
+      "sha256": "256144e2c9d5943471d28ec81eab2f2f1c5f6fa2e20bd978d457f5e3c335f490"
+    },
+    {
+      "name": "CASE_SCREW_4",
+      "label": "M3 x 16 case screw",
+      "file": "case_screw_4.glb",
+      "printed": false,
+      "color": "#a4adb8",
+      "bounds_mm": [
+        [
+          -71.1,
+          -81.85,
+          -4.7
+        ],
+        [
+          -65.5,
+          -76.25,
+          12.9
+        ]
+      ],
+      "sha256": "1e16d5c07caf2d3211249eb2249a53a3c4ae2232f5a77d470a687b4cbc1e58c2"
+    },
+    {
+      "name": "PCB_SCREW_1",
+      "label": "M3 x 4 PCB screw",
+      "file": "pcb_screw_1.glb",
+      "printed": false,
+      "color": "#a4adb8",
+      "bounds_mm": [
+        [
+          -47.8,
+          -27.8,
+          -3.2
+        ],
+        [
+          -42.2,
+          -22.2,
+          2.4
+        ]
+      ],
+      "sha256": "00fbbc403dde7444f143dff6a9ab5e2998c973e1d2fc3ba742293e4c712994d7"
+    },
+    {
+      "name": "PCB_SCREW_2",
+      "label": "M3 x 4 PCB screw",
+      "file": "pcb_screw_2.glb",
+      "printed": false,
+      "color": "#a4adb8",
+      "bounds_mm": [
+        [
+          -47.8,
+          22.2,
+          -3.2
+        ],
+        [
+          -42.2,
+          27.8,
+          2.4
+        ]
+      ],
+      "sha256": "dab68ba70ba5c2ec5476c05a1d6cb990e93b37318774c26c7d5aaea5fea26c01"
+    },
+    {
+      "name": "PCB_SCREW_3",
+      "label": "M3 x 4 PCB screw",
+      "file": "pcb_screw_3.glb",
+      "printed": false,
+      "color": "#a4adb8",
+      "bounds_mm": [
+        [
+          42.2,
+          -27.8,
+          -3.2
+        ],
+        [
+          47.8,
+          -22.2,
+          2.4
+        ]
+      ],
+      "sha256": "655be9189119045a45d3aeb58eb3af1f502cb396438b763c7db85029021714a3"
+    },
+    {
+      "name": "PCB_SCREW_4",
+      "label": "M3 x 4 PCB screw",
+      "file": "pcb_screw_4.glb",
+      "printed": false,
+      "color": "#a4adb8",
+      "bounds_mm": [
+        [
+          42.2,
+          22.2,
+          -3.2
+        ],
+        [
+          47.8,
+          27.8,
+          2.4
+        ]
+      ],
+      "sha256": "053a991658c073c65d098e1f16cd3283ed065046de11c296e6d7bb8430b4c9e6"
+    }
+  ],
+  "source_stl_sha256": {
+    "front-bezel.stl": "66ee18717e378e269d9a2671b38fbc51599415b1b8db22e0c6bf778119cba881",
+    "panel-carrier.stl": "4f89c5956e07a22256db4e53b167ecac22bdd4b45cde06d927035320d68d3c20",
+    "rear-cover.stl": "26929637044a55893c9c714c0e725a9d7fd105480d51a4442afcd83af14b33ae",
+    "desk-stand.stl": "c14d51241014bbe41b6b5ad8cb65fcdcd8330f7edf4745f9eae286ebe1c58a38"
+  },
+  "notes": [
+    "Viewer meshes derive from the existing print files; PCB copper coordinates are unchanged.",
+    "The cradle is placed using the inverse of the existing 15-degree case pose.",
+    "Fasteners are nominal envelopes; the panel face shows the included example image.",
+    "Physical print, FPC insertion and USB plug fit remain untested."
+  ]
+}
