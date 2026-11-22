@@ -4,7 +4,7 @@
   "case_pcb_origin_mm": [
     -39.95,
     -29.3,
-    11.3
+    8.55
   ],
   "board_outline_mm": [
     [
@@ -86,9 +86,12 @@
   "fpc_rotation_deg": 180,
   "usb_mouth_case_x_mm": -91.300029,
   "usb_axis_case_y_mm": -29.3,
-  "usb_axis_case_z_mm": 9.299511,
+  "usb_axis_case_z_mm": 6.549511,
   "usb_aperture_mm": [
     14,
-    8.6
-  ]
+    7.4
+  ],
+  "case_depth_mm": 18.0,
+  "stand_height_mm": 26,
+  "case_screw_length_mm": 14
 }

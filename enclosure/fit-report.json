@@ -17,7 +17,7 @@
       "valid_solid": true,
       "watertight": true,
       "single_body": true,
-      "volume_mm3": 30400.74,
+      "volume_mm3": 30407.15,
       "print_size_mm": [
         175.05,
         118.2,
@@ -28,34 +28,34 @@
       "valid_solid": true,
       "watertight": true,
       "single_body": true,
-      "volume_mm3": 84459.53,
+      "volume_mm3": 80047.65,
       "print_size_mm": [
         182.2,
         137.2,
-        18.35
+        15.6
       ]
     },
     "desk-stand": {
       "valid_solid": true,
       "watertight": true,
       "single_body": true,
-      "volume_mm3": 118099.04,
+      "volume_mm3": 117108.32,
       "print_size_mm": [
         110.0,
         70.0,
-        28.0
+        26.0
       ]
     }
   },
   "case_size_mm": [
     182.2,
     137.2,
-    20.75
+    18.0
   ],
   "glass_pocket_clearance_per_side_mm": 0.5,
   "glass_front_foam_gap_mm": 0.5,
   "glass_back_perimeter_foam_gap_mm": 2.0,
-  "pcb_component_clearance_to_rear_floor_mm": 8.1,
+  "pcb_top_plane_to_rear_floor_mm": 5.35,
   "pcb_hole_centres": [
     [
       -84.95,
@@ -94,24 +94,26 @@
   ],
   "solid_intersections_mm3": 0,
   "stand_lean_degrees": 15,
+  "stand_height_mm": 26,
+  "case_screw_length_mm": 14,
   "stand_slot_clearance_total_mm": 0.6,
   "stand_case_intersections_mm3": 0,
-  "fpc_assumed_contact_plane_z_mm": 9.3,
-  "fpc_bend_radius_mm": 3.6500000000000004,
+  "fpc_assumed_contact_plane_z_mm": 6.550000000000001,
+  "fpc_bend_radius_mm": 3.6499999999999995,
   "fpc_estimated_path_mm": 23.267,
   "fpc_nominal_length_mm": 24,
   "fpc_minimum_straight_stiffener_mm": 6,
   "pcb_case_origin_mm": [
     -39.95,
     -29.3,
-    11.3
+    8.55
   ],
   "usb_access": "flush left-side USB-C port; complete plug body outside enclosure",
   "usb_aperture_width_mm": 14,
-  "usb_aperture_height_mm": 8.6,
+  "usb_aperture_height_mm": 7.4,
   "usb_mating_plane_x_mm": -91.300029,
   "usb_axis_y_mm": -29.3,
-  "usb_axis_z_mm": 9.299511,
+  "usb_axis_z_mm": 6.549511,
   "usb_mouth_projection_mm": 0.2,
   "button_centres": [
     [

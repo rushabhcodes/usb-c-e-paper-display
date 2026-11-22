@@ -6,11 +6,11 @@
   "exit": "left side",
   "plug_mating_plane_x": -91.300029,
   "plug_axis_y": -29.3,
-  "plug_axis_z": 9.299511,
+  "plug_axis_z": 6.549511,
   "socket_projection_beyond_case": 0.2,
   "aperture": [
     14,
-    8.6
+    7.4
   ],
   "checks": [
     {
@@ -78,6 +78,7 @@
       "grip_allowance_each_side": 7
     }
   ],
+  "front_window_clearance_above_stand_lip_mm": 5.275,
   "limits": [
     "First printed fit and actual cable remain untested.",
     "Use a USB data cable and a compatible USB-host image sender.",

@@ -1,0 +1,320 @@
+{
+  "result": "PASS",
+  "case_depth_mm": 18,
+  "rear_floor_mm": 2.4,
+  "minimum_clearance_mm": 2.0990110397338877,
+  "method": "Official loadCadComponentMesh supplier geometry, native installed coordinate transform",
+  "physical_fit_tested": false,
+  "components": [
+    {
+      "name": "J1",
+      "minimum_body_case_z_mm": 4.499011039733888,
+      "rear_floor_clearance_mm": 2.0990110397338877
+    },
+    {
+      "name": "J2",
+      "minimum_body_case_z_mm": 5.740000000000001,
+      "rear_floor_clearance_mm": 3.340000000000001
+    },
+    {
+      "name": "SW1",
+      "minimum_body_case_z_mm": 5.800000000000001,
+      "rear_floor_clearance_mm": 3.400000000000001
+    },
+    {
+      "name": "SW2",
+      "minimum_body_case_z_mm": 5.800000000000001,
+      "rear_floor_clearance_mm": 3.400000000000001
+    },
+    {
+      "name": "U2",
+      "minimum_body_case_z_mm": 6.1010610000000005,
+      "rear_floor_clearance_mm": 3.7010610000000006
+    },
+    {
+      "name": "U5",
+      "minimum_body_case_z_mm": 6.250000000000001,
+      "rear_floor_clearance_mm": 3.850000000000001
+    },
+    {
+      "name": "D1",
+      "minimum_body_case_z_mm": 6.300000000000001,
+      "rear_floor_clearance_mm": 3.900000000000001
+    },
+    {
+      "name": "D2",
+      "minimum_body_case_z_mm": 6.300000000000001,
+      "rear_floor_clearance_mm": 3.900000000000001
+    },
+    {
+      "name": "D3",
+      "minimum_body_case_z_mm": 6.300000000000001,
+      "rear_floor_clearance_mm": 3.900000000000001
+    },
+    {
+      "name": "C4",
+      "minimum_body_case_z_mm": 6.450000000000001,
+      "rear_floor_clearance_mm": 4.050000000000001
+    },
+    {
+      "name": "C6",
+      "minimum_body_case_z_mm": 6.450000000000001,
+      "rear_floor_clearance_mm": 4.050000000000001
+    },
+    {
+      "name": "C26",
+      "minimum_body_case_z_mm": 6.450000000000001,
+      "rear_floor_clearance_mm": 4.050000000000001
+    },
+    {
+      "name": "C27",
+      "minimum_body_case_z_mm": 6.450000000000001,
+      "rear_floor_clearance_mm": 4.050000000000001
+    },
+    {
+      "name": "C28",
+      "minimum_body_case_z_mm": 6.450000047683717,
+      "rear_floor_clearance_mm": 4.050000047683717
+    },
+    {
+      "name": "C29",
+      "minimum_body_case_z_mm": 6.450000047683717,
+      "rear_floor_clearance_mm": 4.050000047683717
+    },
+    {
+      "name": "C30",
+      "minimum_body_case_z_mm": 6.450000047683717,
+      "rear_floor_clearance_mm": 4.050000047683717
+    },
+    {
+      "name": "C31",
+      "minimum_body_case_z_mm": 6.450000047683717,
+      "rear_floor_clearance_mm": 4.050000047683717
+    },
+    {
+      "name": "U3",
+      "minimum_body_case_z_mm": 6.500000000000001,
+      "rear_floor_clearance_mm": 4.100000000000001
+    },
+    {
+      "name": "U4",
+      "minimum_body_case_z_mm": 6.500000000000001,
+      "rear_floor_clearance_mm": 4.100000000000001
+    },
+    {
+      "name": "L1",
+      "minimum_body_case_z_mm": 6.525,
+      "rear_floor_clearance_mm": 4.125
+    },
+    {
+      "name": "Q1",
+      "minimum_body_case_z_mm": 6.575000000000001,
+      "rear_floor_clearance_mm": 4.175000000000001
+    },
+    {
+      "name": "U1",
+      "minimum_body_case_z_mm": 6.880000000000001,
+      "rear_floor_clearance_mm": 4.48
+    },
+    {
+      "name": "C1",
+      "minimum_body_case_z_mm": 6.950000000000001,
+      "rear_floor_clearance_mm": 4.550000000000001
+    },
+    {
+      "name": "C2",
+      "minimum_body_case_z_mm": 6.950000000000001,
+      "rear_floor_clearance_mm": 4.550000000000001
+    },
+    {
+      "name": "C5",
+      "minimum_body_case_z_mm": 6.950000000000001,
+      "rear_floor_clearance_mm": 4.550000000000001
+    },
+    {
+      "name": "C3",
+      "minimum_body_case_z_mm": 6.950000000000001,
+      "rear_floor_clearance_mm": 4.550000000000001
+    },
+    {
+      "name": "C15",
+      "minimum_body_case_z_mm": 6.950000000000001,
+      "rear_floor_clearance_mm": 4.550000000000001
+    },
+    {
+      "name": "C16",
+      "minimum_body_case_z_mm": 6.950000000000001,
+      "rear_floor_clearance_mm": 4.550000000000001
+    },
+    {
+      "name": "C22",
+      "minimum_body_case_z_mm": 6.950000000000001,
+      "rear_floor_clearance_mm": 4.550000000000001
+    },
+    {
+      "name": "C23",
+      "minimum_body_case_z_mm": 6.950000000000001,
+      "rear_floor_clearance_mm": 4.550000000000001
+    },
+    {
+      "name": "C24",
+      "minimum_body_case_z_mm": 6.950000000000001,
+      "rear_floor_clearance_mm": 4.550000000000001
+    },
+    {
+      "name": "C25",
+      "minimum_body_case_z_mm": 6.950000000000001,
+      "rear_floor_clearance_mm": 4.550000000000001
+    },
+    {
+      "name": "Y1",
+      "minimum_body_case_z_mm": 7.049000000000001,
+      "rear_floor_clearance_mm": 4.649000000000001
+    },
+    {
+      "name": "R11",
+      "minimum_body_case_z_mm": 7.140000000000001,
+      "rear_floor_clearance_mm": 4.74
+    },
+    {
+      "name": "F1",
+      "minimum_body_case_z_mm": 7.15,
+      "rear_floor_clearance_mm": 4.75
+    },
+    {
+      "name": "C7",
+      "minimum_body_case_z_mm": 7.250000000000001,
+      "rear_floor_clearance_mm": 4.850000000000001
+    },
+    {
+      "name": "C10",
+      "minimum_body_case_z_mm": 7.250000000000001,
+      "rear_floor_clearance_mm": 4.850000000000001
+    },
+    {
+      "name": "C11",
+      "minimum_body_case_z_mm": 7.250000000000001,
+      "rear_floor_clearance_mm": 4.850000000000001
+    },
+    {
+      "name": "C12",
+      "minimum_body_case_z_mm": 7.250000000000001,
+      "rear_floor_clearance_mm": 4.850000000000001
+    },
+    {
+      "name": "C13",
+      "minimum_body_case_z_mm": 7.250000000000001,
+      "rear_floor_clearance_mm": 4.850000000000001
+    },
+    {
+      "name": "C14",
+      "minimum_body_case_z_mm": 7.250000000000001,
+      "rear_floor_clearance_mm": 4.850000000000001
+    },
+    {
+      "name": "C17",
+      "minimum_body_case_z_mm": 7.250000000000001,
+      "rear_floor_clearance_mm": 4.850000000000001
+    },
+    {
+      "name": "C18",
+      "minimum_body_case_z_mm": 7.250000000000001,
+      "rear_floor_clearance_mm": 4.850000000000001
+    },
+    {
+      "name": "C19",
+      "minimum_body_case_z_mm": 7.250000000000001,
+      "rear_floor_clearance_mm": 4.850000000000001
+    },
+    {
+      "name": "C8",
+      "minimum_body_case_z_mm": 7.250000000000001,
+      "rear_floor_clearance_mm": 4.850000000000001
+    },
+    {
+      "name": "C9",
+      "minimum_body_case_z_mm": 7.250000000000001,
+      "rear_floor_clearance_mm": 4.850000000000001
+    },
+    {
+      "name": "C20",
+      "minimum_body_case_z_mm": 7.250000000000001,
+      "rear_floor_clearance_mm": 4.850000000000001
+    },
+    {
+      "name": "C21",
+      "minimum_body_case_z_mm": 7.250000000000001,
+      "rear_floor_clearance_mm": 4.850000000000001
+    },
+    {
+      "name": "R1",
+      "minimum_body_case_z_mm": 7.300000000000001,
+      "rear_floor_clearance_mm": 4.9
+    },
+    {
+      "name": "R2",
+      "minimum_body_case_z_mm": 7.300000000000001,
+      "rear_floor_clearance_mm": 4.9
+    },
+    {
+      "name": "R3",
+      "minimum_body_case_z_mm": 7.300000000000001,
+      "rear_floor_clearance_mm": 4.9
+    },
+    {
+      "name": "R4",
+      "minimum_body_case_z_mm": 7.300000000000001,
+      "rear_floor_clearance_mm": 4.9
+    },
+    {
+      "name": "R6",
+      "minimum_body_case_z_mm": 7.300000000000001,
+      "rear_floor_clearance_mm": 4.9
+    },
+    {
+      "name": "R9",
+      "minimum_body_case_z_mm": 7.300000000000001,
+      "rear_floor_clearance_mm": 4.9
+    },
+    {
+      "name": "R8",
+      "minimum_body_case_z_mm": 7.300000000000001,
+      "rear_floor_clearance_mm": 4.9
+    },
+    {
+      "name": "R12",
+      "minimum_body_case_z_mm": 7.300000000000001,
+      "rear_floor_clearance_mm": 4.9
+    },
+    {
+      "name": "R13",
+      "minimum_body_case_z_mm": 7.300000000000001,
+      "rear_floor_clearance_mm": 4.9
+    },
+    {
+      "name": "R14",
+      "minimum_body_case_z_mm": 7.300000000000001,
+      "rear_floor_clearance_mm": 4.9
+    },
+    {
+      "name": "R15",
+      "minimum_body_case_z_mm": 7.300000000000001,
+      "rear_floor_clearance_mm": 4.9
+    },
+    {
+      "name": "R10",
+      "minimum_body_case_z_mm": 7.300000000000001,
+      "rear_floor_clearance_mm": 4.9
+    },
+    {
+      "name": "R5",
+      "minimum_body_case_z_mm": 7.390000000000001,
+      "rear_floor_clearance_mm": 4.99
+    },
+    {
+      "name": "R7",
+      "minimum_body_case_z_mm": 7.390000000000001,
+      "rear_floor_clearance_mm": 4.99
+    }
+  ]
+}

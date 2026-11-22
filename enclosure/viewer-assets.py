@@ -10,7 +10,7 @@ from pathlib import Path
 import numpy as np
 import trimesh
 from PIL import Image
-from model import PCB_X, PCB_Y, PCB_CENTRE_Z, PCB_HOLES
+from model import PCB_X, PCB_Y, PCB_CENTRE_Z, PCB_HOLES, CASE_DEPTH, CARRIER_FRONT, GLASS_REAR, FPC_CONTACT_Z, CASE_SCREW_LENGTH
 
 ROOT=Path(__file__).resolve().parent
 OUT=ROOT/'models'
@@ -46,8 +46,8 @@ def export(name,label,meshes,color,printed=False):
                     'sha256':hashlib.sha256(data).hexdigest()})
 
 for name,label,filename,flip,color in [
- ('BEZEL','Front bezel','front-bezel',20.75,'#263238'),
- ('CARRIER','Panel and PCB carrier','panel-carrier',14.6,'#647d7d'),
+ ('BEZEL','Front bezel','front-bezel',CASE_DEPTH,'#263238'),
+ ('CARRIER','Panel and PCB carrier','panel-carrier',CARRIER_FRONT,'#647d7d'),
  ('REAR','Rear cover','rear-cover',0,'#455a64'),
  ('STAND','15 degree desk cradle','desk-stand',0,'#455a64')]:
     mesh=trimesh.load_mesh(ROOT/'exports'/f'{filename}.stl')
@@ -57,13 +57,13 @@ for name,label,filename,flip,color in [
     if name=='STAND':
         tr=lambda p:trimesh.transformations.translation_matrix(p)
         rx=lambda a:trimesh.transformations.rotation_matrix(np.radians(a),[1,0,0])
-        stand_pose=tr([0,0,5])@rx(-15)@tr([0,10.375,71.6])@rx(90)
+        stand_pose=tr([0,0,5])@rx(-15)@tr([0,CASE_DEPTH/2,71.6])@rx(90)
         mesh.apply_transform(np.linalg.inv(stand_pose))
     export(name,label,[mesh],color,True)
 
 # The display image is a material on the closed glass solid. A separate open
 # illustration plane prevented native explosion collision validation.
-glass=box([170.2,111.2,1.25],[0,0,17.225])
+glass=box([170.2,111.2,1.25],[0,0,GLASS_REAR+.625])
 panel_texture=Image.new('RGB',(1702,1112),'#242724')
 panel_texture.paste(Image.open(ROOT.parent/'firmware/examples/dashboard-41.png').convert('RGB').resize((1632,979)),(35,35))
 uv=np.column_stack([(glass.vertices[:,0]+85.1)/170.2,(glass.vertices[:,1]+55.6)/111.2])
@@ -73,10 +73,10 @@ assert glass.is_watertight
 export('PANEL','GDEY075T7 raw 7.5-inch panel',[glass],None)
 
 # Same 3.65 mm radius / 23.267 mm return path used by model.py and render.py.
-points=[[-55.6,16.6],[-58.8,16.6]]
+points=[[-55.6,GLASS_REAR],[-58.8,GLASS_REAR]]
 for i in range(1,25):
-    a=np.pi*i/24;points.append([-58.8-3.65*np.sin(a),12.95+3.65*np.cos(a)])
-points.append([-50.2,9.3]);p=np.asarray(points);tangents=np.gradient(p,axis=0);tangents/=np.linalg.norm(tangents,axis=1)[:,None]
+    a=np.pi*i/24;points.append([-58.8-3.65*np.sin(a),GLASS_REAR-3.65+3.65*np.cos(a)])
+points.append([-50.2,FPC_CONTACT_Z]);p=np.asarray(points);tangents=np.gradient(p,axis=0);tangents/=np.linalg.norm(tangents,axis=1)[:,None]
 normals=np.column_stack([-tangents[:,1],tangents[:,0]])*.075
 verts=[]
 for yz,n in zip(p,normals):
@@ -99,8 +99,8 @@ def foam_ring(z,thickness,interrupt=False):
         bars += [box([72.55,1.5,thickness],[-47.325,-54.85,z]),box([74.65,1.5,thickness],[46.275,-54.85,z])]
     else:bars.append(box([167.2,1.5,thickness],[0,-54.85,z]))
     return bars
-export('FRONT_FOAM','0.5 mm front perimeter gasket',foam_ring(18.1,.5),'#333333')
-export('REAR_FOAM','2 mm rear perimeter support',foam_ring(15.6,2,True),'#333333')
+export('FRONT_FOAM','0.5 mm front perimeter gasket',foam_ring(GLASS_REAR+1.5,.5),'#333333')
+export('REAR_FOAM','2 mm rear perimeter support',foam_ring(GLASS_REAR-1,2,True),'#333333')
 
 # Nominal pan-head fastener envelopes; threads are not represented.
 def screw(z,length):
@@ -108,11 +108,11 @@ def screw(z,length):
     head=trimesh.creation.cylinder(radius=2.8,height=1.6,sections=32);head.apply_translation([0,0,z-.8])
     return [shaft,head]
 for i,(x,y) in enumerate([(x,y) for x in (-78,78) for y in (-65.8,59.7)],1):
-    meshes=screw(0,16)
+    meshes=screw(0,CASE_SCREW_LENGTH)
     for m in meshes:m.apply_translation([x,y,0])
-    export(f'CASE_SCREW_{i}','M3 x 16 case screw',meshes,'#a4adb8')
+    export(f'CASE_SCREW_{i}','M3 x 14 case screw',meshes,'#a4adb8')
 for i,(x,y) in enumerate(PCB_HOLES,1):
-    meshes=screw(10.5,4)
+    meshes=screw(PCB_CENTRE_Z-.8,4)
     for m in meshes:m.apply_translation([x,y,0])
     export(f'PCB_SCREW_{i}','M3 x 4 PCB screw',meshes,'#a4adb8')
 

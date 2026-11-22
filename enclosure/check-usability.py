@@ -1,11 +1,11 @@
 """Check the complete side plug insertion sweep and grip against actual CAD."""
-import json
+import json,math
 from build123d import Compound,Pos,Rot,export_step
-from model import (ROOT,OUT,W,GLASS_REAR,GLASS_W,GLASS_H,GLASS_T,
+from model import (ROOT,OUT,W,CASE_DEPTH,STAND_HEIGHT,GLASS_REAR,GLASS_W,GLASS_H,GLASS_T,
                    USB_MOUTH_X,USB_CENTRE_Y,USB_CENTRE_Z,USB_APERTURE_W,
                    USB_APERTURE_H,block,case)
 parts=case()
-stand_pose=Pos(0,0,5)*Rot(-15,0,0)*Pos(0,10.375,71.6)*Rot(90,0,0)
+stand_pose=Pos(0,0,5)*Rot(-15,0,0)*Pos(0,CASE_DEPTH/2,71.6)*Rot(90,0,0)
 obstacles={n:p for n,p in parts.items() if n!='desk-stand'}
 obstacles['glass']=block(GLASS_W,GLASS_H,GLASS_T,z=GLASS_REAR)
 report={'result':'PASS','physical_cable_tested':False,'units':'mm',
@@ -36,9 +36,13 @@ for name,width,height,length in [('ordinary',14,8,24),('large',22,10,30)]:
   'mating_shell_intersections_mm3':shell_volumes,'grip_intersections_mm3':grip_volumes,
   'body_fully_external':True,'grip_allowance_each_side':7})
  if name=='large':illustration.append(body)
+window_clearance=5-math.sin(math.radians(15))*(CASE_DEPTH/2-CASE_DEPTH)+math.cos(math.radians(15))*(71.6+3.15-99.92/2)-STAND_HEIGHT
+assert window_clearance>3
+report['front_window_clearance_above_stand_lip_mm']=round(window_clearance,3)
 report['limits']=['First printed fit and actual cable remain untested.',
  'Use a USB data cable and a compatible USB-host image sender.',
  'The profiles cover straight plugs, not every right-angle or locking cable.']
 (ROOT/'usability-report.json').write_text(json.dumps(report,indent=2)+'\n')
 export_step(Compound(children=list(obstacles.values())+illustration),OUT/'usb-plug-access-assembly.step')
+path=OUT/'usb-plug-access-assembly.step';path.write_text('\n'.join(line.rstrip() for line in path.read_text().splitlines())+'\n')
 print(json.dumps(report,indent=2))

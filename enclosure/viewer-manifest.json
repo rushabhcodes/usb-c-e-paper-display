@@ -17,7 +17,7 @@
       0.0,
       0.0,
       -1.0,
-      11.3
+      8.55
     ],
     [
       0.0,
@@ -45,7 +45,7 @@
           -0.7
         ]
       ],
-      "sha256": "dfea3889a02b37b63c71cec20839c4325fd637a1296b490a3c244ebe85a2b464"
+      "sha256": "643400b9964b451d712b53a85f343ab22bb1d309f24c29daa5c5aa18a0978e84"
     },
     {
       "name": "CARRIER",
@@ -65,7 +65,7 @@
           -0.8
         ]
       ],
-      "sha256": "f159a6f905cf8b9ce36dc849640f9797ee77baa3b4e4c12d35b7522786e7f47b"
+      "sha256": "92368cac9d36eedc698ef5dc950f85183b029fcc5c2893e6cbf5bc890adb6618"
     },
     {
       "name": "REAR",
@@ -82,10 +82,10 @@
         [
           131.049998,
           42.299998,
-          11.3
+          8.55
         ]
       ],
-      "sha256": "291511d372e5595993a6531c92b2d2e96842653b945211dda6bbf1908eab5100"
+      "sha256": "c86fc67ebcca6469097b34acb0285de68fd32d317740f5635dbe0ce63c59c417"
     },
     {
       "name": "STAND",
@@ -96,16 +96,16 @@
       "bounds_mm": [
         [
           -15.05,
-          13.61323,
-          -31.588309
+          15.545082,
+          -32.963309
         ],
         [
           94.95,
           56.188296,
-          36.026499
+          34.651499
         ]
       ],
-      "sha256": "91104b0ddef362207fb165d8f1534dadda8afc3084eb5e6c608002eb25910988"
+      "sha256": "3b216defde20b01a3fa9925c8652e8e0ddaa8bb4a5396c598cf8d75988be7569"
     },
     {
       "name": "PANEL",
@@ -189,7 +189,7 @@
     },
     {
       "name": "CASE_SCREW_1",
-      "label": "M3 x 16 case screw",
+      "label": "M3 x 14 case screw",
       "file": "case_screw_1.glb",
       "printed": false,
       "color": "#a4adb8",
@@ -197,19 +197,19 @@
         [
           -40.85,
           33.7,
-          -4.7
+          -5.45
         ],
         [
           -35.25,
           39.3,
-          12.9
+          10.15
         ]
       ],
-      "sha256": "3d2f863389906b4be5055485900e81891ef699363ba59a41d4a667b3b38fc5c0"
+      "sha256": "e1ce93f02a43cca5098ec00e903009dec6b3586aec98704f651907fa782c227a"
     },
     {
       "name": "CASE_SCREW_2",
-      "label": "M3 x 16 case screw",
+      "label": "M3 x 14 case screw",
       "file": "case_screw_2.glb",
       "printed": false,
       "color": "#a4adb8",
@@ -217,19 +217,19 @@
         [
           -40.85,
           -91.8,
-          -4.7
+          -5.45
         ],
         [
           -35.25,
           -86.2,
-          12.9
+          10.15
         ]
       ],
-      "sha256": "14c87809ccb13c95ac1ca18a88e35d3e82e78f0242886659fa6eceb40b47dc90"
+      "sha256": "14b72b25aa8238b7e8ea748265661a5001f8febecb700f41eee096a613f5aa0a"
     },
     {
       "name": "CASE_SCREW_3",
-      "label": "M3 x 16 case screw",
+      "label": "M3 x 14 case screw",
       "file": "case_screw_3.glb",
       "printed": false,
       "color": "#a4adb8",
@@ -237,19 +237,19 @@
         [
           115.15,
           33.7,
-          -4.7
+          -5.45
         ],
         [
           120.75,
           39.3,
-          12.9
+          10.15
         ]
       ],
-      "sha256": "ff776fbb21a1e134f19847a6b9037a8aa3171ddf0cdccdbb307880d739df2d2c"
+      "sha256": "fe6cd819c82df4ee9bd520b9241000254fc4571881908e5e476e0ba64e97c69f"
     },
     {
       "name": "CASE_SCREW_4",
-      "label": "M3 x 16 case screw",
+      "label": "M3 x 14 case screw",
       "file": "case_screw_4.glb",
       "printed": false,
       "color": "#a4adb8",
@@ -257,15 +257,15 @@
         [
           115.15,
           -91.8,
-          -4.7
+          -5.45
         ],
         [
           120.75,
           -86.2,
-          12.9
+          10.15
         ]
       ],
-      "sha256": "28551a0a0081580e9e58399aa6e10ada33ce5a6648a854b4f437e7e62ca2d686"
+      "sha256": "f327cc9a7f2b6f8824a6ad19a1b4f5da37d7ea01fe306c2f2df20ab8b3539c60"
     },
     {
       "name": "PCB_SCREW_1",
@@ -349,11 +349,11 @@
     }
   ],
   "source_stl_sha256": {
-    "front-bezel.stl": "66ee18717e378e269d9a2671b38fbc51599415b1b8db22e0c6bf778119cba881",
-    "panel-carrier.stl": "5e4744ffdc3eea4bc18ea1711f4cd078926b93758eedbe22860f9c78c7bf4133",
-    "rear-cover.stl": "c06d3fd78627589a5cbf62bc90ad3b8a32aa47b28e373b8766deffb5d3998b62",
-    "desk-stand.stl": "c14d51241014bbe41b6b5ad8cb65fcdcd8330f7edf4745f9eae286ebe1c58a38",
-    "pcb-reference-assembly.stl": "876b5b38ae30d67ae159ed585518698989da4d928804b451f71c1e979bdb613f"
+    "front-bezel.stl": "ea28d9f607ed98824ae802c3c7b79b7c602cebda0e304e222ad07e6a139dd4cc",
+    "panel-carrier.stl": "4f015446c7f33e6dc9596ea3b4384543a8c038882a0c40fca1e35e19690c0881",
+    "rear-cover.stl": "f4baf32cb4103297d6d5ee583c368acd095fb1de8ebbd6a0c73044edb1153e2b",
+    "desk-stand.stl": "4ec83803c78f4e8d870a18061ca0e04a1d53eba3a1805658347b4c153754889c",
+    "pcb-reference-assembly.stl": "c299124d066fc3ef40bb808e3eca5567ca34016039409d65afc8e8f335f4f7e4"
   },
   "notes": [
     "Viewer meshes derive from the existing print files; PCB copper coordinates are unchanged.",

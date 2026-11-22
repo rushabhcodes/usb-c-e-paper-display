@@ -17,8 +17,15 @@ OUT.mkdir(exist_ok=True)
 W,H,CY,R = 182.2,137.2,-3.0,6.0
 WALL=2.4
 GLASS_W,GLASS_H,GLASS_T = 170.2,111.2,1.25
-GLASS_REAR=16.6
 LAYOUT=json.loads((ROOT.parent/'product/mechanical-layout.json').read_text())
+CASE_DEPTH=LAYOUT['case_depth_mm']
+STAND_HEIGHT=LAYOUT['stand_height_mm']
+CASE_SCREW_LENGTH=LAYOUT['case_screw_length_mm']
+GLASS_REAR=CASE_DEPTH-4.15
+FACE_Z=CASE_DEPTH-2.4
+CARRIER_REAR=GLASS_REAR-3.5
+CARRIER_FRONT=CARRIER_REAR+1.5
+FPC_CONTACT_Z=9.3-(20.75-CASE_DEPTH)
 PCB_X,PCB_Y,PCB_CENTRE_Z=LAYOUT['case_pcb_origin_mm']
 PCB_TOP=PCB_CENTRE_Z-.8
 FPC_X=-1.05
@@ -54,50 +61,50 @@ def cyl(r,d,x,y,z):
 
 def case():
     # Front face prints exterior-down. The rear collar locates the glass laterally.
-    face=rounded(W,H,R,2.4,y=CY,z=18.35)
-    face-=rounded(165.2,99.92,1.0,4,y=3.15,z=18)
-    collar=rounded(175.2,116.2,3.0,3.75,z=14.6)
-    collar-=rounded(171.2,112.2,1.0,5,z=14.0)
+    face=rounded(W,H,R,2.4,y=CY,z=FACE_Z)
+    face-=rounded(165.2,99.92,1.0,4,y=3.15,z=FACE_Z-.35)
+    collar=rounded(175.2,116.2,3.0,3.75,z=CARRIER_FRONT)
+    collar-=rounded(171.2,112.2,1.0,5,z=CARRIER_FRONT-.6)
     # Open the collar behind the glass for the wide 180-degree FPC return bend.
-    collar-=block(20,30,5,FPC_X,-67,14)
+    collar-=block(20,30,5,FPC_X,-67,CARRIER_FRONT-.6)
     bezel=face+collar
     for x,y in SCREWS:
-        bezel+=cyl(3.2,6.35,x,y,12.0)
-        bezel-=cyl(1.3,7.0,x,y,12.0) # blind M3 self-tapping pilot, 1.75mm face remaining
+        bezel+=cyl(3.2,6.35,x,y,FACE_Z-6.35)
+        bezel-=cyl(1.3,7.0,x,y,FACE_Z-6.35) # blind M3 self-tapping pilot, 1.75mm face remaining
     bezel-=usb_aperture()
 
     # Carrier front is flat; compliant perimeter pads support only opaque glass margins.
-    carrier=rounded(174.2,118.2,3.0,1.5,z=13.1)
-    carrier-=block(20,30,4,FPC_X,-58,12)
+    carrier=rounded(174.2,118.2,3.0,1.5,z=CARRIER_REAR)
+    carrier-=block(20,30,4,FPC_X,-58,CARRIER_REAR-1.1)
     for x,y in SCREWS:
-        carrier-=cyl(3.6,4,x,y,12)
+        carrier-=cyl(3.6,4,x,y,CARRIER_REAR-1.1)
     for x,y in PCB_HOLES:
-        carrier+=cyl(3.0,1.0,x,y,12.1)
-        carrier-=cyl(1.3,2.3,x,y,12.1)
+        carrier+=cyl(3.0,1.0,x,y,PCB_TOP+1.6)
+        carrier-=cyl(1.3,2.3,x,y,PCB_TOP+1.6)
     carrier-=usb_aperture()
 
-    rear=rounded(W,H,R,18.35,y=CY)
-    rear-=rounded(W-2*WALL,H-2*WALL,R-WALL,18.5,y=CY,z=2.4)
+    rear=rounded(W,H,R,FACE_Z,y=CY)
+    rear-=rounded(W-2*WALL,H-2*WALL,R-WALL,FACE_Z+.15,y=CY,z=2.4)
     for x,y in SCREWS:
-        # Floor supports the screw head; front-bezel posts receive M3 x 16 screws.
+        # Floor supports the screw head; front-bezel posts receive M3 x 14 screws.
         rear-=cyl(1.7,4,x,y,-.5)
     for x,y in SUPPORTS:
-        rear+=cyl(3.2,10.7,x,y,2.4)
+        rear+=cyl(3.2,CARRIER_REAR-2.4,x,y,2.4)
     rear-=usb_aperture()
     for native_x in (-28,-8):
         rear-=cyl(4,4,PCB_X+native_x,PCB_Y+19,-.5)
 
     # Stable cradle: 15-degree lean, 0.6 mm total slot clearance, closed bottom.
-    profile=Plane.YZ*Polygon((-35,0),(35,0),(25,28),(-18,28),align=None)
+    profile=Plane.YZ*Polygon((-35,0),(35,0),(25,STAND_HEIGHT),(-18,STAND_HEIGHT),align=None)
     stand=Pos(-55,0,0)*extrude(profile,amount=110)
-    stand-=Pos(0,0,5)*Rot(-15,0,0)*Box(120,21.35,70,align=(Align.CENTER,Align.CENTER,Align.MIN))
+    stand-=Pos(0,0,5)*Rot(-15,0,0)*Box(120,CASE_DEPTH+.6,70,align=(Align.CENTER,Align.CENTER,Align.MIN))
     return {"front-bezel":bezel,"panel-carrier":carrier,"rear-cover":rear,"desk-stand":stand}
 
 def main():
     parts=case()
     printed={
-        "front-bezel":Pos(0,0,20.75)*Rot(180,0,0)*parts["front-bezel"],
-        "panel-carrier":Pos(0,0,14.6)*Rot(180,0,0)*parts["panel-carrier"],
+        "front-bezel":Pos(0,0,CASE_DEPTH)*Rot(180,0,0)*parts["front-bezel"],
+        "panel-carrier":Pos(0,0,CARRIER_FRONT)*Rot(180,0,0)*parts["panel-carrier"],
         "rear-cover":parts["rear-cover"],"desk-stand":parts["desk-stand"],
     }
     report={"units":"mm","physical_prototype_tested":False,"parts":{}}
@@ -114,7 +121,7 @@ def main():
     for a,b in [("front-bezel","rear-cover"),("front-bezel","panel-carrier"),("rear-cover","panel-carrier")]:
         volume=(parts[a]&parts[b]).volume
         assert volume<.001,(a,b,volume)
-    stand_pose=Pos(0,0,5)*Rot(-15,0,0)*Pos(0,10.375,71.6)*Rot(90,0,0)
+    stand_pose=Pos(0,0,5)*Rot(-15,0,0)*Pos(0,CASE_DEPTH/2,71.6)*Rot(90,0,0)
     for name in ('front-bezel','panel-carrier','rear-cover'):
         assert ((stand_pose*parts[name])&parts['desk-stand']).volume<.001,(name,'stand collision')
     glass=block(GLASS_W,GLASS_H,GLASS_T,z=GLASS_REAR)
@@ -124,7 +131,7 @@ def main():
         for label,reference in [("glass",glass),("pcb",board)]:
             collision=(parts[name]&reference).volume
             assert collision<.001,(name,label,collision)
-    radius=(GLASS_REAR-9.3)/2
+    radius=(GLASS_REAR-FPC_CONTACT_Z)/2
     fpc_length=3.2+math.pi*radius+8.6
     assert fpc_length<24 and radius>3
     # Read anchors from the fabrication circuit, so button/port placement is auditable.
@@ -134,13 +141,13 @@ def main():
              for e in circuit if e['type']=='pcb_component' and e.get('source_component_id') in source}
     assert anchors['J1']=={'x':-46,'y':0} and anchors['J2']=={'x':38.9,'y':22.3}
     assert anchors['SW1']=={'x':-28,'y':-19} and anchors['SW2']=={'x':-8,'y':-19}
-    report.update({"case_size_mm":[W,H,20.75],"glass_pocket_clearance_per_side_mm":.5,
+    report.update({"case_size_mm":[W,H,CASE_DEPTH],"glass_pocket_clearance_per_side_mm":.5,
         "glass_front_foam_gap_mm":.5,"glass_back_perimeter_foam_gap_mm":2.0,
-        "pcb_component_clearance_to_rear_floor_mm":8.1,"pcb_hole_centres":PCB_HOLES,
+        "pcb_top_plane_to_rear_floor_mm":round(PCB_TOP-2.4,3),"pcb_hole_centres":PCB_HOLES,
         "case_screw_centres":SCREWS,"solid_intersections_mm3":0,
-        "stand_lean_degrees":15,"stand_slot_clearance_total_mm":.6,
+        "stand_lean_degrees":15,"stand_height_mm":STAND_HEIGHT,"case_screw_length_mm":CASE_SCREW_LENGTH,"stand_slot_clearance_total_mm":.6,
         "stand_case_intersections_mm3":0,
-        "fpc_assumed_contact_plane_z_mm":9.3,"fpc_bend_radius_mm":radius,
+        "fpc_assumed_contact_plane_z_mm":FPC_CONTACT_Z,"fpc_bend_radius_mm":radius,
         "fpc_estimated_path_mm":round(fpc_length,3),"fpc_nominal_length_mm":24,
         "fpc_minimum_straight_stiffener_mm":6,
         "pcb_case_origin_mm":[PCB_X,PCB_Y,PCB_CENTRE_Z],
@@ -155,6 +162,7 @@ def main():
     (ROOT/'fit-report.json').write_text(json.dumps(report,indent=2)+'\n')
     assembly=Compound(children=[parts[n] for n in ('front-bezel','panel-carrier','rear-cover')]+[glass,board])
     export_step(assembly,OUT/'enclosure-assembly.step')
+    for path in OUT.glob("*.step"):path.write_text("\n".join(line.rstrip() for line in path.read_text().splitlines())+"\n")
     print(json.dumps(report,indent=2))
 
 if __name__=='__main__':main()
