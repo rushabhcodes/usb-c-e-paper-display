@@ -1,47 +1,44 @@
-"""Check real plug-body insertion and rear finger access against the case solids.
-
-The envelopes are design allowances, not claims that every cable has this size.
-The entire swept body is checked, not just a plug drawn at its final position.
-"""
+"""Check the complete side plug insertion sweep and grip against actual CAD."""
 import json
-from build123d import Compound, Pos, Rot, export_step
-from model import (ROOT, OUT, PCB_X, GLASS_REAR, GLASS_W, GLASS_H, GLASS_T,
-                   USB_MOUTH_Y, USB_CENTRE_Z, USB_WELL_W, USB_WELL_START,
-                   USB_WELL_TOP, block, cyl, case)
-
+from build123d import Compound,Pos,Rot,export_step
+from model import (ROOT,OUT,W,GLASS_REAR,GLASS_W,GLASS_H,GLASS_T,
+                   USB_MOUTH_X,USB_CENTRE_Y,USB_CENTRE_Z,USB_APERTURE_W,
+                   USB_APERTURE_H,block,case)
 parts=case()
 stand_pose=Pos(0,0,5)*Rot(-15,0,0)*Pos(0,10.375,71.6)*Rot(90,0,0)
 obstacles={n:p for n,p in parts.items() if n!='desk-stand'}
 obstacles['glass']=block(GLASS_W,GLASS_H,GLASS_T,z=GLASS_REAR)
-profiles=[('ordinary',14,8,24),('large',22,10,30)]
 report={'result':'PASS','physical_cable_tested':False,'units':'mm',
-        'connector_datum_basis':'C165948 original placed CAD mesh, mm',
-        'plug_mating_plane_y':USB_MOUTH_Y,'plug_axis_z':USB_CENTRE_Z,
-        'rear_well_width':USB_WELL_W,'checks':[]}
+ 'connector_datum_basis':'C165948 original placed CAD mesh, mm',
+ 'exit':'left side','plug_mating_plane_x':USB_MOUTH_X,
+ 'plug_axis_y':USB_CENTRE_Y,'plug_axis_z':USB_CENTRE_Z,
+ 'socket_projection_beyond_case':round(-W/2-USB_MOUTH_X,3),
+ 'aperture':[USB_APERTURE_W,USB_APERTURE_H],'checks':[]}
 illustration=[]
-for name,width,height,length in profiles:
-    body=block(width,length,height,PCB_X,USB_MOUTH_Y+length/2,USB_CENTRE_Z-height/2)
-    # A straight 40 mm insertion stroke, plus the complete final plug body.
-    sweep=block(width,length+40,height,PCB_X,USB_MOUTH_Y+(length+40)/2,USB_CENTRE_Z-height/2)
-    intersections={n:round((sweep&p).volume,6) for n,p in obstacles.items()}
-    intersections['stand']=round(((stand_pose*sweep)&parts['desk-stand']).volume,6)
-    assert max(intersections.values())<.001,(name,intersections)
-    report['checks'].append({'profile':name,'body_envelope':[width,height,length],
-                            'insertion_travel':40,'intersections_mm3':intersections,
-                            'side_clearance_each':(USB_WELL_W-width)/2,
-                            'clearance_to_well_ceiling':USB_WELL_TOP-(USB_CENTRE_Z+height/2)})
-    if name=='large':illustration.append(body)
-# A 14 mm fingertip approaches the plug's rear-facing surface through the open
-# rear well, stopping 0.1 mm before the largest plug body. This checks access
-# from outside the housing; it is not a claim about hand dexterity.
-finger_top=USB_CENTRE_Z-5-.1
-finger=cyl(7,finger_top+8,PCB_X,USB_MOUTH_Y+12,-8)
-volumes={n:round((finger&p).volume,6) for n,p in obstacles.items()}
-assert max(volumes.values())<.001,volumes
-report['rear_finger_access']={'diameter':14,'intersections_mm3':volumes}
-report['limits']=['Actual cable and first printed fit remain untested.',
-                  'The port needs a USB data cable and a compatible USB-host image sender.',
-                  'Unusually wide right-angle or locking plugs are outside these envelopes.']
+def check(shape,include_stand=True):
+ volumes={n:round((shape&p).volume,6) for n,p in obstacles.items()}
+ if include_stand:volumes['stand']=round(((stand_pose*shape)&parts['desk-stand']).volume,6)
+ assert max(volumes.values())<.001,volumes
+ return volumes
+for name,width,height,length in [('ordinary',14,8,24),('large',22,10,30)]:
+ body=block(length,width,height,USB_MOUTH_X-length/2,USB_CENTRE_Y,USB_CENTRE_Z-height/2)
+ sweep=block(length+40,width,height,USB_MOUTH_X-(length+40)/2,USB_CENTRE_Y,USB_CENTRE_Z-height/2)
+ volumes=check(sweep)
+ # A mating shell extends 6.65 mm into the socket. Its outer swept section
+ # checks the aperture, while electrical mating within the socket is intentional.
+ shell=block(6.65+40,8.25,2.56,USB_MOUTH_X+(6.65-40)/2,USB_CENTRE_Y,USB_CENTRE_Z-1.28)
+ shell_volumes=check(shell)
+ # Grip clearance: add a 7 mm finger envelope above/below the external body.
+ grip=block(length+20,width+14,height+14,USB_MOUTH_X-(length+20)/2-.2,USB_CENTRE_Y,USB_CENTRE_Z-height/2-7)
+ grip_volumes=check(grip)
+ report['checks'].append({'profile':name,'body_envelope':[width,height,length],
+  'insertion_travel':40,'body_intersections_mm3':volumes,
+  'mating_shell_intersections_mm3':shell_volumes,'grip_intersections_mm3':grip_volumes,
+  'body_fully_external':True,'grip_allowance_each_side':7})
+ if name=='large':illustration.append(body)
+report['limits']=['First printed fit and actual cable remain untested.',
+ 'Use a USB data cable and a compatible USB-host image sender.',
+ 'The profiles cover straight plugs, not every right-angle or locking cable.']
 (ROOT/'usability-report.json').write_text(json.dumps(report,indent=2)+'\n')
 export_step(Compound(children=list(obstacles.values())+illustration),OUT/'usb-plug-access-assembly.step')
 print(json.dumps(report,indent=2))

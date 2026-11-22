@@ -1,0 +1,34 @@
+{
+  "result": "PASS",
+  "method": "Native JSCAD coplanar merge; no snapping; original boundary vertices retained",
+  "parts": [
+    {
+      "name": "BEZEL",
+      "original_polygons": 4120,
+      "merged_polygons": 2026,
+      "volume_delta_mm3": -3.2378011383116245e-10,
+      "max_bounds_delta_mm": 0
+    },
+    {
+      "name": "CARRIER",
+      "original_polygons": 3458,
+      "merged_polygons": 1802,
+      "volume_delta_mm3": 8.003553375601768e-11,
+      "max_bounds_delta_mm": 0
+    },
+    {
+      "name": "REAR",
+      "original_polygons": 4440,
+      "merged_polygons": 2253,
+      "volume_delta_mm3": -5.820766091346741e-11,
+      "max_bounds_delta_mm": 0
+    },
+    {
+      "name": "STAND",
+      "original_polygons": 28,
+      "merged_polygons": 16,
+      "volume_delta_mm3": -1.4551915228366852e-11,
+      "max_bounds_delta_mm": 0
+    }
+  ]
+}

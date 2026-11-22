@@ -10,13 +10,13 @@ from pathlib import Path
 import numpy as np
 import trimesh
 from PIL import Image
-from model import PCB_X, USB_WELL_W
+from model import PCB_X, PCB_Y, PCB_CENTRE_Z, PCB_HOLES
 
 ROOT=Path(__file__).resolve().parent
 OUT=ROOT/'models'
 OUT.mkdir(exist_ok=True)
 # Case coordinates from model.py: PCB centre (-1.05,-8.6,11.3), top toward rear.
-CASE_TO_BOARD=np.array([[0,-1,0,-8.6],[-1,0,0,-1.05],[0,0,-1,11.3],[0,0,0,1.]])
+CASE_TO_BOARD=np.array([[1,0,0,-PCB_X],[0,-1,0,PCB_Y],[0,0,-1,PCB_CENTRE_Z],[0,0,0,1.]])
 # The native GLB importer defaults to CAD Z-up and applies its own (x,z,y)
 # loader transform. Retain CAD coordinates in these project model assets.
 entries=[]
@@ -94,12 +94,7 @@ export('FLEX','24-contact panel flex return',[flex],'#c58f32')
 # Compressed foam supports stay on the opaque panel perimeter.
 def foam_ring(z,thickness,interrupt=False):
     bars=[box([1.5,111.2,thickness],[x,0,z]) for x in [-84.35,84.35]]
-    if interrupt:
-        # Support only the remaining carrier ledge beside the USB cable well.
-        left=PCB_X-USB_WELL_W/2;right=PCB_X+USB_WELL_W/2
-        bars += [box([left+83.6,1.5,thickness],[(left-83.6)/2,54.85,z]),
-                 box([83.6-right,1.5,thickness],[(right+83.6)/2,54.85,z])]
-    else:bars.append(box([167.2,1.5,thickness],[0,54.85,z]))
+    bars.append(box([167.2,1.5,thickness],[0,54.85,z]))
     if interrupt:
         bars += [box([72.55,1.5,thickness],[-47.325,-54.85,z]),box([74.65,1.5,thickness],[46.275,-54.85,z])]
     else:bars.append(box([167.2,1.5,thickness],[0,-54.85,z]))
@@ -116,7 +111,7 @@ for i,(x,y) in enumerate([(x,y) for x in (-78,78) for y in (-65.8,59.7)],1):
     meshes=screw(0,16)
     for m in meshes:m.apply_translation([x,y,0])
     export(f'CASE_SCREW_{i}','M3 x 16 case screw',meshes,'#a4adb8')
-for i,(x,y) in enumerate([(-1.05-y,-8.6-x) for x in (-45,45) for y in (-25,25)],1):
+for i,(x,y) in enumerate(PCB_HOLES,1):
     meshes=screw(10.5,4)
     for m in meshes:m.apply_translation([x,y,0])
     export(f'PCB_SCREW_{i}','M3 x 4 PCB screw',meshes,'#a4adb8')
@@ -145,3 +140,8 @@ report={'units':'mm','case_to_pcb_matrix':CASE_TO_BOARD.tolist(),'parts':entries
                  'Physical print, FPC insertion and USB plug fit remain untested.']}
 (ROOT/'viewer-manifest.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps({'models':len(entries),'bytes':sum(p.stat().st_size for p in OUT.glob('*.glb')),'frame':'native PCB CAD coordinates'},indent=2))
+
+# Merge coplanar faces with the native JSCAD topology operation, then restore
+# boundary T-junction vertices; verify geometry and manifold integrity.
+import subprocess
+subprocess.run(['bun','scripts/optimize-native-solids.mjs'],cwd=ROOT.parent,check=True)

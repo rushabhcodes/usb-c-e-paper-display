@@ -3,9 +3,15 @@
   "physical_cable_tested": false,
   "units": "mm",
   "connector_datum_basis": "C165948 original placed CAD mesh, mm",
-  "plug_mating_plane_y": 42.750029,
+  "exit": "left side",
+  "plug_mating_plane_x": -91.300029,
+  "plug_axis_y": -29.3,
   "plug_axis_z": 9.299511,
-  "rear_well_width": 34.0,
+  "socket_projection_beyond_case": 0.2,
+  "aperture": [
+    14,
+    8.6
+  ],
   "checks": [
     {
       "profile": "ordinary",
@@ -15,15 +21,29 @@
         24
       ],
       "insertion_travel": 40,
-      "intersections_mm3": {
+      "body_intersections_mm3": {
         "front-bezel": 0,
         "panel-carrier": 0,
         "rear-cover": 0,
         "glass": 0,
         "stand": 0
       },
-      "side_clearance_each": 10.0,
-      "clearance_to_well_ceiling": 1.7004889999999993
+      "mating_shell_intersections_mm3": {
+        "front-bezel": 0,
+        "panel-carrier": 0,
+        "rear-cover": 0,
+        "glass": 0,
+        "stand": 0
+      },
+      "grip_intersections_mm3": {
+        "front-bezel": 0,
+        "panel-carrier": 0,
+        "rear-cover": 0,
+        "glass": 0,
+        "stand": 0
+      },
+      "body_fully_external": true,
+      "grip_allowance_each_side": 7
     },
     {
       "profile": "large",
@@ -33,29 +53,34 @@
         30
       ],
       "insertion_travel": 40,
-      "intersections_mm3": {
+      "body_intersections_mm3": {
         "front-bezel": 0,
         "panel-carrier": 0,
         "rear-cover": 0,
         "glass": 0,
         "stand": 0
       },
-      "side_clearance_each": 6.0,
-      "clearance_to_well_ceiling": 0.7004889999999993
+      "mating_shell_intersections_mm3": {
+        "front-bezel": 0,
+        "panel-carrier": 0,
+        "rear-cover": 0,
+        "glass": 0,
+        "stand": 0
+      },
+      "grip_intersections_mm3": {
+        "front-bezel": 0,
+        "panel-carrier": 0,
+        "rear-cover": 0,
+        "glass": 0,
+        "stand": 0
+      },
+      "body_fully_external": true,
+      "grip_allowance_each_side": 7
     }
   ],
-  "rear_finger_access": {
-    "diameter": 14,
-    "intersections_mm3": {
-      "front-bezel": 0,
-      "panel-carrier": 0,
-      "rear-cover": 0,
-      "glass": 0
-    }
-  },
   "limits": [
-    "Actual cable and first printed fit remain untested.",
-    "The port needs a USB data cable and a compatible USB-host image sender.",
-    "Unusually wide right-angle or locking plugs are outside these envelopes."
+    "First printed fit and actual cable remain untested.",
+    "Use a USB data cable and a compatible USB-host image sender.",
+    "The profiles cover straight plugs, not every right-angle or locking cable."
   ]
 }

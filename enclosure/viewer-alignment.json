@@ -3,7 +3,7 @@
   "parts": [
     {
       "name": "BEZEL",
-      "max_bounds_error_mm": 0.0000035258789097269982
+      "max_bounds_error_mm": 0.000005051757824503511
     },
     {
       "name": "CARRIER",
@@ -11,11 +11,11 @@
     },
     {
       "name": "REAR",
-      "max_bounds_error_mm": 0.0000035258789097269982
+      "max_bounds_error_mm": 0.000005051757824503511
     },
     {
       "name": "STAND",
-      "max_bounds_error_mm": 0.0000020346679718841187
+      "max_bounds_error_mm": 0.000003051757815342171
     },
     {
       "name": "PANEL",
@@ -39,15 +39,15 @@
     },
     {
       "name": "CASE_SCREW_2",
-      "max_bounds_error_mm": 0.0000015258789005656581
+      "max_bounds_error_mm": 0.000003051757815342171
     },
     {
       "name": "CASE_SCREW_3",
-      "max_bounds_error_mm": 0.0000015258789076710855
+      "max_bounds_error_mm": 0.0000015258789005656581
     },
     {
       "name": "CASE_SCREW_4",
-      "max_bounds_error_mm": 0.0000015258789005656581
+      "max_bounds_error_mm": 0.000003051757815342171
     },
     {
       "name": "PCB_SCREW_1",

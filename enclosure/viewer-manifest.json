@@ -2,16 +2,16 @@
   "units": "mm",
   "case_to_pcb_matrix": [
     [
+      1.0,
       0.0,
-      -1.0,
       0.0,
-      -8.6
+      39.95
     ],
     [
+      0.0,
       -1.0,
       0.0,
-      0.0,
-      -1.05
+      -29.3
     ],
     [
       0.0,
@@ -35,17 +35,17 @@
       "color": "#263238",
       "bounds_mm": [
         [
-          -74.199998,
-          -92.149998,
+          -51.149998,
+          -94.899998,
           -9.45
         ],
         [
-          62.999998,
-          90.049998,
+          131.049998,
+          42.299998,
           -0.7
         ]
       ],
-      "sha256": "26dede247057ae01fe422c866399a221f850e561bd4fdcf70465c21570f1d96b"
+      "sha256": "dfea3889a02b37b63c71cec20839c4325fd637a1296b490a3c244ebe85a2b464"
     },
     {
       "name": "CARRIER",
@@ -55,17 +55,17 @@
       "color": "#647d7d",
       "bounds_mm": [
         [
-          -67.699998,
-          -88.149998,
+          -47.999997,
+          -88.399998,
           -3.3
         ],
         [
-          50.499998,
-          86.049998,
+          127.049998,
+          29.799998,
           -0.8
         ]
       ],
-      "sha256": "a89c0f067ccdf231b8822024a027e92e6e90dff05fd5683cc2c88031270ac490"
+      "sha256": "f159a6f905cf8b9ce36dc849640f9797ee77baa3b4e4c12d35b7522786e7f47b"
     },
     {
       "name": "REAR",
@@ -75,17 +75,17 @@
       "color": "#455a64",
       "bounds_mm": [
         [
-          -74.199998,
-          -92.149998,
+          -51.149998,
+          -94.899998,
           -7.05
         ],
         [
-          62.999998,
-          90.049998,
+          131.049998,
+          42.299998,
           11.3
         ]
       ],
-      "sha256": "448f350ca8e36c780179d9353d8a6206bd741da0992c5535f8d1d29fda6ace4d"
+      "sha256": "291511d372e5595993a6531c92b2d2e96842653b945211dda6bbf1908eab5100"
     },
     {
       "name": "STAND",
@@ -95,17 +95,17 @@
       "color": "#455a64",
       "bounds_mm": [
         [
-          34.31323,
-          -56.05,
+          -15.05,
+          13.61323,
           -31.588309
         ],
         [
-          76.888296,
-          53.95,
+          94.95,
+          56.188296,
           36.026499
         ]
       ],
-      "sha256": "f7ef679b89018577941356be6caad14bb5ff5f8d7a3e8e31077cbb16e8739fa6"
+      "sha256": "91104b0ddef362207fb165d8f1534dadda8afc3084eb5e6c608002eb25910988"
     },
     {
       "name": "PANEL",
@@ -115,17 +115,17 @@
       "color": null,
       "bounds_mm": [
         [
-          -64.2,
-          -86.15,
+          -45.15,
+          -84.9,
           -6.55
         ],
         [
-          47.0,
-          84.05,
+          125.05,
+          26.3,
           -5.3
         ]
       ],
-      "sha256": "0d58d3048f99f49aadde0190235860a9613ae43ff1b5b2fc3675d71ba45c96ae"
+      "sha256": "05bf0ca209d659e36e3a46229472c6483f735a992414d293529bbfe098bf5fb8"
     },
     {
       "name": "FLEX",
@@ -135,17 +135,17 @@
       "color": "#c58f32",
       "bounds_mm": [
         [
-          41.6,
-          -6.25,
+          32.65,
+          20.9,
           -5.375
         ],
         [
-          53.925,
-          6.25,
+          45.15,
+          33.225,
           2.075
         ]
       ],
-      "sha256": "ca99ec868a0721faa472986c8f05d5ec00fcc09589f7adc3d8791cb29414480d"
+      "sha256": "87c3fc93cd0ac9b70fd911a37da6e383560bb3cd305d4d8c460c3031ef03e2cb"
     },
     {
       "name": "FRONT_FOAM",
@@ -155,17 +155,17 @@
       "color": "#333333",
       "bounds_mm": [
         [
-          -64.2,
-          -86.15,
+          -45.15,
+          -84.9,
           -7.05
         ],
         [
-          47.0,
-          84.05,
+          125.05,
+          26.3,
           -6.55
         ]
       ],
-      "sha256": "d418bac47267469b40ae2aa213bf1ed924f62c71c8b2345b687076f94a43d5e8"
+      "sha256": "6225c3e64e3debe7da4d2cf8a0506417e5e7518582ec8ee4d52c145ae6b1399b"
     },
     {
       "name": "REAR_FOAM",
@@ -175,17 +175,17 @@
       "color": "#333333",
       "bounds_mm": [
         [
-          -64.2,
-          -86.15,
+          -45.15,
+          -84.9,
           -5.3
         ],
         [
-          47.0,
-          84.05,
+          125.05,
+          26.3,
           -3.3
         ]
       ],
-      "sha256": "2765123eaa6e8f7a11df9cc89f3ee60dfd7658f68949e92931b3bf684ed09ca5"
+      "sha256": "6ca218592f60792d0409bd01a741ad47de9de80047d8a45df9fc58fde3ce767e"
     },
     {
       "name": "CASE_SCREW_1",
@@ -195,17 +195,17 @@
       "color": "#a4adb8",
       "bounds_mm": [
         [
-          54.4,
-          74.15,
+          -40.85,
+          33.7,
           -4.7
         ],
         [
-          60.0,
-          79.75,
+          -35.25,
+          39.3,
           12.9
         ]
       ],
-      "sha256": "698499d5fc1b0497a9e7f674f94629bbb28a6583047eeebac009b528b4c53ecc"
+      "sha256": "3d2f863389906b4be5055485900e81891ef699363ba59a41d4a667b3b38fc5c0"
     },
     {
       "name": "CASE_SCREW_2",
@@ -215,17 +215,17 @@
       "color": "#a4adb8",
       "bounds_mm": [
         [
-          -71.1,
-          74.15,
+          -40.85,
+          -91.8,
           -4.7
         ],
         [
-          -65.5,
-          79.75,
+          -35.25,
+          -86.2,
           12.9
         ]
       ],
-      "sha256": "4f4ea1d5a07017c85b221eaf83c9a86cb4fcc8425f95b7fce2ed5ecd975dfb88"
+      "sha256": "14c87809ccb13c95ac1ca18a88e35d3e82e78f0242886659fa6eceb40b47dc90"
     },
     {
       "name": "CASE_SCREW_3",
@@ -235,17 +235,17 @@
       "color": "#a4adb8",
       "bounds_mm": [
         [
-          54.4,
-          -81.85,
+          115.15,
+          33.7,
           -4.7
         ],
         [
-          60.0,
-          -76.25,
+          120.75,
+          39.3,
           12.9
         ]
       ],
-      "sha256": "256144e2c9d5943471d28ec81eab2f2f1c5f6fa2e20bd978d457f5e3c335f490"
+      "sha256": "ff776fbb21a1e134f19847a6b9037a8aa3171ddf0cdccdbb307880d739df2d2c"
     },
     {
       "name": "CASE_SCREW_4",
@@ -255,17 +255,17 @@
       "color": "#a4adb8",
       "bounds_mm": [
         [
-          -71.1,
-          -81.85,
+          115.15,
+          -91.8,
           -4.7
         ],
         [
-          -65.5,
-          -76.25,
+          120.75,
+          -86.2,
           12.9
         ]
       ],
-      "sha256": "1e16d5c07caf2d3211249eb2249a53a3c4ae2232f5a77d470a687b4cbc1e58c2"
+      "sha256": "28551a0a0081580e9e58399aa6e10ada33ce5a6648a854b4f437e7e62ca2d686"
     },
     {
       "name": "PCB_SCREW_1",
@@ -285,7 +285,7 @@
           2.4
         ]
       ],
-      "sha256": "00fbbc403dde7444f143dff6a9ab5e2998c973e1d2fc3ba742293e4c712994d7"
+      "sha256": "270bd1c5257bdadb11824b69d54bd030a942047fab1ff30cc053847b369068ad"
     },
     {
       "name": "PCB_SCREW_2",
@@ -305,7 +305,7 @@
           2.4
         ]
       ],
-      "sha256": "dab68ba70ba5c2ec5476c05a1d6cb990e93b37318774c26c7d5aaea5fea26c01"
+      "sha256": "4d536321224d427f8e6a5c85e93d74cf1e2fe9c8aa006e24ea7cecdd712eb684"
     },
     {
       "name": "PCB_SCREW_3",
@@ -325,7 +325,7 @@
           2.4
         ]
       ],
-      "sha256": "655be9189119045a45d3aeb58eb3af1f502cb396438b763c7db85029021714a3"
+      "sha256": "e57055e5ac02cd7a6e7bc40e5e2b6a3adff5713d448b9014afcb430560e95ae0"
     },
     {
       "name": "PCB_SCREW_4",
@@ -335,24 +335,25 @@
       "color": "#a4adb8",
       "bounds_mm": [
         [
-          42.2,
+          20.2,
           22.2,
           -3.2
         ],
         [
-          47.8,
+          25.8,
           27.8,
           2.4
         ]
       ],
-      "sha256": "053a991658c073c65d098e1f16cd3283ed065046de11c296e6d7bb8430b4c9e6"
+      "sha256": "0f3d0f8e182a2c34e25fc961a163f8cc5bf7d1bba9744cfe1ab9a053b49e57fc"
     }
   ],
   "source_stl_sha256": {
-    "front-bezel.stl": "3814bbe6dbdda54812a47e853c95077d0489099f5201745d4ff5be61a1b9ebea",
-    "panel-carrier.stl": "dd9c4fc2ea81a347021ae22efffc29f962e27f51353c0f330bea9bf3f31f2a6d",
-    "rear-cover.stl": "9be050c7cd57608c48216b2b27f884861b4d665ce11e85671c3d31fc64961736",
-    "desk-stand.stl": "c14d51241014bbe41b6b5ad8cb65fcdcd8330f7edf4745f9eae286ebe1c58a38"
+    "front-bezel.stl": "66ee18717e378e269d9a2671b38fbc51599415b1b8db22e0c6bf778119cba881",
+    "panel-carrier.stl": "5e4744ffdc3eea4bc18ea1711f4cd078926b93758eedbe22860f9c78c7bf4133",
+    "rear-cover.stl": "c06d3fd78627589a5cbf62bc90ad3b8a32aa47b28e373b8766deffb5d3998b62",
+    "desk-stand.stl": "c14d51241014bbe41b6b5ad8cb65fcdcd8330f7edf4745f9eae286ebe1c58a38",
+    "pcb-reference-assembly.stl": "876b5b38ae30d67ae159ed585518698989da4d928804b451f71c1e979bdb613f"
   },
   "notes": [
     "Viewer meshes derive from the existing print files; PCB copper coordinates are unchanged.",

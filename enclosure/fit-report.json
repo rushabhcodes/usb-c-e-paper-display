@@ -6,7 +6,7 @@
       "valid_solid": true,
       "watertight": true,
       "single_body": true,
-      "volume_mm3": 25035.76,
+      "volume_mm3": 25062.96,
       "print_size_mm": [
         182.2,
         137.2,
@@ -17,9 +17,9 @@
       "valid_solid": true,
       "watertight": true,
       "single_body": true,
-      "volume_mm3": 29375.1,
+      "volume_mm3": 30400.74,
       "print_size_mm": [
-        174.2,
+        175.05,
         118.2,
         2.5
       ]
@@ -28,7 +28,7 @@
       "valid_solid": true,
       "watertight": true,
       "single_body": true,
-      "volume_mm3": 81529.56,
+      "volume_mm3": 84459.53,
       "print_size_mm": [
         182.2,
         137.2,
@@ -58,20 +58,20 @@
   "pcb_component_clearance_to_rear_floor_mm": 8.1,
   "pcb_hole_centres": [
     [
-      23.95,
-      36.4
+      -84.95,
+      -4.300000000000001
     ],
     [
-      -26.05,
-      36.4
+      -84.95,
+      -54.3
     ],
     [
-      23.95,
-      -53.6
+      5.049999999999997,
+      -4.300000000000001
     ],
     [
-      -26.05,
-      -53.6
+      -16.950000000000003,
+      -54.3
     ]
   ],
   "case_screw_centres": [
@@ -101,21 +101,26 @@
   "fpc_estimated_path_mm": 23.267,
   "fpc_nominal_length_mm": 24,
   "fpc_minimum_straight_stiffener_mm": 6,
-  "usb_access": "rear-open plug-body well, open through upper edge",
-  "usb_well_width_mm": 34.0,
-  "usb_well_start_y_mm": 38.750029,
-  "usb_well_top_z_mm": 15.0,
-  "usb_mating_plane_y_mm": 42.750029,
+  "pcb_case_origin_mm": [
+    -39.95,
+    -29.3,
+    11.3
+  ],
+  "usb_access": "flush left-side USB-C port; complete plug body outside enclosure",
+  "usb_aperture_width_mm": 14,
+  "usb_aperture_height_mm": 8.6,
+  "usb_mating_plane_x_mm": -91.300029,
+  "usb_axis_y_mm": -29.3,
   "usb_axis_z_mm": 9.299511,
-  "usb_mouth_recess_mm": 22.85,
+  "usb_mouth_projection_mm": 0.2,
   "button_centres": [
     [
-      17.95,
-      19.4
+      -67.95,
+      -10.3
     ],
     [
-      17.95,
-      -0.5999999999999996
+      -47.95,
+      -10.3
     ]
   ],
   "notes": [
