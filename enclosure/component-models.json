@@ -1,0 +1,58 @@
+[
+  {
+    "lcsc": "C165948",
+    "source": "tsci import --jlcpcb --use-exact-footprint --download",
+    "step_sha256": "3806dacd6082a75cfb24d3ba4b86b3d0c96213134c67e1385eb1599a89b2c461",
+    "obj_sha256": "9d7e957178f20137fdd5d62ae84281fe3b5bb3a44262f348d8e129b0a4182320",
+    "glb_sha256": "921a49da301415184ebcf86c90706763d9c1465c910bd5afb5a2014a294bd85c",
+    "solid_count": 14,
+    "each_mesh_watertight": true,
+    "matches_original_bounds_mm": 0.025,
+    "source_origin_baked_mm": [
+      0.0,
+      -2.7500289000000517,
+      1.0999999999872223e-05
+    ],
+    "model_bounds_mm": [
+      [
+        -4.470000000000001,
+        -2.549971099999958,
+        -0.8500109999999995
+      ],
+      [
+        4.469999999999999,
+        5.350028900000051,
+        3.2509890000000006
+      ]
+    ],
+    "model_frame": "native tscircuit GLB loader: CAD Z-up; board-surface origin baked to zero"
+  },
+  {
+    "lcsc": "C13585",
+    "source": "tsci import --jlcpcb --use-exact-footprint --download",
+    "step_sha256": "a3b636a587c98bf5baa4dcd6af15732c43a5f396ec40d2b987bd6db5417c8265",
+    "obj_sha256": "d725fdbb4ab326035448275626e2022faef2bcdf473e3b7654e25f6308d096c0",
+    "glb_sha256": "561cc071d404ab42b888962271d7b06aa2691f84a25ce8991f88c508768a39ad",
+    "solid_count": 1,
+    "each_mesh_watertight": true,
+    "matches_original_bounds_mm": 0.025,
+    "source_origin_baked_mm": [
+      0.0,
+      0.0,
+      -0.65
+    ],
+    "model_bounds_mm": [
+      [
+        -1.6,
+        -0.8000000000000003,
+        -2.220446049250313e-16
+      ],
+      [
+        1.6,
+        0.8000000000000003,
+        1.3000000000000003
+      ]
+    ],
+    "model_frame": "native tscircuit GLB loader: CAD Z-up; board-surface origin baked to zero"
+  }
+]

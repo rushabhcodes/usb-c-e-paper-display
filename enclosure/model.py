@@ -23,6 +23,19 @@ FPC_X=PCB_X
 SCREWS=[(x,y) for x in (-78,78) for y in (-65.8,59.7)]
 PCB_HOLES=[(PCB_X-y,PCB_Y-x) for x in (-45,45) for y in (-25,25)]
 SUPPORTS=[(x,y) for x in (-72,72) for y in (-45,45)]
+# Installed connector datums measured from the actual C165948 CAD mesh.
+# A full plug body must enter this region: a tip-sized hole at the case edge
+# cannot reach the recessed receptacle. The rear-open well admits the body.
+USB_MOUTH_Y=42.750029
+USB_CENTRE_Z=9.299511
+USB_WELL_W=34.0
+USB_WELL_START=USB_MOUTH_Y-4.0
+USB_WELL_END=74.0
+USB_WELL_TOP=15.0
+
+def usb_well():
+    return rounded(USB_WELL_W,USB_WELL_END-USB_WELL_START,3.0,
+                   USB_WELL_TOP+1,PCB_X,(USB_WELL_START+USB_WELL_END)/2,-1)
 
 def block(w,h,d,x=0,y=0,z=0):
     return Pos(x,y,z)*Box(w,h,d,align=(Align.CENTER,Align.CENTER,Align.MIN))
@@ -45,6 +58,7 @@ def case():
     for x,y in SCREWS:
         bezel+=cyl(3.2,6.35,x,y,12.0)
         bezel-=cyl(1.3,7.0,x,y,12.0) # blind M3 self-tapping pilot, 1.75mm face remaining
+    bezel-=usb_well() # relieve only the rear collar; glass and front face stay supported
 
     # Carrier front is flat; compliant perimeter pads support only opaque glass margins.
     carrier=rounded(174.2,118.2,3.0,1.5,z=13.1)
@@ -54,6 +68,7 @@ def case():
     for x,y in PCB_HOLES:
         carrier+=cyl(3.0,1.0,x,y,12.1)
         carrier-=cyl(1.3,2.3,x,y,12.1)
+    carrier-=usb_well()
 
     rear=rounded(W,H,R,18.35,y=CY)
     rear-=rounded(W-2*WALL,H-2*WALL,R-WALL,18.5,y=CY,z=2.4)
@@ -62,8 +77,9 @@ def case():
         rear-=cyl(1.7,4,x,y,-.5)
     for x,y in SUPPORTS:
         rear+=cyl(3.2,10.7,x,y,2.4)
-    # USB socket faces the upper edge after the physical PCB rotation.
-    rear-=block(14,30,8,PCB_X,60,4.9)
+    # Open to the rear and top: exposes the complete plug body for insertion
+    # and removal instead of burying it behind a 24 mm connector-tip tunnel.
+    rear-=usb_well()
     for native_x in (-28,-8):
         rear-=cyl(4,4,PCB_X+19,PCB_Y-native_x,-.5)
 
@@ -126,8 +142,12 @@ def main():
         "stand_case_intersections_mm3":0,
         "fpc_assumed_contact_plane_z_mm":9.3,"fpc_bend_radius_mm":radius,
         "fpc_estimated_path_mm":round(fpc_length,3),"fpc_nominal_length_mm":24,
-        "fpc_minimum_straight_stiffener_mm":6,"usb_opening_mm":[14,8],
-        "usb_mouth_recess_mm":round((CY+H/2)-(PCB_Y+50.194),3),
+        "fpc_minimum_straight_stiffener_mm":6,
+        "usb_access":"rear-open plug-body well, open through upper edge",
+        "usb_well_width_mm":USB_WELL_W,"usb_well_start_y_mm":USB_WELL_START,
+        "usb_well_top_z_mm":USB_WELL_TOP,
+        "usb_mating_plane_y_mm":USB_MOUTH_Y,"usb_axis_z_mm":USB_CENTRE_Z,
+        "usb_mouth_recess_mm":round((CY+H/2)-USB_MOUTH_Y,3),
         "button_centres":[[PCB_X+19,PCB_Y+28],[PCB_X+19,PCB_Y+8]],
         "notes":["FPC contact depth/height and plug overmould require physical fit confirmation.",
                  "No pressure or hard support on active glass area; foam on opaque perimeter only.",

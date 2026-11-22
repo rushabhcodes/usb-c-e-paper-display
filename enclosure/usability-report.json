@@ -1,0 +1,61 @@
+{
+  "result": "PASS",
+  "physical_cable_tested": false,
+  "units": "mm",
+  "connector_datum_basis": "C165948 original placed CAD mesh, mm",
+  "plug_mating_plane_y": 42.750029,
+  "plug_axis_z": 9.299511,
+  "rear_well_width": 34.0,
+  "checks": [
+    {
+      "profile": "ordinary",
+      "body_envelope": [
+        14,
+        8,
+        24
+      ],
+      "insertion_travel": 40,
+      "intersections_mm3": {
+        "front-bezel": 0,
+        "panel-carrier": 0,
+        "rear-cover": 0,
+        "glass": 0,
+        "stand": 0
+      },
+      "side_clearance_each": 10.0,
+      "clearance_to_well_ceiling": 1.7004889999999993
+    },
+    {
+      "profile": "large",
+      "body_envelope": [
+        22,
+        10,
+        30
+      ],
+      "insertion_travel": 40,
+      "intersections_mm3": {
+        "front-bezel": 0,
+        "panel-carrier": 0,
+        "rear-cover": 0,
+        "glass": 0,
+        "stand": 0
+      },
+      "side_clearance_each": 6.0,
+      "clearance_to_well_ceiling": 0.7004889999999993
+    }
+  ],
+  "rear_finger_access": {
+    "diameter": 14,
+    "intersections_mm3": {
+      "front-bezel": 0,
+      "panel-carrier": 0,
+      "rear-cover": 0,
+      "glass": 0
+    }
+  },
+  "limits": [
+    "Actual cable and first printed fit remain untested.",
+    "The port needs a USB data cable and a compatible USB-host image sender.",
+    "Unusually wide right-angle or locking plugs are outside these envelopes."
+  ]
+}

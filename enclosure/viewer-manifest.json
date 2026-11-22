@@ -45,7 +45,7 @@
           -0.7
         ]
       ],
-      "sha256": "c1c3bead37a8c774c459649e8fa4e5248ea92248adb5ea2fb6c13555d461fa02"
+      "sha256": "26dede247057ae01fe422c866399a221f850e561bd4fdcf70465c21570f1d96b"
     },
     {
       "name": "CARRIER",
@@ -65,7 +65,7 @@
           -0.8
         ]
       ],
-      "sha256": "20673e15edff7be3795bfd3e78a12041ad54e483aa0f046e37f34e0fa9be9729"
+      "sha256": "a89c0f067ccdf231b8822024a027e92e6e90dff05fd5683cc2c88031270ac490"
     },
     {
       "name": "REAR",
@@ -85,7 +85,7 @@
           11.3
         ]
       ],
-      "sha256": "6abf9fbbf80be7cec2014e5f3167f7b3c173cc85954769f4df63d43e34019460"
+      "sha256": "448f350ca8e36c780179d9353d8a6206bd741da0992c5535f8d1d29fda6ace4d"
     },
     {
       "name": "STAND",
@@ -117,7 +117,7 @@
         [
           -64.2,
           -86.15,
-          -6.56
+          -6.55
         ],
         [
           47.0,
@@ -125,7 +125,7 @@
           -5.3
         ]
       ],
-      "sha256": "bd76d0caa4be585440e6678aea7b6521517286327aed3329be54fd2214ffa583"
+      "sha256": "0d58d3048f99f49aadde0190235860a9613ae43ff1b5b2fc3675d71ba45c96ae"
     },
     {
       "name": "FLEX",
@@ -185,7 +185,7 @@
           -3.3
         ]
       ],
-      "sha256": "f197136f7ab30d9007d164682c1695f7fe6051c30e7f8ce52a356f326d24df0f"
+      "sha256": "2765123eaa6e8f7a11df9cc89f3ee60dfd7658f68949e92931b3bf684ed09ca5"
     },
     {
       "name": "CASE_SCREW_1",
@@ -349,9 +349,9 @@
     }
   ],
   "source_stl_sha256": {
-    "front-bezel.stl": "66ee18717e378e269d9a2671b38fbc51599415b1b8db22e0c6bf778119cba881",
-    "panel-carrier.stl": "4f89c5956e07a22256db4e53b167ecac22bdd4b45cde06d927035320d68d3c20",
-    "rear-cover.stl": "26929637044a55893c9c714c0e725a9d7fd105480d51a4442afcd83af14b33ae",
+    "front-bezel.stl": "3814bbe6dbdda54812a47e853c95077d0489099f5201745d4ff5be61a1b9ebea",
+    "panel-carrier.stl": "dd9c4fc2ea81a347021ae22efffc29f962e27f51353c0f330bea9bf3f31f2a6d",
+    "rear-cover.stl": "9be050c7cd57608c48216b2b27f884861b4d665ce11e85671c3d31fc64961736",
     "desk-stand.stl": "c14d51241014bbe41b6b5ad8cb65fcdcd8330f7edf4745f9eae286ebe1c58a38"
   },
   "notes": [

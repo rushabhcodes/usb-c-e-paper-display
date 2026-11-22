@@ -1,0 +1,70 @@
+{
+  "result": "PASS",
+  "parts": [
+    {
+      "name": "BEZEL",
+      "max_bounds_error_mm": 0.0000035258789097269982
+    },
+    {
+      "name": "CARRIER",
+      "max_bounds_error_mm": 0.0000035258789097269982
+    },
+    {
+      "name": "REAR",
+      "max_bounds_error_mm": 0.0000035258789097269982
+    },
+    {
+      "name": "STAND",
+      "max_bounds_error_mm": 0.0000020346679718841187
+    },
+    {
+      "name": "PANEL",
+      "max_bounds_error_mm": 0.000003051757815342171
+    },
+    {
+      "name": "FLEX",
+      "max_bounds_error_mm": 0.0000015258789076710855
+    },
+    {
+      "name": "FRONT_FOAM",
+      "max_bounds_error_mm": 0.000003051757815342171
+    },
+    {
+      "name": "REAR_FOAM",
+      "max_bounds_error_mm": 0.000003051757815342171
+    },
+    {
+      "name": "CASE_SCREW_1",
+      "max_bounds_error_mm": 0.0000015258789076710855
+    },
+    {
+      "name": "CASE_SCREW_2",
+      "max_bounds_error_mm": 0.0000015258789005656581
+    },
+    {
+      "name": "CASE_SCREW_3",
+      "max_bounds_error_mm": 0.0000015258789076710855
+    },
+    {
+      "name": "CASE_SCREW_4",
+      "max_bounds_error_mm": 0.0000015258789005656581
+    },
+    {
+      "name": "PCB_SCREW_1",
+      "max_bounds_error_mm": 7.629394538355427e-7
+    },
+    {
+      "name": "PCB_SCREW_2",
+      "max_bounds_error_mm": 7.629394538355427e-7
+    },
+    {
+      "name": "PCB_SCREW_3",
+      "max_bounds_error_mm": 7.629394538355427e-7
+    },
+    {
+      "name": "PCB_SCREW_4",
+      "max_bounds_error_mm": 7.629394538355427e-7
+    }
+  ],
+  "method": "Official loadCadComponentMesh output compared with the actual installed CAD bounds"
+}

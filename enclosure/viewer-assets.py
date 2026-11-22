@@ -10,12 +10,15 @@ from pathlib import Path
 import numpy as np
 import trimesh
 from PIL import Image
+from model import PCB_X, USB_WELL_W
 
 ROOT=Path(__file__).resolve().parent
 OUT=ROOT/'models'
 OUT.mkdir(exist_ok=True)
 # Case coordinates from model.py: PCB centre (-1.05,-8.6,11.3), top toward rear.
 CASE_TO_BOARD=np.array([[0,-1,0,-8.6],[-1,0,0,-1.05],[0,0,-1,11.3],[0,0,0,1.]])
+# The native GLB importer defaults to CAD Z-up and applies its own (x,z,y)
+# loader transform. Retain CAD coordinates in these project model assets.
 entries=[]
 
 def color_mesh(mesh,color):
@@ -27,17 +30,19 @@ def box(size,centre):
 
 def export(name,label,meshes,color,printed=False):
     scene=trimesh.Scene()
+    bounds=[]
     for i,mesh in enumerate(meshes):
         m=mesh.copy()
         if color is not None:color_mesh(m,color)
         m.apply_transform(CASE_TO_BOARD)
+        bounds.append(m.bounds)
         scene.add_geometry(m,node_name=f'{name}_{i}',geom_name=f'{name}_{i}')
     data=scene.export(file_type='glb')
     path=OUT/f'{name.lower()}.glb';path.write_bytes(data)
     loaded=trimesh.load(path,force='scene')
     assert np.allclose(loaded.bounds,scene.bounds,atol=2e-5)
     entries.append({'name':name,'label':label,'file':path.name,'printed':printed,
-                    'color':color,'bounds_mm':scene.bounds.round(6).tolist(),
+                    'color':color,'bounds_mm':np.array([np.min(np.array(bounds)[:,0],axis=0),np.max(np.array(bounds)[:,1],axis=0)]).round(6).tolist(),
                     'sha256':hashlib.sha256(data).hexdigest()})
 
 for name,label,filename,flip,color in [
@@ -56,12 +61,16 @@ for name,label,filename,flip,color in [
         mesh.apply_transform(np.linalg.inv(stand_pose))
     export(name,label,[mesh],color,True)
 
-glass=color_mesh(box([170.2,111.2,1.25],[0,0,17.225]),'#242724')
-vertices=[[-81.6,-45.81,17.86],[81.6,-45.81,17.86],[81.6,52.11,17.86],[-81.6,52.11,17.86]]
-paper=trimesh.Trimesh(vertices=vertices,faces=[[0,1,2],[0,2,3]],process=False)
-material=trimesh.visual.material.PBRMaterial(baseColorTexture=Image.open(ROOT.parent/'firmware/examples/dashboard-41.png'),metallicFactor=0,roughnessFactor=.95,doubleSided=True)
-paper.visual=trimesh.visual.TextureVisuals(uv=[[0,0],[1,0],[1,1],[0,1]],material=material)
-export('PANEL','GDEY075T7 raw 7.5-inch panel',[glass,paper],None)
+# The display image is a material on the closed glass solid. A separate open
+# illustration plane prevented native explosion collision validation.
+glass=box([170.2,111.2,1.25],[0,0,17.225])
+panel_texture=Image.new('RGB',(1702,1112),'#242724')
+panel_texture.paste(Image.open(ROOT.parent/'firmware/examples/dashboard-41.png').convert('RGB').resize((1632,979)),(35,35))
+uv=np.column_stack([(glass.vertices[:,0]+85.1)/170.2,(glass.vertices[:,1]+55.6)/111.2])
+material=trimesh.visual.material.PBRMaterial(baseColorTexture=panel_texture,metallicFactor=0,roughnessFactor=.95)
+glass.visual=trimesh.visual.TextureVisuals(uv=uv,material=material)
+assert glass.is_watertight
+export('PANEL','GDEY075T7 raw 7.5-inch panel',[glass],None)
 
 # Same 3.65 mm radius / 23.267 mm return path used by model.py and render.py.
 points=[[-55.6,16.6],[-58.8,16.6]]
@@ -85,7 +94,12 @@ export('FLEX','24-contact panel flex return',[flex],'#c58f32')
 # Compressed foam supports stay on the opaque panel perimeter.
 def foam_ring(z,thickness,interrupt=False):
     bars=[box([1.5,111.2,thickness],[x,0,z]) for x in [-84.35,84.35]]
-    bars.append(box([167.2,1.5,thickness],[0,54.85,z]))
+    if interrupt:
+        # Support only the remaining carrier ledge beside the USB cable well.
+        left=PCB_X-USB_WELL_W/2;right=PCB_X+USB_WELL_W/2
+        bars += [box([left+83.6,1.5,thickness],[(left-83.6)/2,54.85,z]),
+                 box([83.6-right,1.5,thickness],[(right+83.6)/2,54.85,z])]
+    else:bars.append(box([167.2,1.5,thickness],[0,54.85,z]))
     if interrupt:
         bars += [box([72.55,1.5,thickness],[-47.325,-54.85,z]),box([74.65,1.5,thickness],[46.275,-54.85,z])]
     else:bars.append(box([167.2,1.5,thickness],[0,-54.85,z]))
