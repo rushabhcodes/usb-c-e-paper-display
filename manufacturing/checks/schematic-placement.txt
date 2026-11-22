@@ -1,4 +1,1 @@
-Command: bun run --bun tsci check schematic-placement index.circuit.tsx
-Exit code: 0
-
 

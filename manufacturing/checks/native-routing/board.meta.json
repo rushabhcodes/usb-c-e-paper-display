@@ -1,11 +1,11 @@
 {
   "type": "autorouter_debug_summary",
-  "generatedAt": "2026-11-22T11:32:48.894Z",
+  "generatedAt": "2026-11-22T17:25:32.887Z",
   "phaseCount": 2,
   "phases": [
     {
       "subcircuit_id": "subcircuit_source_group_0",
-      "componentDisplayName": "<board#379 />",
+      "componentDisplayName": "<board#413(.USB_EPAPER>.CONTROLLER) />",
       "phaseName": "CLOCK",
       "phaseStageIndex": 0,
       "phaseStageCount": 1,
@@ -25,13 +25,13 @@
       "outputTraceCount": 10,
       "outputJumperCount": 0,
       "errorCount": 0,
-      "elapsedMs": 1066,
-      "startedAt": "2026-11-22T11:32:02.840Z",
-      "completedAt": "2026-11-22T11:32:03.906Z"
+      "elapsedMs": 1502,
+      "startedAt": "2026-11-22T17:24:25.658Z",
+      "completedAt": "2026-11-22T17:24:27.160Z"
     },
     {
       "subcircuit_id": "subcircuit_source_group_0",
-      "componentDisplayName": "<board#379 />",
+      "componentDisplayName": "<board#413(.USB_EPAPER>.CONTROLLER) />",
       "phaseName": "MAIN",
       "phaseStageIndex": 0,
       "phaseStageCount": 1,
@@ -51,11 +51,11 @@
       "outputTraceCount": 165,
       "outputJumperCount": 0,
       "errorCount": 0,
-      "elapsedMs": 39778,
-      "startedAt": "2026-11-22T11:32:04.075Z",
-      "completedAt": "2026-11-22T11:32:43.853Z"
+      "elapsedMs": 55123,
+      "startedAt": "2026-11-22T17:24:27.361Z",
+      "completedAt": "2026-11-22T17:25:22.485Z"
     }
   ],
-  "circuitJsonElementCount": 2762,
+  "circuitJsonElementCount": 2939,
   "targetPhaseReached": false
 }

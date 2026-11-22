@@ -17,7 +17,13 @@ parser.add_argument('--allow-unrouted', action='store_true')
 args = parser.parse_args()
 path = Path(args.circuit)
 data = json.loads(path.read_text())
-components = {x['name']: x for x in data if x['type'] == 'source_component'}
+pcb_sources = {x['source_component_id'] for x in data
+               if x['type']=='pcb_component' and x.get('source_component_id')}
+components = {x['name']: x for x in data
+              if x['type']=='source_component' and x['source_component_id'] in pcb_sources}
+mechanical = [x for x in data if x['type']=='source_component'
+              and x['source_component_id'] not in pcb_sources]
+assert all(x['ftype'] in ['subassembly','printedpart'] for x in mechanical), 'Unexpected non-PCB source component'
 expected = {'J1','J2','F1','U1','U2','U3','U4','U5','Y1','SW1','SW2','Q1','L1','D1','D2','D3'}
 expected |= {f'C{i}' for i in range(1,32)} | {f'R{i}' for i in range(1,16)} | {f'TP{i}' for i in range(1,7)}
 assert set(components) == expected, f'Missing/extra components: {set(components)^expected}'

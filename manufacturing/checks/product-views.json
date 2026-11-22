@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "mechanical_parts": 16,
+  "printed_parts": 4,
+  "system_pages": 2,
+  "drawing_pages": 6,
+  "dimension_lines": 20,
+  "mechanical_parts_in_pcb_bom": 0,
+  "circuit_sha256": "f07465331805c329edf2f08805ffb39fc3eebd88966be373155937a5ed5b0100",
+  "physical_fit_tested": false,
+  "explosion_geometry_coverage": "Incomplete for J1, C28-C31 and decorative panel image plane; not physical assembly qualification"
+}

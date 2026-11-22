@@ -1,6 +1,6 @@
 {
   "name": "@tsci/rushabhcodes.usb-c-e-paper-display",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "USB-C RP2040 controller for the GDEY075T7 7.5-inch raw e-paper panel",
   "main": "index.circuit.tsx",
   "keywords": [
@@ -16,14 +16,16 @@
     "snapshot:update": "tsci snapshot --update",
     "start": "tsci dev",
     "typecheck": "tsc --noEmit",
-    "check:netlist": "tsci check netlist index.circuit.tsx",
-    "check:placement": "tsci check placement index.circuit.tsx",
+    "check:netlist": "tsci check netlist board.circuit.tsx",
+    "check:placement": "tsci check placement board.circuit.tsx",
     "check:shorts": "tsci check shorts dist/index/circuit.json",
     "check:pcb-style": "tsci check pcb-style dist/index/circuit.json",
     "check:continuous-style": "python scripts/check-continuous-style.py",
-    "validate": "python scripts/validate-circuit.py"
+    "validate": "python scripts/validate-circuit.py",
+    "check:schematic-placement": "tsci check schematic-placement board.circuit.tsx"
   },
   "devDependencies": {
+    "@tscircuit/circuit-json-to-drawing": "https://jscdn.tscircuit.com/@tscircuit/circuit-json-to-drawing/0.0.7.tgz",
     "@types/react": "^19.3.0",
     "tscircuit": "0.0.3277",
     "typescript": "^5.0.0"

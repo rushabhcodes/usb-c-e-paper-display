@@ -57,3 +57,9 @@ blender --background --python enclosure/render.py
 The model script exports every solid, checks STL topology, validates nominal collisions, and writes `fit-report.json`. Edit the named dimensions in `model.py` to adjust printer tolerances or the actual connector height. `render.py` creates assembly illustrations from the exported geometry; component models in the illustration are simplified fit references.
 
 ![Exploded assembly](exploded.png)
+
+## Native tscircuit viewer integration
+
+The product entrypoint references these parts through `assembly.device`, `assembly.printedpart` and `assembly.part`, including the display, flex, foam supports and fasteners. The 3D viewer has four native separation stages. System diagrams and six dimensioned drawing sheets are authored in `product/`.
+
+Run `.toolchains/cad/bin/python enclosure/viewer-assets.py` after regenerating the printable solids. It bakes the installed case-to-PCB transform into `models/*.glb`, records alignment and source hashes in `viewer-manifest.json`, and exports the exact printed-part triangle solids as native `createGeom3` JSCAD operations in `native-solids.json`. The physical PCB stays in its fabrication coordinates. No routing is imported by these mechanical assets.

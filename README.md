@@ -24,7 +24,7 @@ The panel manufacturer lists 3 s full, 1.5 s fast, and 0.3 s partial refresh at 
 bun install --frozen-lockfile
 bun run typecheck
 bun run check:netlist
-bun run tsci check schematic-placement
+bun run check:schematic-placement
 bun run check:placement
 bun run build
 bun run check:shorts
@@ -33,7 +33,7 @@ bun run check:continuous-style
 python scripts/validate-circuit.py
 ```
 
-`index.circuit.tsx` is the complete design source. **All PCB routing is defined and generated with tscircuit.** Five signal paths (RUN, DC, CS, BUSY and display SCK) are hand-authored in TSX with standard `trace` / `pcbPaths` primitives. The built-in local autorouter refines those paths for clearance and solves their remaining branches and all other connections. There are no imported board routes, saved-routing callbacks or externally generated vias. `tscircuit.config.ts` disables the local routing cache and cloud routing. The debug build command below records each routing stage's input and output so the result can be audited. No KiCad or external router is used to create or edit the copper.
+`index.circuit.tsx` is the native product assembly entrypoint. The unchanged electronics and tscircuit routing live in `product/controller-board.tsx`; `board.circuit.tsx` selects that board for electrical and placement checks. **All PCB routing is defined and generated with tscircuit.** Five signal paths (RUN, DC, CS, BUSY and display SCK) are hand-authored in TSX with standard `trace` / `pcbPaths` primitives. The built-in local autorouter refines those paths for clearance and solves their remaining branches and all other connections. There are no imported board routes, saved-routing callbacks or externally generated vias. `tscircuit.config.ts` disables the local routing cache and cloud routing. The debug build command below records each routing stage's input and output so the result can be audited. No KiCad or external router is used to create or edit the copper.
 
 ```sh
 bun run --bun tsci build index.circuit.tsx --autorouter-debug --autorouter-debug-dir dist/native-routing-release-final --autorouter-dump-srj all --autorouter-threads 1
@@ -100,3 +100,19 @@ The printable enclosure is a **182.2 × 137.2 × 20.75 mm landscape frame** with
 See [`enclosure/README.md`](enclosure/README.md) for printing, screw sizes, foam placement, flex-tail folding and assembly. The case has passed solid/collision and watertight-mesh checks; a first print must confirm flex insertion depth, supplied-panel tolerances and the USB plug fit. Disconnect USB before inserting or removing the FPC.
 
 ![Enclosure preview](enclosure/assembled.png)
+
+## Native assembly, System and Drawing views
+
+Open [the published product](https://tscircuit.com/rushabhcodes/usb-c-e-paper-display). The viewer selector exposes **3D** for the assembled enclosure, **System** for the image pipeline and power tree, and **Drawing** for six engineering sheets: controller PCB, front bezel, carrier, rear cover, stand and complete product. On a narrow viewer these choices are in the dropdown beside Files/PCB/Schematic.
+
+The entrypoint uses `assembly.device`, four `assembly.printedpart` elements and twelve `assembly.part` elements. The parts include the panel, flex tail, compliant supports and eight screws. Four native explosion stages separate the enclosure. Printed-part geometry uses native JSCAD `createGeom3` operations derived directly from the validated printable meshes, so dimensions measure the real geometry. The remaining models use immutable GLB URLs; both source geometry and models are included in the registry package. This integration follows the [official assembly documentation](https://docs.tscircuit.com/elements/assembly-device) and the [Abse Gameboy enclosure example](https://tscircuit.com/abse/gameboy-advance).
+
+`product/system-design.tsx` declares two `systemblock.page` diagrams and links blocks to real PCB references. `product/drawings.tsx` declares six `assembly.drawing.page` sheets with dimension lines, title blocks and mechanical notes. Self-contained SVG exports are in `manufacturing/engineering/`; system diagrams are in `manufacturing/system/`.
+
+```sh
+bun scripts/render-engineering.mjs
+```
+
+The drawing export script uses the official `circuit-json-to-drawing` 0.0.7 converter, which supports board/part drawing stages. The pinned CLI's bundled drawing converter predates those stages, so use this script for the six-sheet export. Geometry is resolved from the same native circuit JSON and project models; the script only adapts source identities and the documented CAD/glTF coordinate frame.
+
+This revision changes the product assembly and documentation; no physical prototype has been tested. Native explosion checking reports incomplete closed-geometry coverage for some imported electronic models and the panel's decorative image plane. The original solid/mesh fit report remains available in `enclosure/fit-report.json`.

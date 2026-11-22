@@ -107,6 +107,22 @@ for i,(x,y) in enumerate([(-1.05-y,-8.6-x) for x in (-45,45) for y in (-25,25)],
     for m in meshes:m.apply_translation([x,y,0])
     export(f'PCB_SCREW_{i}','M3 x 4 PCB screw',meshes,'#a4adb8')
 
+# Native polyhedra let tscircuit resolve dimensions from actual solids. The
+# pinned drawing-dimension engine cannot measure an external GLB alone.
+solids={}
+for part in entries:
+    if not part['printed']:continue
+    mesh=trimesh.load(OUT/part['file'],force='scene').to_geometry()
+    assert mesh.is_watertight and mesh.is_winding_consistent
+    vertices=mesh.vertices.round(6)
+    polygons=[]
+    for face in mesh.faces:
+        points=vertices[face]
+        normal=np.cross(points[1]-points[0],points[2]-points[0]);normal/=np.linalg.norm(normal)
+        polygons.append({'vertices':points.tolist(),'plane':[*normal.tolist(),float(normal@points[0])]})
+    solids[part['name']]={'type':'createGeom3','polygons':polygons}
+(ROOT/'native-solids.json').write_text(json.dumps(solids,separators=(',',':'))+'\n')
+
 report={'units':'mm','case_to_pcb_matrix':CASE_TO_BOARD.tolist(),'parts':entries,
         'source_stl_sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/'exports').glob('*.stl')},
         'notes':['Viewer meshes derive from the existing print files; PCB copper coordinates are unchanged.',

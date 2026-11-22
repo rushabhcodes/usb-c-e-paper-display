@@ -25,7 +25,7 @@
   "obstacle_count": 251,
   "trace_count": 165,
   "via_count": 151,
-  "elapsed_ms": 40844,
+  "elapsed_ms": 56625,
   "phases": [
     {
       "phaseName": "CLOCK",
@@ -33,7 +33,7 @@
       "solverName": "BusLanesPipelineSolver",
       "cacheStatus": "disabled",
       "previousTraceCount": 5,
-      "elapsedMs": 1066
+      "elapsedMs": 1502
     },
     {
       "phaseName": "MAIN",
@@ -41,11 +41,22 @@
       "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
       "cacheStatus": "disabled",
       "previousTraceCount": 10,
-      "elapsedMs": 39778
+      "elapsedMs": 55123
     }
   ],
-  "source_sha256": "332d6cf332ab0036aa2039fa0df31071417ead51cdc44dde8d19aaf18677b926",
-  "circuit_sha256": "a798852a44626dafc46e6036857799215f7d65de044ba5bfcc1ed0fff3ce6988",
+  "source_sha256": "2d2cd0e0bd90d3aeee848804c43ef1adf223066cced46e89a510ebab357aa0bb",
+  "circuit_sha256": "f07465331805c329edf2f08805ffb39fc3eebd88966be373155937a5ed5b0100",
+  "source_files_sha256": {
+    "index.circuit.tsx": "2d2cd0e0bd90d3aeee848804c43ef1adf223066cced46e89a510ebab357aa0bb",
+    "board.circuit.tsx": "b51eed3c61ef7c7b9f12fa64e1172bbdc18cb269beec05e7235bc5ce17a3e332",
+    "product/model-assets.ts": "4de0641c5da1574947858ff2b0b2455a08e7ad031d389413b5beb27a8fdb58f9",
+    "product/assembly.tsx": "e407635a387ef119240947af2c8e4e306c0293a5b46783f6baa0518930a82e67",
+    "product/controller-board.tsx": "29bb7dc46b5cf9ff97e5de96d0798e2728dab9e29d960c92974fb430d646b856",
+    "product/drawings.tsx": "a6560f3f79183d54e1421467d9634b4a5c6e973209c2b1b6fabd9afb28cb66e1",
+    "product/system-design.tsx": "9b9bacac0b63292324019045fc4222f40253feb4832e0f63e82900b9028ac958",
+    "enclosure/native-solids.json": "08a15cda3390a96af760ee7ac037941e4b1db3e5382ef6bfdbd52e0db319fd3e",
+    "enclosure/viewer-manifest.json": "33dd3e5ae0d00bed61688f32241145c0252749953f645fd08ab3a22eeba64b3a"
+  },
   "config_sha256": "c5b775e8dee27067a0ba14dd9b933a72a910f32e07dd40047b0e2380b9d6df18",
   "routing_input_sha256": "bf8a8382b2d2eac4dd91ef23db7e13e199ac0d00eb801c638d7aac43d8750141",
   "tscircuit_version": "0.0.3277",

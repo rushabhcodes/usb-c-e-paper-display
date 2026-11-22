@@ -22,7 +22,7 @@ Validated 22 November 2026. This two-layer release fixes the four long angled ru
 | BOM/CPL | 62 matched references; all supplier codes and orientations resolved |
 | Stencil | Four RP2040 exposed-pad windows, about 55% coverage; no paste on probe pads |
 
-All copper is authored and generated with tscircuit. `index.circuit.tsx` defines RUN, DC, CS, BUSY and display SCK using standard `trace` / `pcbPaths` primitives with straight and 45° segments. Numeric coordinates are anchored to TP6 at the board centre; component selectors supply the endpoints. Explicit wire landings represent continuity at vias. These paths were newly authored in TSX, rather than imported from a previously routed board.
+All copper is authored and generated with tscircuit. `product/controller-board.tsx` defines RUN, DC, CS, BUSY and display SCK using standard `trace` / `pcbPaths` primitives with straight and 45° segments. Numeric coordinates are anchored to TP6 at the board centre; component selectors supply the endpoints. Explicit wire landings represent continuity at vias. These paths were newly authored in TSX, rather than imported from a previously routed board.
 
 The initial routing input contains exactly those five source-authored paths. The built-in `bus_lanes` phase adds five top-layer crystal paths. The general local tscircuit solver receives those ten paths, refines portions of the five authored signals for clearance, and completes the remaining connections. Both phases report cache disabled. The released build uses tscircuit **0.0.3277**, Core **0.0.2458** and capacity-autorouter **0.0.1153**, pinned by the package and lockfile. No KiCad, external router, custom routing algorithm or saved-board-route import is used.
 
@@ -37,3 +37,12 @@ Imported generic chips can produce non-blocking pin-description and supplier-ava
 This is file-level validation. A fabricated prototype still needs power-rail, USB, FPC and refresh testing. Firmware passes compilation and software tests; enclosure CAD/mesh checks do not establish physical printed fit.
 
 Source: [JLCPCB fabrication capabilities](https://jlcpcb.com/capabilities/pcb-capabilities).
+
+
+## Native product-view revision 1.1.0
+
+Freshly rebuilt from `assembly.device` with the same pinned native PCB router, caches disabled. All 68 component placements are preserved; the fresh route again has 165 traces, 151 through vias and three bottom ground-pour regions. Netlist, both placement checks, Gerber shorts, default PCB style and the 238-chain continuous style check pass. BOM/CPL remain 62 PCB references; the 16 mechanical assembly parts are excluded.
+
+The native product now includes four printed enclosure solids, panel, flex, two foam supports and eight fasteners, two system diagram pages, and six dimensioned engineering drawing pages. `checks/product-views.json` validates their records and resolved dimensions. The six engineering SVGs use official `circuit-json-to-drawing` 0.0.7, with its documented source-identity adapter and canonical CAD/glTF rotation.
+
+Native explosion collision checking reports incomplete closed-geometry coverage for J1, C28–C31 and the decorative panel image plane. This does not replace the nominal enclosure solid/mesh checks or a physical first print. No prototype hardware or printed-fit validation is claimed.

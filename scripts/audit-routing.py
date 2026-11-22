@@ -9,7 +9,9 @@ parser=argparse.ArgumentParser()
 parser.add_argument('--debug-dir',default='dist/native-routing-release-final')
 args=parser.parse_args()
 debug=root/args.debug_dir
-source=(root/'index.circuit.tsx').read_text()
+source_files=[root/'index.circuit.tsx',root/'board.circuit.tsx',*sorted((root/'product').glob('*.ts')), *sorted((root/'product').glob('*.tsx'))]
+source='\n'.join(p.read_text() for p in source_files)
+source_files += [root/'enclosure/native-solids.json',root/'enclosure/viewer-manifest.json']
 for forbidden in ['algorithmFn','pcbTracePaths','pcb-routes.json','savedRouter','<pcbtrace','<via ']:
     assert forbidden not in source,f'Non-native routing input: {forbidden}'
 assert 'preset: "tscircuit"' in source
@@ -63,6 +65,7 @@ report={
     'trace_count':len(traces),'via_count':len(vias),'elapsed_ms':sum(p['elapsedMs'] for p in phases),
     'phases':[{k:p.get(k) for k in ['phaseName','autorouterName','solverName','cacheStatus','previousTraceCount','elapsedMs']} for p in phases],
     'source_sha256':digest(root/'index.circuit.tsx'),'circuit_sha256':digest(circuit_path),
+    'source_files_sha256':{str(p.relative_to(root)):digest(p) for p in source_files},
     'config_sha256':digest(root/'tscircuit.config.ts'),
     'routing_input_sha256':digest(debug/'phase-0.input.simple-route.json'),
     'tscircuit_version':json.loads((root/'node_modules/tscircuit/package.json').read_text())['version'],
