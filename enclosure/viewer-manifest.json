@@ -42,10 +42,10 @@
         [
           131.049998,
           42.299998,
-          -0.7
+          1.850489
         ]
       ],
-      "sha256": "643400b9964b451d712b53a85f343ab22bb1d309f24c29daa5c5aa18a0978e84"
+      "sha256": "797d02b2e4c8acda351921aeca32109cff5cde6fa1ee0436beebc3268198d321"
     },
     {
       "name": "CARRIER",
@@ -65,7 +65,7 @@
           -0.8
         ]
       ],
-      "sha256": "92368cac9d36eedc698ef5dc950f85183b029fcc5c2893e6cbf5bc890adb6618"
+      "sha256": "4e1891ae43e636ca54535c8e5baf8f319a12adf7a7c08c99793082f8f7f04ed0"
     },
     {
       "name": "REAR",
@@ -77,7 +77,7 @@
         [
           -51.149998,
           -94.899998,
-          -7.05
+          -1.8
         ],
         [
           131.049998,
@@ -85,7 +85,7 @@
           8.55
         ]
       ],
-      "sha256": "c86fc67ebcca6469097b34acb0285de68fd32d317740f5635dbe0ce63c59c417"
+      "sha256": "8da99ed54452cb5f8c93ef658aea4c2c0b2fb11f9b25b67f3b2e3ef0843ae720"
     },
     {
       "name": "STAND",
@@ -349,9 +349,9 @@
     }
   ],
   "source_stl_sha256": {
-    "front-bezel.stl": "ea28d9f607ed98824ae802c3c7b79b7c602cebda0e304e222ad07e6a139dd4cc",
-    "panel-carrier.stl": "4f015446c7f33e6dc9596ea3b4384543a8c038882a0c40fca1e35e19690c0881",
-    "rear-cover.stl": "f4baf32cb4103297d6d5ee583c368acd095fb1de8ebbd6a0c73044edb1153e2b",
+    "front-bezel.stl": "c0897b276065c6e028b221cba767f411f9050fac80ef61182bd891e54bbdeedf",
+    "panel-carrier.stl": "2ee085e433f8e4ec776a7167b56d693b2745f6574a68b477389558caeffca5c7",
+    "rear-cover.stl": "ecad07faad2536ae9262ac78106a85f2fd38ef13916a33b1122513af4f94496d",
     "desk-stand.stl": "4ec83803c78f4e8d870a18061ca0e04a1d53eba3a1805658347b4c153754889c",
     "pcb-reference-assembly.stl": "c299124d066fc3ef40bb808e3eca5567ca34016039409d65afc8e8f335f4f7e4"
   },

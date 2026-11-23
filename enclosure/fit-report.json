@@ -6,18 +6,18 @@
       "valid_solid": true,
       "watertight": true,
       "single_body": true,
-      "volume_mm3": 25062.96,
+      "volume_mm3": 38202.56,
       "print_size_mm": [
         182.2,
         137.2,
-        8.75
+        11.3
       ]
     },
     "panel-carrier": {
       "valid_solid": true,
       "watertight": true,
       "single_body": true,
-      "volume_mm3": 30407.15,
+      "volume_mm3": 30404.74,
       "print_size_mm": [
         175.05,
         118.2,
@@ -28,11 +28,11 @@
       "valid_solid": true,
       "watertight": true,
       "single_body": true,
-      "volume_mm3": 80047.65,
+      "volume_mm3": 66450.88,
       "print_size_mm": [
         182.2,
         137.2,
-        15.6
+        10.35
       ]
     },
     "desk-stand": {
@@ -93,6 +93,8 @@
     ]
   ],
   "solid_intersections_mm3": 0,
+  "case_split_z_mm": 6.549511,
+  "shell_seam_clearance_mm": 0.3,
   "stand_lean_degrees": 15,
   "stand_height_mm": 26,
   "case_screw_length_mm": 14,
@@ -110,7 +112,7 @@
   ],
   "usb_access": "flush left-side USB-C port; complete plug body outside enclosure",
   "usb_aperture_width_mm": 14,
-  "usb_aperture_height_mm": 7.4,
+  "usb_aperture_height_mm": 8,
   "usb_mating_plane_x_mm": -91.300029,
   "usb_axis_y_mm": -29.3,
   "usb_axis_z_mm": 6.549511,

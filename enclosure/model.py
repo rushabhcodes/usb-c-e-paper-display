@@ -19,6 +19,7 @@ WALL=2.4
 GLASS_W,GLASS_H,GLASS_T = 170.2,111.2,1.25
 LAYOUT=json.loads((ROOT.parent/'product/mechanical-layout.json').read_text())
 CASE_DEPTH=LAYOUT['case_depth_mm']
+CASE_SPLIT=LAYOUT['case_split_z_mm']
 STAND_HEIGHT=LAYOUT['stand_height_mm']
 CASE_SCREW_LENGTH=LAYOUT['case_screw_length_mm']
 GLASS_REAR=CASE_DEPTH-4.15
@@ -67,7 +68,11 @@ def case():
     collar-=rounded(171.2,112.2,1.0,5,z=CARRIER_FRONT-.6)
     # Open the collar behind the glass for the wide 180-degree FPC return bend.
     collar-=block(20,30,5,FPC_X,-67,CARRIER_FRONT-.6)
-    bezel=face+collar
+    # Split both housing walls through the USB axis. Each half has an open
+    # port notch, so the cover and carrier can be installed and removed along Z.
+    skirt=rounded(W,H,R,FACE_Z-CASE_SPLIT-.15+.1,y=CY,z=CASE_SPLIT+.15)
+    skirt-=rounded(W-2*WALL,H-2*WALL,R-WALL,FACE_Z-CASE_SPLIT+1,y=CY,z=CASE_SPLIT-.25)
+    bezel=face+collar+skirt
     for x,y in SCREWS:
         bezel+=cyl(3.2,6.35,x,y,FACE_Z-6.35)
         bezel-=cyl(1.3,7.0,x,y,FACE_Z-6.35) # blind M3 self-tapping pilot, 1.75mm face remaining
@@ -83,7 +88,7 @@ def case():
         carrier-=cyl(1.3,2.3,x,y,PCB_TOP+1.6)
     carrier-=usb_aperture()
 
-    rear=rounded(W,H,R,FACE_Z,y=CY)
+    rear=rounded(W,H,R,CASE_SPLIT-.15,y=CY)
     rear-=rounded(W-2*WALL,H-2*WALL,R-WALL,FACE_Z+.15,y=CY,z=2.4)
     for x,y in SCREWS:
         # Floor supports the screw head; front-bezel posts receive M3 x 14 screws.
@@ -145,6 +150,7 @@ def main():
         "glass_front_foam_gap_mm":.5,"glass_back_perimeter_foam_gap_mm":2.0,
         "pcb_top_plane_to_rear_floor_mm":round(PCB_TOP-2.4,3),"pcb_hole_centres":PCB_HOLES,
         "case_screw_centres":SCREWS,"solid_intersections_mm3":0,
+        "case_split_z_mm":CASE_SPLIT,"shell_seam_clearance_mm":.3,
         "stand_lean_degrees":15,"stand_height_mm":STAND_HEIGHT,"case_screw_length_mm":CASE_SCREW_LENGTH,"stand_slot_clearance_total_mm":.6,
         "stand_case_intersections_mm3":0,
         "fpc_assumed_contact_plane_z_mm":FPC_CONTACT_Z,"fpc_bend_radius_mm":radius,

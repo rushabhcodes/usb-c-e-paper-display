@@ -22,7 +22,7 @@ export function EnclosureAssembly() {
       </Fragment>
     })}
     <assembly.explosion.stage name="REMOVE_FASTENERS" nextStageRef="OPEN_REAR">
-      <assembly.explosion.move targetRef="STAND" offX={90} />
+      <assembly.explosion.move targetRef="STAND" offY={100} />
       <assembly.explosion.move targetRefs={["CASE_SCREW_1","CASE_SCREW_2","CASE_SCREW_3","CASE_SCREW_4"]} offZ={70} />
     </assembly.explosion.stage>
     <assembly.explosion.stage name="OPEN_REAR" prevStageRef="REMOVE_FASTENERS" nextStageRef="UNPLUG_PANEL">
@@ -31,7 +31,7 @@ export function EnclosureAssembly() {
     </assembly.explosion.stage>
     <assembly.explosion.stage name="UNPLUG_PANEL" prevStageRef="OPEN_REAR" nextStageRef="EXPLODED">
       <assembly.explosion.move targetRefs={["BEZEL","FRONT_FOAM"]} offZ={-80} />
-      <assembly.explosion.move targetRefs={["PANEL","FLEX"]} offX={20} />
+      <assembly.explosion.move targetRefs={["PANEL","FLEX"]} offY={20} />
     </assembly.explosion.stage>
     <assembly.explosion.stage name="EXPLODED" prevStageRef="UNPLUG_PANEL">
       <assembly.explosion.move targetRefs={["PANEL","FLEX"]} offZ={-50} />

@@ -89,9 +89,10 @@
   "usb_axis_case_z_mm": 6.549511,
   "usb_aperture_mm": [
     14,
-    7.4
+    8
   ],
   "case_depth_mm": 18.0,
   "stand_height_mm": 26,
-  "case_screw_length_mm": 14
+  "case_screw_length_mm": 14,
+  "case_split_z_mm": 6.549511
 }

@@ -4,23 +4,23 @@
   "parts": [
     {
       "name": "BEZEL",
-      "original_polygons": 4120,
-      "merged_polygons": 2026,
-      "volume_delta_mm3": -3.7471181713044643e-10,
+      "original_polygons": 4656,
+      "merged_polygons": 2340,
+      "volume_delta_mm3": -2.255546860396862e-10,
       "max_bounds_delta_mm": 0
     },
     {
       "name": "CARRIER",
-      "original_polygons": 3370,
-      "merged_polygons": 1734,
-      "volume_delta_mm3": 6.912159733474255e-11,
+      "original_polygons": 3426,
+      "merged_polygons": 1785,
+      "volume_delta_mm3": 7.639755494892597e-11,
       "max_bounds_delta_mm": 0
     },
     {
       "name": "REAR",
-      "original_polygons": 4440,
-      "merged_polygons": 2253,
-      "volume_delta_mm3": 3.637978807091713e-10,
+      "original_polygons": 4268,
+      "merged_polygons": 2125,
+      "volume_delta_mm3": 4.0745362639427185e-10,
       "max_bounds_delta_mm": 0
     },
     {

@@ -3,9 +3,9 @@ import { Fragment } from "react"
 
 const sheets = [
   {name:"BEZEL",sheet:"02-front-bezel",title:"FRONT BEZEL",note:"Glass pocket 171.2 x 112.2; window 165.2 x 99.92. Four blind 2.6 mm pilots."},
-  {name:"CARRIER",sheet:"03-panel-carrier",title:"PANEL / PCB CARRIER",note:"PCB mounting pattern 90 x 50; four blind 2.6 mm pilots. Support foam on opaque glass margins only."},
-  {name:"REAR",sheet:"04-rear-cover",title:"REAR COVER",note:"Wall 2.4; case screw pattern 156 x 125.5; four 3.4 mm clearance holes. USB opening 14 x 8."},
-  {name:"STAND",sheet:"05-desk-stand",title:"15 DEGREE DESK CRADLE",note:"Print envelope 110 x 70 x 28. Slot 21.35 wide; 0.6 total case clearance. Print STL sets the bed orientation."},
+  {name:"CARRIER",sheet:"03-panel-carrier",title:"PANEL / PCB CARRIER",note:"PCB Rev B: four blind 2.6 mm pilots; right lower fastener offset to clear the flex notch. Unbroken upper glass support ledge."},
+  {name:"REAR",sheet:"04-rear-cover",title:"REAR COVER",note:"Wall 2.4; case screw pattern 156 x 125.5; four 3.4 mm clearance holes. Left-side USB-C aperture 14 x 8. Rear BOOTSEL / RESET service holes; closed top edge."},
+  {name:"STAND",sheet:"05-desk-stand",title:"15 DEGREE DESK CRADLE",note:"Print envelope 110 x 70 x 26. Slot 18.6 wide; 0.6 total case clearance. Print STL sets the bed orientation."},
 ] as const
 
 const notes = (text:string) => {
@@ -14,7 +14,7 @@ const notes = (text:string) => {
 }
 
 const title = (text:string,index:number) => <assembly.drawing.titleblock title={text}
-  identificationNumber={`USB-EPD-A-${String(index).padStart(2,"0")}`} revisionIndex="A"
+  identificationNumber={`USB-EPD-B-${String(index).padStart(2,"0")}`} revisionIndex="B"
   dateOfIssue="2026-11-22" creator="Rushabh Patil" legalOwner="Rushabh Patil"
   approvalPerson="PROTOTYPE / FIT UNTESTED" sheetNumber={index} numberOfSheets={6} />
 
@@ -35,7 +35,7 @@ export function EngineeringDrawings() {
       </assembly.drawing.partview>
       <assembly.drawing.partview name="PCB_ISO" stageRef=".PCB_SUBSTRATE" displayName="PCB ISOMETRIC" direction="isometric"
         centerX={77} centerY={22} width={115} height={105} />
-      {notes("All dimensions mm. 100 x 60 x 1.6 FR-4; 2 mm corner radii; four 3.2 mm NPTH mounting holes. Two copper layers; 1 oz; ENIG. Use the validated JLCPCB Gerbers.")}
+      {notes("All dimensions mm. 100 x 60 x 1.6 FR-4 envelope; chamfered outline with USB tongue. Mounting holes: (-45,-25), (-45,25), (45,-25), (23,25); diameter 3.2. Four copper layers; 1 oz; ENIG. Use the validated JLCPCB Gerbers.")}
       {title("RP2040 E-PAPER CONTROLLER - MECHANICAL",1)}
     </assembly.drawing.page>
     {sheets.map((sheet,i) => <Fragment key={sheet.name}>
@@ -77,14 +77,15 @@ export function EngineeringDrawings() {
         "1     15 degree desk cradle",
         "1     GDEY075T7 panel + FPC",
         "1     RP2040 controller PCB",
-        "4     M3 x 16 case screws",
+        "4     M3 x 14 case screws",
         "4     M3 x 4 PCB screws",
         "1     0.5 mm front gasket",
         "1     2 mm rear foam support",
       ].map((text,i) => <Fragment key={text}><assembly.drawing.note paperX={92} paperY={120-i*7} fontSize={2.7} text={text} /></Fragment>)}
-      <assembly.drawing.note paperX={-195} paperY={-106} fontSize={2.7} text="Rear cover: 4 x M3 x 16. PCB to carrier: 4 x M3 x 4. Do not substitute longer PCB screws." />
+      <assembly.drawing.note paperX={-195} paperY={-99} fontSize={2.7} text="USB-C exits left above the stand; 22 x 10 x 30 plug body stays outside. Straight 40 mm insertion and grip checked." />
+      <assembly.drawing.note paperX={-195} paperY={-106} fontSize={2.7} text="Rear cover: 4 x M3 x 14. PCB to carrier: 4 x M3 x 4. Do not substitute longer PCB screws." />
       <assembly.drawing.note paperX={-195} paperY={-113} fontSize={2.7} text="Front gasket 0.5 mm; rear perimeter support 2 mm, compressed. Keep pressure off active glass and the FPC." />
-      <assembly.drawing.note paperX={-195} paperY={-120} fontSize={2.7} text="Case 182.2 x 137.2 x 20.75; nominal flex return R3.65. Disconnect USB before installing or removing the FPC." />
+      <assembly.drawing.note paperX={-195} paperY={-120} fontSize={2.7} text="Case 182.2 x 137.2 x 18.0; nominal flex return R3.65. Disconnect USB before installing or removing the FPC." />
       {title("USB-C E-PAPER DISPLAY - PRODUCT ASSEMBLY",6)}
     </assembly.drawing.page>
   </>
