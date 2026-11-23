@@ -1,3 +1,4 @@
+import { ReferenceLabel } from "../product/reference-label"
 import type { CapacitorProps } from "@tscircuit/props"
 
 const pinAttributes = {
@@ -23,7 +24,7 @@ export const CL05B104KO5NNNC = (props: Omit<CapacitorProps, "capacitance">) => {
       footprint={<footprint>
         <smtpad solderMaskMargin="0.02mm" solderPasteMargin="0mm" portHints={["pin2"]} pcbX="0.420116mm" pcbY="0mm" width="0.499999mm" height="0.540004mm" shape="rect" />
 <smtpad solderMaskMargin="0.02mm" solderPasteMargin="0mm" portHints={["pin1"]} pcbX="-0.420116mm" pcbY="0mm" width="0.499999mm" height="0.540004mm" shape="rect" />
-<silkscreentext text="{NAME}" pcbX="0mm" pcbY="0mm" pcbRotation={360} layer="bottom" anchorAlignment="center" fontSize="1mm" />
+<ReferenceLabel name={props.name} />
 <courtyardoutline outline={[{"x":-0.9201154999999517,"y":0.5200019999999768},{"x":0.9201154999999517,"y":0.5200019999999768},{"x":0.9201154999999517,"y":-0.5200019999999768},{"x":-0.9201154999999517,"y":-0.5200019999999768},{"x":-0.9201154999999517,"y":0.5200019999999768}]} />
       </footprint>}
       cadModel={{

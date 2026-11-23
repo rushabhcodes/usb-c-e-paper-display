@@ -4,6 +4,8 @@ A 100 × 60 mm controller PCB for the **Good Display GDEY075T7**: a **7.5-inch, 
 
 The panel manufacturer lists 3 s full, 1.5 s fast, and 0.3 s partial refresh at 25 °C. Actual timing depends on temperature and the panel's waveforms. This is a dashboard / text display, with periodic full refreshes to clear ghosting. The panel itself is purchased separately from the PCB assembly.
 
+The validated Rev B PCB, firmware and 18 mm enclosure are available in [release v1.2.0](https://github.com/rushabhcodes/usb-c-e-paper-display/releases/tag/v1.2.0). The native full-product build has zero errors and warnings; Gerber shorts, default style and continuous-copper checks pass.
+
 **Manufacturing status is recorded in `manufacturing/VALIDATION.md`; use that file to determine whether the fabrication release has passed its checks.**
 
 ## Hardware
@@ -16,7 +18,7 @@ The panel manufacturer lists 3 s full, 1.5 s fast, and 0.3 s partial refresh at 
 - 24-contact, 0.5 mm pitch, bottom-contact ZIF connector. Pin 1 is marked; insert the panel tail with exposed contacts facing the PCB.
 - Si1308EDL boost MOSFET, 10 µH / 1 A inductor, three MBR0530 rectifiers, 0.47 Ω current sensing, and 50 V ceramic reservoir / flying capacitors.
 - BOOTSEL and RESET buttons; six SWD / supply probe pads; four 3.2 mm mounting holes and three assembly fiducials.
-- Two copper layers, with a ground pour on the bottom. Both layers carry routed signals and power connections. Components are assembled on the top side; reference names are on the reverse side.
+- Four copper layers, with an inner ground pour beneath the signals. An inner1 ground pour provides a ground reference; the native router can use all four layers for signals and power. Components are assembled on the top side; 68 readable reference names are on the component-side top silkscreen.
 
 ## Build and inspect
 
@@ -33,26 +35,27 @@ bun run check:continuous-style
 python scripts/validate-circuit.py
 ```
 
-`index.circuit.tsx` is the native product assembly entrypoint. The unchanged electronics and tscircuit routing live in `product/controller-board.tsx`; `board.circuit.tsx` selects that board for electrical and placement checks. **All PCB routing is defined and generated with tscircuit.** Five signal paths (RUN, DC, CS, BUSY and display SCK) are hand-authored in TSX with standard `trace` / `pcbPaths` primitives. The built-in local autorouter refines those paths for clearance and solves their remaining branches and all other connections. There are no imported board routes, saved-routing callbacks or externally generated vias. `tscircuit.config.ts` disables the local routing cache and cloud routing. The debug build command below records each routing stage's input and output so the result can be audited. No KiCad or external router is used to create or edit the copper.
-
+`index.circuit.tsx` is the native product assembly entrypoint. The electronics and tscircuit routing live in `product/controller-board.tsx`; `board.circuit.tsx` selects that board for electrical and placement checks. **All PCB routing is defined and generated with tscircuit.** Local USB power, MCU bypass supplies, crystal connections, ground returns and signal escapes are authored with ordinary `trace` / `pcbPath` and `via` primitives. The flash is oriented so its clock and data pins face the MCU, with its bypass capacitor beside the supply pin. SWD and RESET use short via escapes and straight bottom tracks; BUSY uses inner2 between full-stack vias. TP6 sits beside the reset pull-up and button with fixed local connections. Ground pads reach the inner ground pour through short local via returns; USB shell slots already pass through that plane. The remaining named nets are explicitly assigned to the built-in local router, with implicit routing disabled. Unrouted-connection and physical checks remain enabled. The native router generates the remaining copper from the current placement. The source imports no routed-board paths and defines no routing algorithm callbacks. `tscircuit.config.ts` disables both local and cloud routing caches.
 ```sh
-bun run --bun tsci build index.circuit.tsx --autorouter-debug --autorouter-debug-dir dist/native-routing-release-final --autorouter-dump-srj all --autorouter-threads 1
+bun run --bun tsci build index.circuit.tsx --autorouter-debug --autorouter-debug-dir dist/native-routing-final-release --autorouter-dump-srj all --autorouter-threads 1
 ```
 
-The PCB uses 0.15 mm drilled vias, which add a JLCPCB fabrication charge. Complex parts were imported using `tsci import C… --jlcpcb --use-exact-footprint`; their imported footprints are in `imports/`. Solder mask, stencil apertures and reference markings are adjusted for fabrication; the USB shell slots are enlarged to 0.8 × 1.6 mm while retaining the outer board-edge clearance. Passives also use exact CLI-imported footprints with explicit LCSC codes. `docs/parts/` contains the part discovery responses; stock fields may be cached or unavailable. The previous external-routing release is superseded and excluded from current release packages.
+The pinned Core dependency has a reproducible Bun patch in `patches/`. It preserves the declared net and source endpoints on native autorouter branches instead of borrowing an unrelated local trace's identity and width. It also preserves explicitly requested inner-layer via ports, allowing ordinary traces to connect to inner2 on full-stack through vias. These fixes correct native connectivity/API behavior without changing the routing algorithm or disabling checks. `bun install --frozen-lockfile` applies it; `bun test tests` checks both the native-via regression and detection of a real foreign-net short. Keep the patch with the source when rebuilding.
 
-The five authored paths use straight and 45° segments, with explicit wire landings at each via. TP6 at the board centre supplies their coordinate reference; endpoint selectors resolve the actual component pins. The crystal nets use tscircuit's built-in `bus_lanes` phase to stay short and on the top layer. The main phase receives the authored paths and the five clock paths generated earlier in the same build. Diagnostic route JSON written by the CLI is an output only; nothing in the circuit imports or replays it. `manufacturing/checks/routing-provenance.json` identifies the five source-authored inputs and their native refinements, and records hashes, solver versions and disabled caches.
+Rev B uses four layers for RP2040 fanout and an inner ground reference. The PCB uses 0.30 mm drilled vias and 0.55 mm pads, avoiding the previous small-drill fabrication charge. Complex parts were imported using `tsci import C… --jlcpcb --use-exact-footprint`; their imported footprints are in `imports/`. Solder mask, stencil apertures and reference markings are adjusted for fabrication; the USB shell slots are enlarged to 0.8 × 1.6 mm while retaining the outer board-edge clearance. Passives also use exact CLI-imported footprints with explicit LCSC codes. `docs/parts/` contains the part discovery responses; inventory is refreshed from exact JLCPCB product records with `bun run refresh:stock`. The supplier engine retains native lookup, footprint and orientation checks; only verified inventory younger than six hours supplements an unknown catalog result. Unknown or expired inventory remains a warning. The previous external-routing release is superseded and excluded from current release packages.
 
-The current release contains 165 traces and 151 through vias on two copper layers. Electrical, clearance, drill, Gerber-derived shorts and default PCB-style checks pass. The continuous-copper check also reports zero style findings across 238 chains. Details and tool versions are recorded in `manufacturing/VALIDATION.md`.
+The native autorouter receives the source-authored local connections and ground vias, then routes the remaining connections from the current placement. Diagnostic route JSON written by the CLI is output only. `manufacturing/checks/routing-provenance.json` records the fresh inputs, source hashes, solver versions and disabled caches.
+
+See `manufacturing/VALIDATION.md` for measured routing counts, Gerber shorts, default PCB style and continuous-copper checks for this release.
 
 ## Fabrication package
 
-`manufacturing/JLCPCB-Gerbers-RevA.zip`, `BOM.csv`, and `CPL.csv` are the PCB and top-side assembly files, generated from the fresh tscircuit build. `SMT-Stencil-RevA.zip` provides the stencil. The directory also contains three schematic SVG pages, assembly and PCB views, and check reports. See `manufacturing/VALIDATION.md` for the current routing revision's release status and `ORDERING.md` for fabrication settings. The RP2040 exposed pad has four 1.15 mm stencil windows (55% paste coverage). Probe pads have no stencil openings.
+`manufacturing/JLCPCB-Gerbers-RevB.zip`, `BOM.csv`, and `CPL.csv` are the PCB and top-side assembly files, generated from the fresh tscircuit build. `SMT-Stencil-RevB.zip` provides the stencil. The directory also contains three schematic SVG pages, assembly and PCB views, and check reports. See `manufacturing/VALIDATION.md` for the current routing revision's release status and `ORDERING.md` for fabrication settings. The RP2040 exposed pad has four 1.15 mm stencil windows (55% paste coverage). Probe pads have no stencil openings.
 
 To export a newly validated build, use an absolute output path (the CLI resolves relative exports beside the input file):
 
 ```sh
-bun run --bun tsci export dist/index/circuit.json -f gerbers -o "$PWD/manufacturing/JLCPCB-Gerbers-RevA.zip"
+bun run --bun tsci export dist/index/circuit.json -f gerbers -o "$PWD/manufacturing/JLCPCB-Gerbers-RevB.zip"
 python scripts/package-release.py
 python scripts/validate-circuit.py
 python scripts/audit-routing.py
@@ -63,9 +66,14 @@ python scripts/audit-routing.py
 **Firmware and host image sender are included.** Flash [`USB-Epaper-RevA-v1.0.0.uf2`](firmware/releases/USB-Epaper-RevA-v1.0.0.uf2), then use the Python USB sender. See [`firmware/README.md`](firmware/README.md) for BOOTSEL installation, image conversion, commands and build instructions.
 
 ```sh
-python -m pip install -r firmware/host/requirements.txt
-python firmware/host/epaper.py --port /dev/ttyACM0 send image.png
+python -m venv .venv-host
+.venv-host/bin/pip install -r firmware/host/requirements.txt
+.venv-host/bin/python firmware/host/epaper.py --port /dev/ttyACM0 send image.png
 ```
+
+Connect a normal USB-C **data cable** to the left-side socket and a computer USB host. A USB-A-to-C cable also works. Other host devices need an application implementing the included serial image protocol; a charger supplies power only.
+
+Rev B preserves the GPIO assignments and USB protocol, so the supplied Rev A-named UF2 remains compatible.
 
 The firmware validates CRC-checked transfers, finds the changed rectangle, uses fast partial refresh after a full baseline, and runs a clean full refresh after five partial updates. The ready-built UF2 and source are included; software tests pass, while real USB and panel operation await a physical prototype.
 
@@ -95,7 +103,7 @@ BOOTSEL: hold SW1 while pressing and releasing RESET (SW2), then release SW1. Th
 
 ## Mechanical assembly
 
-The printable enclosure is a **182.2 × 137.2 × 20.75 mm landscape frame** with a bezel, separate foam-supported glass carrier, rear cover and 15° desktop cradle. USB enters at the top and BOOTSEL/RESET are accessible from the rear. All four parts have STL and editable STEP files, with parametric CAD source and a nominal-fit report.
+The printable enclosure is a **182.2 × 137.2 × 18.0 mm landscape frame** with a bezel, separate foam-supported glass carrier, rear cover and 15° desktop cradle. USB-C exits the left side, above the cradle, through a small 14 × 8 mm opening. The socket mouth projects 0.2 mm past the sidewall, leaving the full plug body outside and easy to grip. BOOTSEL/RESET are accessible from the rear. The PCB sits horizontally across the lower half of the frame and the display connector remains beside the short panel tail. All four parts have STL and editable STEP files, with parametric CAD source and a nominal-fit report.
 
 See [`enclosure/README.md`](enclosure/README.md) for printing, screw sizes, foam placement, flex-tail folding and assembly. The case has passed solid/collision and watertight-mesh checks; a first print must confirm flex insertion depth, supplied-panel tolerances and the USB plug fit. Disconnect USB before inserting or removing the FPC.
 
@@ -115,4 +123,6 @@ bun scripts/render-engineering.mjs
 
 The drawing export script uses the official `circuit-json-to-drawing` 0.0.7 converter, which supports board/part drawing stages. The pinned CLI's bundled drawing converter predates those stages, so use this script for the six-sheet export. Geometry is resolved from the same native circuit JSON and project models; the script only adapts source identities and the documented CAD/glTF coordinate frame.
 
-This revision changes the product assembly and documentation; no physical prototype has been tested. Native explosion checking reports incomplete closed-geometry coverage for some imported electronic models and the panel's decorative image plane. The original solid/mesh fit report remains available in `enclosure/fit-report.json`.
+The USB connector and large capacitor viewer models are closed solids tessellated from their original supplier STEP files; the panel image is on a closed glass model. Model geometry and installed coordinate frames are audited. No physical prototype has been tested. Nominal solid/mesh fit and complete side-plug insertion/grip checks are in `enclosure/fit-report.json` and `enclosure/usability-report.json`.
+
+![Side USB-C access](enclosure/usb-access.png)

@@ -1,3 +1,4 @@
+import { ReferenceLabel } from "../product/reference-label"
 import type { CapacitorProps } from "@tscircuit/props"
 
 export const UMK212BBJ475KG_T = (props: Omit<CapacitorProps, "capacitance">) => {
@@ -17,7 +18,7 @@ export const UMK212BBJ475KG_T = (props: Omit<CapacitorProps, "capacitance">) => 
       footprint={<footprint>
         <smtpad solderMaskMargin="0.02mm" solderPasteMargin="0mm" portHints={["pin2"]} pcbX="0.999998mm" pcbY="0mm" width="1.4100048mm" height="1.35001mm" shape="rect" />
 <smtpad solderMaskMargin="0.02mm" solderPasteMargin="0mm" portHints={["pin1"]} pcbX="-0.999998mm" pcbY="0mm" width="1.4100048mm" height="1.35001mm" shape="rect" />
-<silkscreentext text="{NAME}" pcbX="0mm" pcbY="0mm" pcbRotation={360} layer="bottom" anchorAlignment="center" fontSize="1mm" />
+<ReferenceLabel name={props.name} />
 <courtyardoutline outline={[{"x":-1.9550003999999035,"y":0.9250050000000556},{"x":1.9550003999999035,"y":0.9250050000000556},{"x":1.9550003999999035,"y":-0.9250050000000556},{"x":-1.9550003999999035,"y":-0.9250050000000556},{"x":-1.9550003999999035,"y":0.9250050000000556}]} />
       </footprint>}
       cadModel={{

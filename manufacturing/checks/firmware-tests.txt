@@ -1,0 +1,11 @@
+PASS: CRC, stream resync, bounds, transfer timeout, difference bounds, baseline and cleanup policy
+PASS: actual sketch USB framing, power sequence, baseline, partial bounds, cleanup, sleep, BUSY fault and ACK replay
+test_alpha_composited_white_and_contain (test_host.ProtocolTests.test_alpha_composited_white_and_contain) ... ok
+test_corrupt_reply_then_recovery (test_host.ProtocolTests.test_corrupt_reply_then_recovery) ... ok
+test_fragmented_reply_and_noise (test_host.ProtocolTests.test_fragmented_reply_and_noise) ... ok
+test_pixel_polarity_and_bit_order (test_host.ProtocolTests.test_pixel_polarity_and_bit_order) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.057s
+
+OK

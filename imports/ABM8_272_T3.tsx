@@ -1,3 +1,4 @@
+import { ReferenceLabel } from "../product/reference-label"
 import type { CrystalProps } from "@tscircuit/props"
 
 type ImportedCrystalProps = Omit<CrystalProps, "frequency" | "pinVariant">
@@ -31,7 +32,7 @@ export const ABM8_272_T3 = (props: ImportedCrystalProps) => {
 <smtpad solderMaskMargin="0.02mm" solderPasteMargin="0mm" portHints={["pin4"]} pcbX="-1.100074mm" pcbY="0.850011mm" width="1.3999972mm" height="1.1999976mm" shape="rect" />
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":-2.028596400000083,"y":-1.6784827999999834},{"x":-2.028596400000083,"y":1.678736800000138},{"x":2.0285963999999694,"y":1.678736800000138},{"x":2.0285963999999694,"y":-1.6784827999999834},{"x":-2.028596400000083,"y":-1.6784827999999834}]} />
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":-2.257196399999998,"y":-0.24988519999988057},{"x":-2.257196399999998,"y":-1.9070827999998983},{"x":-0.39999920000002476,"y":-1.9070827999998983}]} />
-<silkscreentext text="{NAME}" pcbX="0mm" pcbY="0mm" pcbRotation={360} layer="bottom" anchorAlignment="center" fontSize="1mm" />
+<ReferenceLabel name={props.name} />
 <courtyardoutline outline={[{"x":-2.0500725999999077,"y":1.7000097999999753},{"x":2.0500725999999077,"y":1.7000097999999753},{"x":2.0500725999999077,"y":-1.7000097999999753},{"x":-2.0500725999999077,"y":-1.7000097999999753},{"x":-2.0500725999999077,"y":1.7000097999999753}]} />
       </footprint>}
       cadModel={{

@@ -1,3 +1,4 @@
+import { ReferenceLabel } from "../product/reference-label"
 import type { DiodeProps } from "@tscircuit/props"
 
 const pinLabels = {
@@ -33,7 +34,7 @@ export const MBR0530T1G = (props: DiodeProps) => {
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":-0.17779999999999063,"y":0},{"x":0.406400000000005,"y":0.406400000000005}]} />
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":0.406400000000005,"y":-0.40639999999999077},{"x":-0.17779999999999063,"y":0}]} />
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":1.3462000000000103,"y":-0.850010999999995},{"x":-1.346199999999996,"y":-0.850010999999995}]} />
-<silkscreentext text="{NAME}" pcbX="0mm" pcbY="0mm" pcbRotation={360} layer="bottom" anchorAlignment="center" fontSize="1mm" />
+<ReferenceLabel name={props.name} />
 <fabricationnotepath route={[{"x":1.1899391999999978,"y":0.21201379999999403},{"x":2.031898400000003,"y":0.21201379999999403},{"x":2.031898400000003,"y":0.005054600000008236},{"x":1.1893295999999935,"y":0.005054600000008236},{"x":1.1899391999999978,"y":0.21201379999999403}]} strokeWidth="0mm" isFilled hasStroke={false} />
 <fabricationnotepath route={[{"x":1.5246096000000051,"y":-0.33840419999998517},{"x":1.5246096000000051,"y":0.5035550000000057},{"x":1.7315688000000051,"y":0.5035550000000057},{"x":1.7315688000000051,"y":-0.3390137999999894},{"x":1.5246096000000051,"y":-0.33840419999998517}]} strokeWidth="0mm" isFilled hasStroke={false} />
 <fabricationnotepath route={[{"x":-2.041524999999993,"y":0.12377420000001393},{"x":-1.1995657999999878,"y":0.12377420000001393},{"x":-1.1995657999999878,"y":-0.08318499999998608},{"x":-2.042134599999997,"y":-0.08318499999998608},{"x":-2.041524999999993,"y":0.12377420000001393}]} strokeWidth="0mm" isFilled hasStroke={false} />

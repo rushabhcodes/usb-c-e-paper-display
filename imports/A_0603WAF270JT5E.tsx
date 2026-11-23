@@ -1,3 +1,4 @@
+import { ReferenceLabel } from "../product/reference-label"
 import type { ResistorProps } from "@tscircuit/props"
 
 export const A_0603WAF270JT5E = (props: Omit<ResistorProps, "resistance">) => {
@@ -16,7 +17,7 @@ export const A_0603WAF270JT5E = (props: Omit<ResistorProps, "resistance">) => {
       footprint={<footprint>
         <smtpad solderMaskMargin="0.02mm" solderPasteMargin="0mm" portHints={["pin2"]} pcbX="0.753364mm" pcbY="0mm" width="0.8064754mm" height="0.8640064mm" shape="rect" />
 <smtpad solderMaskMargin="0.02mm" solderPasteMargin="0mm" portHints={["pin1"]} pcbX="-0.753364mm" pcbY="0mm" width="0.8064754mm" height="0.8640064mm" shape="rect" />
-<silkscreentext text="{NAME}" pcbX={name === "R15" ? -1.6 : 0} pcbY="0mm" pcbRotation={360} layer="bottom" anchorAlignment="center" fontSize="1mm" />
+<ReferenceLabel name={props.name} />
 <courtyardoutline outline={[{"x":-1.4066016999998965,"y":0.6820032000000538},{"x":1.4066016999997828,"y":0.6820032000000538},{"x":1.4066016999997828,"y":-0.6820032000000538},{"x":-1.4066016999998965,"y":-0.6820032000000538},{"x":-1.4066016999998965,"y":0.6820032000000538}]} />
       </footprint>}
       cadModel={{

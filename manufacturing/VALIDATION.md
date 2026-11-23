@@ -1,48 +1,40 @@
-# Rev A — tscircuit routing release
+# Rev B — native tscircuit fabrication release
 
-**PASS for prototype fabrication — zero default PCB-style findings.**
+**PASS for prototype fabrication: zero circuit errors and zero warnings.**
 
-Validated 22 November 2026. This two-layer release fixes the four long angled runs and one staircase reported in the previous native routing. Board dimensions, mounting holes, connectors, component placements and GPIO assignments are unchanged.
+Checked 2026-11-23T08:44:45.908186+00:00. USB-C exits the left side of an 18 mm case. The PCB is installed horizontally; the display connector stays beside the short raw-panel flex. The shell seam crosses the USB axis so the housing can open without trapping the connector.
 
-| Check | Result |
+| Check | Measured result |
 |---|---|
-| TypeScript and tscircuit build | PASS; zero circuit errors |
-| Electrical netlist | 0 errors, 0 warnings |
-| Schematic placement | PASS; three sheets |
-| PCB component placement | 0 errors, 0 warnings |
-| Independent device-pin and supply audit | PASS; 68 electrical components, 45 nets |
-| Routing provenance | PASS; five TSX-authored inputs, zero imported board routes, caches disabled |
-| Routing | 165 trace records, 151 through vias; two copper layers, three bottom ground-pour regions |
-| Gerber-derived shorts check | No shorts detected |
-| Default PCB style | 0 long odd-angle runs; 0 staircases |
-| Continuous-copper style check | PASS; zero findings across 238 chains |
-| Drill spacing | Minimum 0.270 mm between via drill edges; required 0.20 mm |
-| Via geometry | 0.15 mm drills, 0.30 mm pads; both sides tented by board default |
-| USB plated slots | 0.8 × 1.6 mm; 0.20 mm minimum annular ring |
-| BOM/CPL | 62 matched references; all supplier codes and orientations resolved |
-| Stencil | Four RP2040 exposed-pad windows, about 55% coverage; no paste on probe pads |
+| TypeScript / native full-product build | PASS |
+| Electrical netlist and both placement checks | 0 errors, 0 warnings |
+| Independent pin / supply audit | 68 electrical components, 45 nets |
+| Native routing | 185 traces, 136 through vias, four copper layers |
+| Inner ground pour | 1 connected regions; no isolated-island warnings |
+| Routing inputs | 108 source-authored local paths and 87 native through vias; zero imported routes; caches disabled |
+| Gerber-derived shorts | No shorts detected |
+| Default PCB style | 0 issues |
+| Continuous-copper style | 0 issues across 200 chains |
+| Minimum via drill-edge spacing | 0.402 mm; required 0.20 mm |
+| Via geometry | 0.30 mm drill / 0.55 mm pad, tented both sides |
+| Top reference labels | 68 readable, component-associated labels; zero bottom labels |
+| Supplier inventory | 25 exact SKUs with recent primary JLCPCB observations |
+| BOM / CPL | 62 matched top-side assembly references; supplier orientations resolved |
+| Stencil | Four 1.15 mm RP2040 pad windows; no paste on probe pads |
+| Native product views | 16 mechanical parts, two System pages, six Drawing pages |
+| Enclosure | Four valid single solids and watertight print meshes; nominal fit checks pass |
+| Disassembly | Native closed-geometry sweep checks pass |
+| Component rear clearance | Minimum 2.099 mm across all 62 supplier meshes |
+| USB usability | Full 40 mm insertion stroke and 7 mm grip allowance, including stand clearance |
 
-All copper is authored and generated with tscircuit. `product/controller-board.tsx` defines RUN, DC, CS, BUSY and display SCK using standard `trace` / `pcbPaths` primitives with straight and 45° segments. Numeric coordinates are anchored to TP6 at the board centre; component selectors supply the endpoints. Explicit wire landings represent continuity at vias. These paths were newly authored in TSX, rather than imported from a previously routed board.
+All PCB copper is created through tscircuit. The USB entry, local bypass supplies, crystal connections and ground returns use ordinary `trace` / `pcbPath` declarations and native `via` primitives. Ground pads have short local via returns to inner1; the plated USB shell slots already cross the plane. Ground is connected by the pour rather than globally routed tracks, and all other named nets are explicitly assigned to native routing. Connectivity checks remain enabled. The crystal and its load capacitors stay on top with no signal-layer changes. The native AutoroutingPipelineSolver9_PreloadedTraceGraph routes the remaining connections from the current component placement. All 108 declared local paths remain fixed. No KiCad, external router, custom algorithm callback or saved-board-route input is used.
 
-The initial routing input contains exactly those five source-authored paths. The built-in `bus_lanes` phase adds five top-layer crystal paths. The general local tscircuit solver receives those ten paths, refines portions of the five authored signals for clearance, and completes the remaining connections. Both phases report cache disabled. The released build uses tscircuit **0.0.3277**, Core **0.0.2458** and capacity-autorouter **0.0.1153**, pinned by the package and lockfile. No KiCad, external router, custom routing algorithm or saved-board-route import is used.
+The build uses tscircuit 0.0.3285, Core 0.0.2462 and capacity-autorouter 0.0.1159. A pinned Bun Core patch preserves native branch net/endpoints and avoids borrowing unrelated local width constraints; it also creates explicitly requested inner-layer via ports; the routing algorithm and all diagnostics remain enabled. Its regression also verifies that a real foreign-net short is detected. `checks/routing-provenance.json` records the patch, dependency/source hashes and every native stage. `checks/native-routing/` contains fresh diagnostic output; these files are never imported by the circuit.
 
-`checks/routing-provenance.json` identifies the authored inputs and native refinements and records source/config/output hashes. `checks/native-routing/` contains the actual stage inputs, outputs, images and timing; these diagnostics are output artifacts, never routing inputs to the project. `checks/pcb-style.txt`, `checks/continuous-style.txt` and their SVGs record the unmodified default checks. The continuous-copper check joins unbranched same-net edges for verification, so trace-record boundaries cannot hide an angle or staircase. It never changes fabrication geometry.
+`JLCPCB-Gerbers-RevB.zip` contains 13 fabrication files. `BOM.csv`, `CPL.csv` and `SMT-Stencil-RevB.zip` come from the same validated Circuit JSON. Six engineering SVGs and two system diagrams accompany the editable design, compatible firmware and enclosure files.
 
-Routing requests 0.15 mm clearance, with a 0.10 mm final trace-clearance floor matching JLCPCB's published minimum for two-layer, 1 oz boards. Via-to-pad and pad-to-pad clearances remain 0.12 mm. The 0.15 mm drill option carries a surcharge; see `ORDERING.md`.
+The case is 182.2 × 137.2 × 18.0 mm. It retains the R3.65 flex return and uses M3 × 14 case screws. The 14 × 8 mm port admits the mating shell while the complete plug body stays outside; nominal straight-plug profiles are 14 × 8 × 24 and 22 × 10 × 30 mm. The lower display-window edge clears the stand lip by 5.275 mm.
 
-`JLCPCB-Gerbers-RevA.zip` contains eleven files: two copper layers, masks, legends, paste layers, outline, plated drilling and non-plated drilling. `BOM.csv` and `CPL.csv` are supplied separately. These are exported directly from the validated tscircuit Circuit JSON. The complete package includes the editable design, firmware, enclosure and runtime configuration.
+Supplier observations expire after six hours; run `bun run refresh:stock` before a later build or order. Unknown or expired inventory retains the native warning. Inventory can change during quoting.
 
-Imported generic chips can produce non-blocking pin-description and supplier-availability warnings. The independent pin audit covers their device connections; inventory is confirmed during the JLCPCB quote.
-
-This is file-level validation. A fabricated prototype still needs power-rail, USB, FPC and refresh testing. Firmware passes compilation and software tests; enclosure CAD/mesh checks do not establish physical printed fit.
-
-Source: [JLCPCB fabrication capabilities](https://jlcpcb.com/capabilities/pcb-capabilities).
-
-
-## Native product-view revision 1.1.0
-
-Freshly rebuilt from `assembly.device` with the same pinned native PCB router, caches disabled. All 68 component placements are preserved; the fresh route again has 165 traces, 151 through vias and three bottom ground-pour regions. Netlist, both placement checks, Gerber shorts, default PCB style and the 238-chain continuous style check pass. BOM/CPL remain 62 PCB references; the 16 mechanical assembly parts are excluded.
-
-The native product now includes four printed enclosure solids, panel, flex, two foam supports and eight fasteners, two system diagram pages, and six dimensioned engineering drawing pages. `checks/product-views.json` validates their records and resolved dimensions. The six engineering SVGs use official `circuit-json-to-drawing` 0.0.7, with its documented source-identity adapter and canonical CAD/glTF rotation.
-
-Native explosion collision checking reports incomplete closed-geometry coverage for J1, C28–C31 and the decorative panel image plane. This does not replace the nominal enclosure solid/mesh checks or a physical first print. No prototype hardware or printed-fit validation is claimed.
+This validates prototype files and nominal CAD. A first print, supplied-panel/FPC fit, USB bring-up, power rails and real refresh behavior still require physical hardware. No JLCPCB order has been placed.

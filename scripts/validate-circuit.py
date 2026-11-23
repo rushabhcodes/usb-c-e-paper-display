@@ -44,6 +44,12 @@ for x in data:
     if x['type'] != 'source_trace': continue
     ids = x.get('connected_source_port_ids', []) + x.get('connected_source_net_ids', [])
     for item in ids[1:]: join(ids[0], item)
+# A native through via connects its layer ports to its declared net.
+for via in [e for e in data if e['type']=='source_manually_placed_via']:
+    net_id=via.get('source_net_id')
+    if not net_id:continue
+    for port in [e for e in data if e['type']=='source_port' and e.get('source_component_id')==via['source_manually_placed_via_id']]:
+        join(port['source_port_id'],net_id)
 ports = {(x['source_component_id'],x['pin_number']):x['source_port_id'] for x in data if x['type']=='source_port' and 'pin_number' in x}
 nets = {x['name']:x['source_net_id'] for x in data if x['type']=='source_net'}
 def pin(ref, number): return ports[components[ref]['source_component_id'],number]
@@ -54,7 +60,9 @@ def on_net(ref, number, net):
 for number in [1,10,22,33,42,43,44,48,49]: on_net('U1',number,'V3V3')
 for number in [23,45,50]: on_net('U1',number,'VCORE')
 for number in [19,57]: on_net('U1',number,'GND')
-for number,net in {20:'XIN',21:'XOUT',24:'SWCLK',25:'SWDIO',26:'RUN',46:'USB_DM_MCU',47:'USB_DP_MCU',51:'QSPI_SD3',52:'QSPI_SCLK',53:'QSPI_SD0',54:'QSPI_SD2',55:'QSPI_SD1',56:'QSPI_SS'}.items(): on_net('U1',number,net)
+for number,net in {11:'EPD_DC',12:'EPD_CS',13:'SCK_MCU',14:'MOSI_MCU',15:'EPD_RST',16:'EPD_BUSY',17:'EPD_EN',20:'XIN',21:'XOUT',24:'SWCLK',25:'SWDIO',26:'RUN',46:'USB_DM_MCU',47:'USB_DP_MCU',51:'QSPI_SD3',52:'QSPI_SCLK',53:'QSPI_SD0',54:'QSPI_SD2',55:'QSPI_SD1',56:'QSPI_SS'}.items(): on_net('U1',number,net)
+on_net('C19',1,'V3V3')
+on_net('C19',2,'GND')
 # Flash / crystal: IO2 and IO3 are data pins in quad mode, not fixed pullups.
 for number,net in {1:'QSPI_SS',2:'QSPI_SD1',3:'QSPI_SD2',4:'GND',5:'QSPI_SD0',6:'QSPI_SCLK',7:'QSPI_SD3',8:'V3V3'}.items(): on_net('U5',number,net)
 for number,net in {1:'XIN',2:'GND',3:'XOSC_OUT',4:'GND'}.items(): on_net('Y1',number,net)
@@ -85,8 +93,8 @@ if not args.allow_unrouted:
     expected_layers={'top','bottom'} if board['num_layers']==2 else {'top','inner1','inner2','bottom'}
     for v in vias:
         assert set(v['layers']) == expected_layers, 'Non-through via'
-        assert v['hole_diameter'] >= .15-1e-6
-        assert v['outer_diameter']-v['hole_diameter'] >= .15-1e-6
+        assert v['hole_diameter'] >= .3-1e-6
+        assert v['outer_diameter']-v['hole_diameter'] >= .25-1e-6
         assert v.get('tented_on_top',board.get('default_via_tented_on_top')) and v.get('tented_on_bottom',board.get('default_via_tented_on_bottom')), 'Untented via'
     for i,a in enumerate(vias):
         for b in vias[i+1:]:

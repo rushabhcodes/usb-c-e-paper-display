@@ -1,3 +1,4 @@
+import { ReferenceLabel } from "../product/reference-label"
 import type { ChipProps } from "@tscircuit/props"
 
 const pinLabels = {
@@ -210,7 +211,7 @@ export const RP2040 = (props: ChipProps<typeof pinLabels>) => {
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":-3.5000691999999844,"y":3.5001453999999512},{"x":-2.9311854000001176,"y":3.5001453999999512}]} />
 <silkscreencircle strokeWidth="0.15mm" pcbX="-3.999992mm" pcbY="3.700272mm" radius="0.127mm" />
 <silkscreencircle strokeWidth="0.15mm" pcbX="-3.999992mm" pcbY="3.700145mm" radius="0.127mm" />
-<silkscreentext text="{NAME}" pcbX="0mm" pcbY="0mm" pcbRotation={360} layer="bottom" anchorAlignment="center" fontSize="1mm" />
+<ReferenceLabel name={props.name} />
 <courtyardoutline outline={[{"x":-4.0999415,"y":4.10006850000002},{"x":4.0999415,"y":4.10006850000002},{"x":4.0999415,"y":-4.10006850000002},{"x":-4.0999415,"y":-4.10006850000002},{"x":-4.0999415,"y":4.10006850000002}]} />
       </footprint>}
       cadModel={{

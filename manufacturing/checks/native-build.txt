@@ -1,51 +1,31 @@
 Building 1 file(s)...
 Building index.circuit.tsx...
 Generating circuit JSON...
-Wrote debug artifact: dist/product-routing-final/placement-unrouted.png
-Autorouting <board#413(.USB_EPAPER>.CONTROLLER) /> phase 1/2 "CLOCK" start: connections=3, obstacles=251, previous_traces=5, router=bus_lanes, version=beta_pipeline9, solver=BusLanesPipelineSolver, effort=1x, cache=disabled(strategy_not_cacheable)
-  connections: net.XIN, net.XOUT, net.XOSC_OUT
-Wrote debug artifact: dist/product-routing-final/phase-0.input.simple-route.json
-  phase 1/2 "CLOCK" done: routed_traces=10, jumpers=0, errors=0, elapsed=1.5s
-Wrote debug artifact: dist/product-routing-final/phase-0.output.traces.json
-Wrote debug artifact: dist/product-routing-final/phase-0-routed.png
-Saved autorouting paths to .tscircuit/autorouting-artifacts/index-circuit-tsx-2e2764dae4/subcircuit_source_group_0-phase-0-order-0-stage-0.pcb-trace-paths.json (import this JSON into <autoroutingphase pcbTracePaths={...} />).
-Autorouting <board#413(.USB_EPAPER>.CONTROLLER) /> phase 2/2 "MAIN" start: connections=42, obstacles=251, previous_traces=10, router=tscircuit, version=beta_pipeline9, solver=AutoroutingPipelineSolver9_PreloadedTraceGraph, effort=1x, cache=disabled(no_cache_engine)
-  connections: net.GND, net.VBUS, net.VSYS, net.V3V3, net.VCORE, net.EPD_3V3, net.EPD_SW, net.EPD_PUMP, net.EPD_VGH, net.EPD_VGL, net.EPD_VSH, net.EPD_VSL, net.EPD_VCOM, net.EPD_VSHR, net.CC1, net.CC2, net.USB_DP, net.USB_DM, net.EPD_EN, net.USB_DM_MCU, net.USB_DP_MCU, net.QSPI_SD3, net.QSPI_SCLK, net.QSPI_SD0, net.QSPI_SD2, net.QSPI_SD1, net.QSPI_SS, net.SWCLK, net.SWDIO, net.RUN, net.EPD_DC, net.EPD_CS, net.SCK_MCU, net.MOSI_MCU, net.EPD_RST, net.EPD_BUSY, net.BOOT_N, net.EPD_GDR, net.EPD_RESE, net.EPD_SCK, net.EPD_MOSI, net.EPD_VDD
-Wrote debug artifact: dist/product-routing-final/phase-1.input.simple-route.json
-  phase 2/2 "MAIN" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=topologyPlanningSolver steps=1 progress=17% iterations_per_second=7800 elapsed=272ms
-  phase 2/2 "MAIN" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=8 progress=52% iterations_per_second=170356 elapsed=12.9s
-  phase 2/2 "MAIN" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=19 progress=54% iterations_per_second=2800 elapsed=23.3s
-  phase 2/2 "MAIN" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityForceImproveSolver steps=49 progress=56% iterations_per_second=508 elapsed=33.5s
-  phase 2/2 "MAIN" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=pipeline9JointDrcRepairSolver steps=71 progress=86% iterations_per_second=71 elapsed=43.7s
-  phase 2/2 "MAIN" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=powerTraceExpansionSolver steps=96 progress=96% iterations_per_second=130 elapsed=53.9s
-  phase 2/2 "MAIN" done: routed_traces=165, jumpers=0, errors=0, elapsed=55.1s
-Wrote debug artifact: dist/product-routing-final/phase-1.output.traces.json
-Wrote debug artifact: dist/product-routing-final/phase-1-routed.png
-Saved autorouting paths to .tscircuit/autorouting-artifacts/index-circuit-tsx-2e2764dae4/subcircuit_source_group_0-phase-1-order-1-stage-0.pcb-trace-paths.json (import this JSON into <autoroutingphase pcbTracePaths={...} />).
-Wrote debug artifact: dist/product-routing-final/board.meta.json
+Wrote debug artifact: dist/native-routing-final-release/placement-unrouted.png
+Autorouting <board#893(.USB_EPAPER>.CONTROLLER) /> phase 1/1 "MAIN_ROUTE" start: connections=69, obstacles=326, previous_traces=108, router=tscircuit, version=beta_pipeline9, solver=AutoroutingPipelineSolver9_PreloadedTraceGraph, effort=1x, cache=disabled(no_cache_engine)
+  connections: MCU_pin46, MCU_pin47, MCU_pin54, MCU_pin55, MCU_pin56, MCU_pin13, MCU_pin14, net.VBUS, net.VSYS, net.V3V3, net.VCORE, net.EPD_3V3, net.EPD_SW, net.EPD_PUMP, net.EPD_VGH, net.EPD_VGL, net.EPD_VSH, net.EPD_VSL, net.EPD_VCOM, net.EPD_VSHR, net.CC1, net.CC2, net.USB_DP, net.USB_DM, net.EPD_EN, net.USB_DM_MCU, net.USB_DP_MCU, net.XIN, net.XOUT, net.QSPI_SD3, net.QSPI_SCLK, net.QSPI_SD0, net.QSPI_SD2, net.QSPI_SD1, net.QSPI_SS, net.SWCLK, net.SWDIO, net.RUN, net.EPD_DC, net.EPD_CS, net.SCK_MCU, net.MOSI_MCU, net.EPD_RST, net.EPD_BUSY, net.XOSC_OUT, net.BOOT_N, net.EPD_GDR, net.EPD_RESE, net.EPD_SCK, net.EPD_MOSI, net.EPD_VDD, 
+Wrote debug artifact: dist/native-routing-final-release/phase-1.input.simple-route.json
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=topologyPlanningSolver steps=1 progress=16% iterations_per_second=888 elapsed=3.0s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=portPointPathingSolver steps=15 progress=45% iterations_per_second=57036 elapsed=13.2s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=18 progress=53% iterations_per_second=197404 elapsed=23.7s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=20 progress=53% iterations_per_second=166692 elapsed=33.8s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=33 progress=53% iterations_per_second=100988 elapsed=50.2s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=60 progress=54% iterations_per_second=1848 elapsed=60.5s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=87 progress=55% iterations_per_second=20432 elapsed=70.7s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=traceWidthSolver steps=113 progress=76% iterations_per_second=30780 elapsed=80.8s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=pipeline9JointDrcRepairSolver steps=134 progress=86% iterations_per_second=13404 elapsed=90.9s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=pipeline9JointDrcRepairSolver steps=157 progress=87% iterations_per_second=50 elapsed=101.1s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=pipeline9JointDrcRepairSolver steps=181 progress=87% iterations_per_second=1233 elapsed=111.2s
+  phase 1/1 "MAIN_ROUTE" done: routed_traces=185, jumpers=0, errors=0, elapsed=115.3s
+Wrote debug artifact: dist/native-routing-final-release/phase-1.output.traces.json
+Wrote debug artifact: dist/native-routing-final-release/phase-1-routed.png
+Could not save autorouting paths for subcircuit_source_group_2: Only port-anchored wire/via routes can be saved
+Wrote debug artifact: dist/native-routing-final-release/board.meta.json
 Circuit JSON written to dist/index/circuit.json
-The "Q" prefix is being used with a <chip />, try using it with a <transistor />
-U2 has no pin with requires_power=true
-Q1 has no pin with requires_power=true
-Q1 has no pin with requires_ground=true
-All pins on Q1 are underspecified (no pinAttributes set)
-R5 may not have availability from jlcpcb (C11702).
-R7 may not have availability from jlcpcb (C11702).
-R1 may not have availability from jlcpcb (C23186).
-R2 may not have availability from jlcpcb (C23186).
-Y1 may not have availability from jlcpcb (C20625731).
-J1 may not have availability from jlcpcb (C165948).
-C28 may not have availability from jlcpcb (C13585).
-C29 may not have availability from jlcpcb (C13585).
-C30 may not have availability from jlcpcb (C13585).
-C31 may not have availability from jlcpcb (C13585).
-Explosion collision checking is incomplete: could not load or validate closed geometry for "J1", "C28", "C29", "C30", "C31", "PANEL"
-jlcpcb_standard: 151 via(s) have a hole diameter below 0.3 mm and incur an extra fabrication charge. Use a hole diameter of at least 0.3 mm to avoid this charge.
-… 52 more source_component_availability_warning not shown
 
 Build complete
   Circuits  1 passed
-  Options   autorouter-debug, autorouter-dump-srj
+  Options   autorouter-debug, autorouter-timeout, autorouter-dump-srj
   Output    dist
 
 ✓ Done

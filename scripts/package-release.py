@@ -6,7 +6,7 @@ import zipfile
 from pathlib import Path
 
 root = Path('manufacturing')
-archive = root/'JLCPCB-Gerbers-RevA.zip'
+archive = root/'JLCPCB-Gerbers-RevB.zip'
 with zipfile.ZipFile(archive) as z:
     files = {f:z.read(f) for f in z.namelist()}
 bom_data = files.pop('bom.csv') if 'bom.csv' in files else (root/'BOM.csv').read_bytes()
@@ -39,7 +39,7 @@ with (root/'CPL.csv').open('w',newline='') as f:
     writer = csv.DictWriter(f,fieldnames=['Designator','Mid X','Mid Y','Layer','Rotation'])
     writer.writeheader()
     writer.writerows(cpl)
-with zipfile.ZipFile(root/'SMT-Stencil-RevA.zip','w',zipfile.ZIP_DEFLATED) as z:
+with zipfile.ZipFile(root/'SMT-Stencil-RevB.zip','w',zipfile.ZIP_DEFLATED) as z:
     for name in ['F_Paste.gbr','Edge_Cuts.gbr']:
         z.writestr(name,files[name])
 files.pop('F_Fab.gbr',None)

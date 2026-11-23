@@ -1,3 +1,4 @@
+import { ReferenceLabel } from "../product/reference-label"
 import type { PushButtonProps } from "@tscircuit/props"
 
 const pinLabels = {
@@ -34,7 +35,7 @@ export const TS_1088_AR02016 = (props: PushButtonProps<typeof pinLabels>) => {
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":2.0262087999999494,"y":1.5411958000000823},{"x":-2.026208800000063,"y":1.5411958000000823}]} />
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":2.0262087999999494,"y":-1.5411957999999686},{"x":-2.026208800000063,"y":-1.5411957999999686}]} />
 <silkscreencircle strokeWidth="0.15mm" pcbX="0mm" pcbY="0mm" radius="0.899922mm" />
-<silkscreentext text="{NAME}" pcbX="0mm" pcbY="0mm" pcbRotation={360} layer="bottom" anchorAlignment="center" fontSize="1mm" />
+<ReferenceLabel name={props.name} />
 <courtyardoutline outline={[{"x":-3.049905499999909,"y":1.700009800000089},{"x":3.049905499999795,"y":1.700009800000089},{"x":3.049905499999795,"y":-1.6999843999999484},{"x":-3.049905499999909,"y":-1.6999843999999484},{"x":-3.049905499999909,"y":1.700009800000089}]} />
       </footprint>}
       cadModel={{

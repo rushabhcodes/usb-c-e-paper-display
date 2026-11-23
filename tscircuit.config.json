@@ -6,7 +6,11 @@
     ".toolchains/**",
     "firmware/**",
     "manufacturing/**",
-    "checks/**"
+    "checks/**",
+    "enclosure/exports/**",
+    "enclosure/*.png",
+    "enclosure/*.blend",
+    "tests/**"
   ],
   "includeBoardFiles": [
     "index.circuit.tsx"

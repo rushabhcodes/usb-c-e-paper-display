@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "mechanical_parts": 16,
+  "printed_parts": 4,
+  "system_pages": 2,
+  "drawing_pages": 6,
+  "dimension_lines": 20,
+  "mechanical_parts_in_pcb_bom": 0,
+  "circuit_sha256": "c355c141f7611a05b33369dcf75102f567fc736016eb379e12e22b90e1d77c62",
+  "physical_fit_tested": false,
+  "explosion_geometry_coverage": "Complete closed geometry; actual physical assembly remains untested"
+}

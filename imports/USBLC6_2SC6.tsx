@@ -1,3 +1,4 @@
+import { ReferenceLabel } from "../product/reference-label"
 import type { ChipProps } from "@tscircuit/props"
 
 const pinLabels = {
@@ -14,7 +15,7 @@ const pinAttributes = {
   pin2: {requiresGround: true, mustBeConnected: true},
   pin3: {isPassive: true},
   pin4: {isPassive: true},
-  pin5: {isPassive: true, mustBeConnected: true, shouldHaveDecouplingCapacitor: true, recommendedDecouplingCapacitorCapacitance: "100nF"},
+  pin5: {requiresPower: true, mustBeConnected: true, shouldHaveDecouplingCapacitor: true, recommendedDecouplingCapacitorCapacitance: "100nF"},
   pin6: {isPassive: true}
 } satisfies NonNullable<ChipProps["pinAttributes"]>
 
@@ -73,7 +74,7 @@ export const USBLC6_2SC6 = (props: ChipProps<typeof pinLabels>) => {
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":1.5391891999998961,"y":-0.8892031999998835},{"x":1.5391891999998961,"y":0.8892031999999972}]} />
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":-1.5391892000000098,"y":-0.8892031999998835},{"x":-1.5391892000000098,"y":0.8892031999999972}]} />
 <silkscreencircle strokeWidth="0.15mm" pcbX="-1.668272mm" pcbY="-1.301496mm" radius="0.150114mm" />
-<silkscreentext text="{NAME}" pcbX="0mm" pcbY="0mm" pcbRotation={360} layer="bottom" anchorAlignment="center" fontSize="1mm" />
+<ReferenceLabel name={props.name} />
 <courtyardoutline outline={[{"x":-1.6999843999999484,"y":1.9350994999999784},{"x":1.7000097999999753,"y":1.9350994999999784},{"x":1.7000097999999753,"y":-1.9350994999998647},{"x":-1.6999843999999484,"y":-1.9350994999998647},{"x":-1.6999843999999484,"y":1.9350994999999784}]} />
       </footprint>}
       cadModel={{

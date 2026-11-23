@@ -8,6 +8,7 @@ never used as a routing input or as a fabrication export.
 """
 import argparse
 import json
+import re
 import subprocess
 from collections import defaultdict
 from pathlib import Path
@@ -27,16 +28,23 @@ sources={e['source_trace_id']:e for e in data if e['type']=='source_trace'}
 for e in sources.values():
     ids=e.get('connected_source_port_ids',[])+e.get('connected_source_net_ids',[])
     for k in ids[1:]:join(ids[0],k)
+# A native through via connects its layer ports to its declared net.
+for via in [e for e in data if e['type']=='source_manually_placed_via']:
+    net_id=via.get('source_net_id')
+    if not net_id:continue
+    for port in [e for e in data if e['type']=='source_port' and e.get('source_component_id')==via['source_manually_placed_via_id']]:
+        join(port['source_port_id'],net_id)
 groups=defaultdict(dict)
 for t in data:
     if t['type']!='pcb_trace':continue
-    net=t.get('connection_name')
-    if net and net.startswith('source_net_'):net=root(net.split('_mst')[0].split('_rip')[0])
+    source=sources.get(t.get('source_trace_id'))
+    ids=(source.get('connected_source_port_ids',[])+source.get('connected_source_net_ids',[])) if source else []
+    if ids:
+        net=root(ids[0])
     else:
-        source=sources.get(t.get('source_trace_id'))
-        if source:
-            ids=source.get('connected_source_port_ids',[])+source.get('connected_source_net_ids',[])
-            net=root(ids[0]) if ids else net
+        connection=t.get('connection_name','')
+        match=re.search(r'source_net_\d+',connection)
+        net=root(match[0]) if match else connection
     assert net,f"Cannot identify electrical net for {t['pcb_trace_id']}"
     for a,b in zip(t['route'],t['route'][1:]):
         if a['route_type']!='wire' or b['route_type']!='wire' or a['layer']!=b['layer']:continue
@@ -74,4 +82,4 @@ output=ROOT/'checks/continuous-style.circuit.json'
 output.parent.mkdir(exist_ok=True)
 output.write_text(json.dumps([e for e in data if e['type']!='pcb_trace']+chains))
 print(f'Checking {len(chains)} continuous chains with the default tscircuit rules.',flush=True)
-subprocess.run(['bun','run','--bun','tsci','check','pcb-style',str(output)],cwd=ROOT,check=True)
+subprocess.run(['bun',str(ROOT/'node_modules/.bin/tsci'),'check','pcb-style',str(output)],cwd=ROOT,check=True)

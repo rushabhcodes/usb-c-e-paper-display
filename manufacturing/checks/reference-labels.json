@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "top_references": 68,
+  "bottom_references": 0,
+  "minimum_font_height_mm": 1,
+  "all_references_associated_with_their_components": true,
+  "minimum_label_to_component_bounds_mm": 0.218,
+  "minimum_required_clearance_mm": 0.15,
+  "circuit_sha256": "c355c141f7611a05b33369dcf75102f567fc736016eb379e12e22b90e1d77c62"
+}

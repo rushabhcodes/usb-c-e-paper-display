@@ -1,3 +1,4 @@
+import { ReferenceLabel } from "../product/reference-label"
 import type { ChipProps } from "@tscircuit/props"
 
 const pinLabels = {
@@ -35,7 +36,7 @@ export const A_1206L050_33NR = (props: ChipProps<typeof pinLabels>) => {
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":2.1163026000000116,"y":-1.092606399999994},{"x":0.926210999999995,"y":-1.092606399999994}]} />
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":-1.4210854715202004e-14,"y":0},{"x":-0.08441074011676619,"y":0.2037855535998574},{"x":-0.11320167162334371,"y":0.422474390000005},{"x":-0.08441074011676619,"y":0.6411632264001383},{"x":0,"y":0.8449487799999957}]} />
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":2.842170943040401e-14,"y":0},{"x":0.08441074011679461,"y":-0.20378555359984318},{"x":0.11320167162334371,"y":-0.42247438999999076},{"x":0.08441074011679461,"y":-0.6411632264001241},{"x":0,"y":-0.8449487799999957}]} />
-<silkscreentext text="{NAME}" pcbX="0mm" pcbY="0mm" pcbRotation={360} layer="bottom" anchorAlignment="center" fontSize="1mm" />
+<ReferenceLabel name={props.name} />
 <courtyardoutline outline={[{"x":-2.2900518000000005,"y":1.1139936999999946},{"x":2.2900518000000005,"y":1.1139936999999946},{"x":2.2900518000000005,"y":-1.1139936999999946},{"x":-2.2900518000000005,"y":-1.1139936999999946},{"x":-2.2900518000000005,"y":1.1139936999999946}]} />
       </footprint>}
       cadModel={{

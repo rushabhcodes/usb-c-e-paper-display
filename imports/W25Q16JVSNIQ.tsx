@@ -1,3 +1,4 @@
+import { ReferenceLabel } from "../product/reference-label"
 import type { ChipProps } from "@tscircuit/props"
 
 const pinLabels = {
@@ -39,7 +40,7 @@ export const W25Q16JVSNIQ = (props: ChipProps<typeof pinLabels>) => {
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":-2.576245799999924,"y":-1.5213076},{"x":-2.576245799999924,"y":1.5215361999999004},{"x":2.5761188000000175,"y":1.5215361999999004},{"x":2.5761188000000175,"y":-1.5213076},{"x":-2.576245799999924,"y":-1.5213076}]} />
 <silkscreencircle strokeWidth="0.15mm" pcbX="-1.9050254mm" pcbY="-0.769112mm" radius="0.150114mm" />
 <silkscreencircle strokeWidth="0.15mm" pcbX="-2.6723594mm" pcbY="-2.682494mm" radius="0.150114mm" />
-<silkscreentext text="{NAME}" pcbX="0mm" pcbY="0mm" pcbRotation={360} layer="bottom" anchorAlignment="center" fontSize="1mm" />
+<ReferenceLabel name={props.name} />
 <courtyardoutline outline={[{"x":-2.709989999999948,"y":3.86499149999986},{"x":2.6900002000000995,"y":3.86499149999986},{"x":2.6900002000000995,"y":-3.8649914999999737},{"x":-2.709989999999948,"y":-3.8649914999999737},{"x":-2.709989999999948,"y":3.86499149999986}]} />
       </footprint>}
       cadModel={{

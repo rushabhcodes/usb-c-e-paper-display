@@ -1,15 +1,17 @@
-import type { ChipProps } from "@tscircuit/props"
+import { ReferenceLabel } from "../product/reference-label"
+import type { TransistorProps } from "@tscircuit/props"
 
 const pinLabels = {
-  pin1: ["G"],
-  pin2: ["S"],
-  pin3: ["D"]
+  pin1: ["gate", "G"],
+  pin2: ["source", "S"],
+  pin3: ["drain", "D"]
 } as const
 
-export const SI1308EDL_T1_GE3 = (props: ChipProps<typeof pinLabels>) => {
+export const SI1308EDL_T1_GE3 = (props: Omit<TransistorProps, "type">) => {
   return (
-    <chip
+    <transistor type="mosfet"
       pinLabels={pinLabels}
+      pinAttributes={{pin1: {isInput: true}, pin2: {isPassive: true}, pin3: {isPassive: true}}}
       symbol={
         <symbol>
           <schematicpath points={[{"x":-0.2,"y":0},{"x":-0.08,"y":-0.04},{"x":-0.08,"y":0.04},{"x":-0.2,"y":0}]} strokeColor="#880000" isFilled fillColor="#FEFEFE" />
@@ -48,7 +50,7 @@ export const SI1308EDL_T1_GE3 = (props: ChipProps<typeof pinLabels>) => {
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":-0.6999986000000007,"y":-1.099997799999997},{"x":0.09999979999999198,"y":-1.099997799999997}]} />
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":-0.6999986000000007,"y":0.6311391999999927},{"x":-0.6999986000000007,"y":1.0999977999999828}]} />
 <silkscreenpath strokeWidth="0.15mm" route={[{"x":0.7999984000000069,"y":-1.2999974000000236},{"x":0.676810019950679,"y":-1.4250859285046573},{"x":0.8012683999999979,"y":-1.548910920239507},{"x":0.9257267800493167,"y":-1.4250859285046573},{"x":0.8025384000000031,"y":-1.2999974000000236}]} />
-<silkscreentext text="{NAME}" pcbX="0mm" pcbY="0mm" pcbRotation={360} layer="bottom" anchorAlignment="center" fontSize="1mm" />
+<ReferenceLabel name={props.name} />
 <courtyardoutline outline={[{"x":-1.5000991,"y":1.2999851999999947},{"x":1.5000991,"y":1.2999851999999947},{"x":1.5000991,"y":-1.299985200000009},{"x":-1.5000991,"y":-1.299985200000009},{"x":-1.5000991,"y":1.2999851999999947}]} />
       </footprint>}
       cadModel={{

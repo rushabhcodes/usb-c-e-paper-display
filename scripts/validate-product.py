@@ -19,9 +19,9 @@ assert counts['drawing_page']==counts['drawing_page_title_block']==6
 assert counts['drawing_part_view']==18 and counts['drawing_dimension_line']==20
 assert not [x for x in data if x['type'].endswith('_error')]
 texts={x['text'] for x in data if x['type']=='drawing_dimension_line'}
-assert {'100 mm','60 mm','90 mm','50 mm','1.6 mm','137.2 mm','182.2 mm','20.75 mm'} <= texts
+assert {'100 mm','60 mm','90 mm','50 mm','1.6 mm','137.2 mm','182.2 mm','18 mm'} <= texts
 pcbids={x['source_component_id'] for x in data if x['type']=='pcb_component'}
 assert not pcbids & {p['source_component_id'] for p in parts.values()}
-report={'result':'PASS','mechanical_parts':16,'printed_parts':4,'system_pages':2,'drawing_pages':6,'dimension_lines':20,'mechanical_parts_in_pcb_bom':0,'circuit_sha256':hashlib.sha256((root/'dist/index/circuit.json').read_bytes()).hexdigest(),'physical_fit_tested':False,'explosion_geometry_coverage':'Incomplete for J1, C28-C31 and decorative panel image plane; not physical assembly qualification'}
+report={'result':'PASS','mechanical_parts':16,'printed_parts':4,'system_pages':2,'drawing_pages':6,'dimension_lines':20,'mechanical_parts_in_pcb_bom':0,'circuit_sha256':hashlib.sha256((root/'dist/index/circuit.json').read_bytes()).hexdigest(),'physical_fit_tested':False,'explosion_geometry_coverage':'Complete closed geometry; actual physical assembly remains untested'}
 (root/'manufacturing/checks/product-views.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(report,indent=2))

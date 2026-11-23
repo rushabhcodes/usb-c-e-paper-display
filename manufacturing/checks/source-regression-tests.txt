@@ -1,0 +1,15 @@
+bun test v1.3.3 (274e01c7)
+
+tests/supplier-stock.test.mjs:
+(pass) uses the exact supplier SKU, never stock from a recommendation [4.00ms]
+(pass) retains a confirmed zero quantity [1.00ms]
+(pass) does not invent availability for missing or malformed supplier data
+
+tests/routing-net-identity.test.tsx:
+(pass) autorouted inner-layer branches retain their declared net at native vias [1635.98ms]
+(pass) explicit full-stack via layers expose native inner-layer trace endpoints [277.00ms]
+
+ 5 pass
+ 0 fail
+ 14 expect() calls
+Ran 5 tests across 2 files. [7.65s]
