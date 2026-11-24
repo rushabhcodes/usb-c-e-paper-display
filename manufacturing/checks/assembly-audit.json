@@ -1,6 +1,6 @@
 {
   "result": "PASS",
-  "assembled_refs": 62,
+  "assembled_refs": 70,
   "bom_cpl_match": true,
   "all_supplier_codes_match": true,
   "coordinate_origin": "PCB centre, matching Gerbers; mm",

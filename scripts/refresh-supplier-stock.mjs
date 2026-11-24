@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from "node:fs"
 import { fetchJlcStock } from "../product/supplier-stock"
-const circuit=JSON.parse(readFileSync("manufacturing/design.circuit.json","utf8"))
+const circuit=JSON.parse(readFileSync(process.argv[2]??"manufacturing/design.circuit.json","utf8"))
 const skus=[...new Set(circuit.flatMap((e)=>e.type==="source_component" ? e.supplier_part_numbers?.jlcpcb??[] : []))].sort()
 const records = {}
 for(let i=0;i<skus.length;i+=3){

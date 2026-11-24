@@ -1,0 +1,71 @@
+{
+  "cli_version": "0.1.2485",
+  "method": "Exact supplier pad geometry imported through TSCI. Top labels and fabrication mask/paste policy are source-authored. The inductor uses its CLI-downloaded STEP solid.",
+  "parts": [
+    {
+      "sku": "C39843328",
+      "manufacturer_part_number": "RP2354B",
+      "source_file": "imports/RP2354B.tsx",
+      "import_command": "tsci import C39843328 --jlcpcb --use-exact-footprint",
+      "inventory_observation": {
+        "stock": 10587,
+        "price": 1.5166,
+        "currency": "USD",
+        "checkedAt": "2026-11-24T17:25:42.538Z",
+        "sourceUrl": "https://jlcpcb.com/partdetail/C39843328"
+      }
+    },
+    {
+      "sku": "C141836",
+      "manufacturer_part_number": "TLV62569DBVR",
+      "source_file": "imports/TLV62569DBVR.tsx",
+      "import_command": "tsci import C141836 --jlcpcb --use-exact-footprint",
+      "inventory_observation": {
+        "stock": 461325,
+        "price": 0.0664,
+        "currency": "USD",
+        "checkedAt": "2026-11-24T17:25:37.058Z",
+        "sourceUrl": "https://jlcpcb.com/partdetail/C141836"
+      }
+    },
+    {
+      "sku": "C408335",
+      "manufacturer_part_number": "MWSA0402S-2R2MT",
+      "source_file": "imports/MWSA0402S_2R2MT.tsx",
+      "import_command": "tsci import C408335 --jlcpcb --use-exact-footprint",
+      "inventory_observation": {
+        "stock": 16006,
+        "price": 0.1445,
+        "currency": "USD",
+        "checkedAt": "2026-11-24T17:25:42.257Z",
+        "sourceUrl": "https://jlcpcb.com/partdetail/C408335"
+      }
+    },
+    {
+      "sku": "C45783",
+      "manufacturer_part_number": "CL21A226MAQNNNE",
+      "source_file": "imports/CL21A226MAQNNNE.tsx",
+      "import_command": "tsci import C45783 --jlcpcb --use-exact-footprint",
+      "inventory_observation": {
+        "stock": 4647559,
+        "price": 0.1085,
+        "currency": "USD",
+        "checkedAt": "2026-11-24T17:25:43.262Z",
+        "sourceUrl": "https://jlcpcb.com/partdetail/C45783"
+      }
+    },
+    {
+      "sku": "C25981",
+      "manufacturer_part_number": "0603WAF8201T5E",
+      "source_file": "imports/A_0603WAF8201T5E.tsx",
+      "import_command": "tsci import C25981 --jlcpcb --use-exact-footprint",
+      "inventory_observation": {
+        "stock": 535485,
+        "price": 0.0035,
+        "currency": "USD",
+        "checkedAt": "2026-11-24T17:25:41.546Z",
+        "sourceUrl": "https://jlcpcb.com/partdetail/C25981"
+      }
+    }
+  ]
+}

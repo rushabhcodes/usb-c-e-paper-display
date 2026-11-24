@@ -1,177 +1,198 @@
 {
-  "C13585": {
-    "stock": 3988791,
-    "price": 0.12,
-    "currency": "USD",
-    "checkedAt": "2026-11-23T06:28:57.940Z",
-    "sourceUrl": "https://jlcpcb.com/partdetail/C13585"
-  },
   "C11702": {
-    "stock": 29228328,
+    "stock": 28584672,
     "price": 0.0011,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:28:58.100Z",
+    "checkedAt": "2026-11-24T17:25:36.802Z",
     "sourceUrl": "https://jlcpcb.com/partdetail/C11702"
   },
-  "C14663": {
-    "stock": 53255242,
-    "price": 0.0056,
+  "C141836": {
+    "stock": 461325,
+    "price": 0.0664,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:28:58.178Z",
-    "sourceUrl": "https://jlcpcb.com/partdetail/C14663"
+    "checkedAt": "2026-11-24T17:25:37.058Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C141836"
   },
-  "C15849": {
-    "stock": 12085394,
-    "price": 0.0094,
+  "C13585": {
+    "stock": 3898583,
+    "price": 0.1201,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:28:58.890Z",
-    "sourceUrl": "https://jlcpcb.com/partdetail/C15849"
-  },
-  "C1525": {
-    "stock": 32793868,
-    "price": 0.0025,
-    "currency": "USD",
-    "checkedAt": "2026-11-23T06:28:59.008Z",
-    "sourceUrl": "https://jlcpcb.com/partdetail/C1525"
+    "checkedAt": "2026-11-24T17:25:37.347Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C13585"
   },
   "C1548": {
-    "stock": 1372132,
-    "price": 0.0026,
+    "stock": 1355121,
+    "price": 0.0019,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:28:59.322Z",
+    "checkedAt": "2026-11-24T17:25:37.846Z",
     "sourceUrl": "https://jlcpcb.com/partdetail/C1548"
   },
-  "C15850": {
-    "stock": 9167722,
-    "price": 0.0311,
+  "C1525": {
+    "stock": 31944970,
+    "price": 0.0029,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:28:59.974Z",
+    "checkedAt": "2026-11-24T17:25:38.109Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C1525"
+  },
+  "C14663": {
+    "stock": 50793847,
+    "price": 0.0051,
+    "currency": "USD",
+    "checkedAt": "2026-11-24T17:25:38.338Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C14663"
+  },
+  "C15850": {
+    "stock": 9200740,
+    "price": 0.0312,
+    "currency": "USD",
+    "checkedAt": "2026-11-24T17:25:38.965Z",
     "sourceUrl": "https://jlcpcb.com/partdetail/C15850"
   },
-  "C19193043": {
-    "stock": 117483,
-    "price": 0.0488,
-    "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:00.000Z",
-    "sourceUrl": "https://jlcpcb.com/partdetail/C19193043"
-  },
   "C165948": {
-    "stock": 476782,
-    "price": 0.1869,
+    "stock": 446177,
+    "price": 0.1871,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:00.067Z",
+    "checkedAt": "2026-11-24T17:25:39.022Z",
     "sourceUrl": "https://jlcpcb.com/partdetail/C165948"
   },
-  "C20625731": {
-    "stock": 11844,
-    "price": 0.3962,
+  "C15849": {
+    "stock": 11714288,
+    "price": 0.0141,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:00.609Z",
-    "sourceUrl": "https://jlcpcb.com/partdetail/C20625731"
-  },
-  "C2040": {
-    "stock": 61619,
-    "price": 1.0866,
-    "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:00.627Z",
-    "sourceUrl": "https://jlcpcb.com/partdetail/C2040"
+    "checkedAt": "2026-11-24T17:25:39.208Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C15849"
   },
   "C22935": {
-    "stock": 5608963,
-    "price": 0.0018,
+    "stock": 5476513,
+    "price": 0.0016,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:01.039Z",
+    "checkedAt": "2026-11-24T17:25:39.725Z",
     "sourceUrl": "https://jlcpcb.com/partdetail/C22935"
   },
-  "C2456211": {
-    "stock": 23690,
-    "price": 1.116,
+  "C20625731": {
+    "stock": 9197,
+    "price": 0.3967,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:01.638Z",
-    "sourceUrl": "https://jlcpcb.com/partdetail/C2456211"
+    "checkedAt": "2026-11-24T17:25:39.902Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C20625731"
+  },
+  "C19193043": {
+    "stock": 117468,
+    "price": 0.0489,
+    "currency": "USD",
+    "checkedAt": "2026-11-24T17:25:39.939Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C19193043"
   },
   "C23186": {
-    "stock": 18282336,
+    "stock": 17700903,
     "price": 0.0015,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:01.652Z",
+    "checkedAt": "2026-11-24T17:25:40.516Z",
     "sourceUrl": "https://jlcpcb.com/partdetail/C23186"
   },
-  "C25190": {
-    "stock": 722386,
-    "price": 0.0017,
-    "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:01.811Z",
-    "sourceUrl": "https://jlcpcb.com/partdetail/C25190"
-  },
   "C25804": {
-    "stock": 42411838,
+    "stock": 41279175,
     "price": 0.0017,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:02.479Z",
+    "checkedAt": "2026-11-24T17:25:40.586Z",
     "sourceUrl": "https://jlcpcb.com/partdetail/C25804"
   },
-  "C262669": {
-    "stock": 64587,
-    "price": 0.1208,
+  "C25190": {
+    "stock": 715104,
+    "price": 0.0017,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:02.570Z",
-    "sourceUrl": "https://jlcpcb.com/partdetail/C262669"
+    "checkedAt": "2026-11-24T17:25:40.739Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C25190"
   },
   "C382278": {
-    "stock": 61455,
+    "stock": 61435,
     "price": 0.0127,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:02.706Z",
+    "checkedAt": "2026-11-24T17:25:41.298Z",
     "sourceUrl": "https://jlcpcb.com/partdetail/C382278"
   },
-  "C51118": {
-    "stock": 18902,
-    "price": 0.1667,
+  "C25981": {
+    "stock": 535485,
+    "price": 0.0035,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:03.246Z",
-    "sourceUrl": "https://jlcpcb.com/partdetail/C51118"
+    "checkedAt": "2026-11-24T17:25:41.546Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C25981"
+  },
+  "C262669": {
+    "stock": 64124,
+    "price": 0.1209,
+    "currency": "USD",
+    "checkedAt": "2026-11-24T17:25:41.619Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C262669"
+  },
+  "C408335": {
+    "stock": 16006,
+    "price": 0.1445,
+    "currency": "USD",
+    "checkedAt": "2026-11-24T17:25:42.257Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C408335"
   },
   "C412634": {
-    "stock": 4981,
-    "price": 0.091,
+    "stock": 4867,
+    "price": 0.0911,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:03.262Z",
+    "checkedAt": "2026-11-24T17:25:42.422Z",
     "sourceUrl": "https://jlcpcb.com/partdetail/C412634"
   },
-  "C469327": {
-    "stock": 39009,
-    "price": 0.2602,
+  "C39843328": {
+    "stock": 10587,
+    "price": 1.5166,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:03.474Z",
+    "checkedAt": "2026-11-24T17:25:42.538Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C39843328"
+  },
+  "C469327": {
+    "stock": 33222,
+    "price": 0.2605,
+    "currency": "USD",
+    "checkedAt": "2026-11-24T17:25:43.109Z",
     "sourceUrl": "https://jlcpcb.com/partdetail/C469327"
   },
-  "C602018": {
-    "stock": 67525,
-    "price": 0.0468,
+  "C45783": {
+    "stock": 4647559,
+    "price": 0.1085,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:04.151Z",
-    "sourceUrl": "https://jlcpcb.com/partdetail/C602018"
+    "checkedAt": "2026-11-24T17:25:43.262Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C45783"
+  },
+  "C51118": {
+    "stock": 16978,
+    "price": 0.1668,
+    "currency": "USD",
+    "checkedAt": "2026-11-24T17:25:43.476Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C51118"
   },
   "C7519": {
-    "stock": 39283,
-    "price": 0.1544,
+    "stock": 44945,
+    "price": 0.1538,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:04.175Z",
+    "checkedAt": "2026-11-24T17:25:44.013Z",
     "sourceUrl": "https://jlcpcb.com/partdetail/C7519"
   },
   "C720477": {
-    "stock": 789006,
-    "price": 0.0509,
+    "stock": 752370,
+    "price": 0.0505,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:04.189Z",
+    "checkedAt": "2026-11-24T17:25:44.063Z",
     "sourceUrl": "https://jlcpcb.com/partdetail/C720477"
   },
+  "C602018": {
+    "stock": 62282,
+    "price": 0.0469,
+    "currency": "USD",
+    "checkedAt": "2026-11-24T17:25:44.142Z",
+    "sourceUrl": "https://jlcpcb.com/partdetail/C602018"
+  },
   "C82046": {
-    "stock": 166759,
+    "stock": 164764,
     "price": 0.0588,
     "currency": "USD",
-    "checkedAt": "2026-11-23T06:29:04.782Z",
+    "checkedAt": "2026-11-24T17:25:44.817Z",
     "sourceUrl": "https://jlcpcb.com/partdetail/C82046"
   }
 }

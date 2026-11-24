@@ -1,0 +1,22 @@
+{
+  "core": "rp2040:rp2040@6.4.0",
+  "fqbn": "rp2040:rp2040:generic_rp2350:flash=2097152_0,freq=150,usbstack=picosdk,arch=arm,variantchip=RP2350B,opt=Small",
+  "mcu": "RP2354B",
+  "physical_board_tested": false,
+  "usb": {
+    "vid": "2e8a",
+    "pid": "f00f",
+    "configuration_max_power_ma": 250
+  },
+  "source_files_sha256": {
+    "firmware/usb_epaper/usb_epaper.ino": "1aeb3c597627a34ec0684ea2bfdcde76bb007893c86e16454fd3c52886314011",
+    "firmware/usb_epaper/src/protocol.h": "1ac9f8045e2f5dc9f52458c9bb870ecead13781f2994485e8f2f2bf414ff689b",
+    "firmware/vendor-lock.json": "dc6fe21e21ff16bfbc8275efcaef12b280e543c8ca5ee9d1677083e283eefb2e"
+  },
+  "artifacts": {
+    "usb_epaper.ino.bin": "72fd675b62f284728895e74d7080bf799ba647b637d4e1808a88acc99b918041",
+    "usb_epaper.ino.elf": "4fdea4291b092d5bccf00e19c8ce42a09998a9cfa06a073e7080964388a9aa7d",
+    "usb_epaper.ino.uf2": "f70ea2112b3d912b1561d0143416ecfacfac392f65908e4e09bd61b3fbc30a38",
+    "USB-Epaper-RevC-RP2354B-v1.1.0.uf2": "f70ea2112b3d912b1561d0143416ecfacfac392f65908e4e09bd61b3fbc30a38"
+  }
+}

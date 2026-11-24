@@ -13,7 +13,7 @@ await Promise.all(Array.from({length:3},async()=>{
   const original=models[next++],part=source.get(original.source_component_id)
   if(!part?.supplier_part_numbers?.jlcpcb)continue
   const cad={...original},sku=part.supplier_part_numbers.jlcpcb[0]
-  if(['C165948','C13585'].includes(sku))cad.model_glb_url='data:model/gltf-binary;base64,'+readFileSync(`enclosure/component-models/${sku}.glb`).toString('base64')
+  if(['C165948','C13585','C408335'].includes(sku))cad.model_glb_url='data:model/gltf-binary;base64,'+readFileSync(`enclosure/component-models/${sku}.glb`).toString('base64')
   const mesh=await loadCadComponentMesh(cad)
   if(!mesh?.positions?.length)throw Error(part.name+' has no measurable supplier mesh')
   let maxZ=-Infinity
@@ -23,7 +23,7 @@ await Promise.all(Array.from({length:3},async()=>{
   results.push({name:part.name,minimum_body_case_z_mm:rearZ,rear_floor_clearance_mm:clearance})
  }
 }))
-if(results.length!==62)throw Error(`Expected 62 supplier models; got ${results.length}`)
+if(results.length!==70)throw Error(`Expected 70 supplier models; got ${results.length}`)
 results.sort((a,b)=>a.rear_floor_clearance_mm-b.rear_floor_clearance_mm)
 writeFileSync('enclosure/component-clearance.json',JSON.stringify({result:'PASS',case_depth_mm:layout.case_depth_mm,rear_floor_mm:2.4,minimum_clearance_mm:results[0].rear_floor_clearance_mm,method:'Official loadCadComponentMesh supplier geometry, native installed coordinate transform',physical_fit_tested:false,components:results},null,2)+'\n')
-console.log('62 component bodies checked; minimum rear clearance:',results[0].name,results[0].rear_floor_clearance_mm.toFixed(3),'mm')
+console.log('70 component bodies checked; minimum rear clearance:',results[0].name,results[0].rear_floor_clearance_mm.toFixed(3),'mm')

@@ -1,29 +1,30 @@
-# USB-C RP2040 raw e-paper controller
+# USB-C RP2354B raw e-paper controller
 
-A 100 × 60 mm controller PCB for the **Good Display GDEY075T7**: a **7.5-inch, 800 × 480 monochrome raw panel**. The display plugs directly into J2. USB-C provides power, USB data, and RP2040 ROM BOOTSEL programming. All display power components are on this PCB; no HAT or external driver board is required.
+A 100 × 60 mm controller PCB for the **Good Display GDEY075T7**: a **7.5-inch, 800 × 480 monochrome raw panel**. The display plugs directly into J2. USB-C provides power, USB data, and RP2354B ROM BOOTSEL programming. All display power components are on this PCB; no HAT or external driver board is required.
 
 The panel manufacturer lists 3 s full, 1.5 s fast, and 0.3 s partial refresh at 25 °C. Actual timing depends on temperature and the panel's waveforms. This is a dashboard / text display, with periodic full refreshes to clear ghosting. The panel itself is purchased separately from the PCB assembly.
 
-The validated Rev B PCB, firmware and 18 mm enclosure are available in [release v1.2.0](https://github.com/rushabhcodes/usb-c-e-paper-display/releases/tag/v1.2.0). The native full-product build has zero errors and warnings; Gerber shorts, default style and continuous-copper checks pass.
+The validated Rev C PCB, firmware and 18 mm enclosure are available in [release v1.3.0](https://github.com/rushabhcodes/usb-c-e-paper-display/releases/tag/v1.3.0). The native full-product build has zero errors and warnings; Gerber shorts, default style and continuous-copper checks pass.
 
 **Manufacturing status is recorded in `manufacturing/VALIDATION.md`; use that file to determine whether the fabrication release has passed its checks.**
 
 ## Hardware
 
-- Bare RP2040 in QFN-56, including its exposed ground pad, TESTEN ground, 3.3 V I/O and 1.1 V core supply.
-- Winbond W25Q16JVSNIQ, 2 MB QSPI flash.
+- Bare RP2354B in QFN-80, including exposed ground pad 81, 3.3 V I/O and an external 1.092 V core buck supply.
+- 2 MB stacked flash inside RP2354B; no external flash chip. U5 is now a TLV62569 core buck regulator. See [Rev C hardware details](docs/RP2354B.md).
 - Raspberry Pi's recommended ABM8-272-T3 12 MHz crystal, 15 pF load capacitors, and 1 kΩ drive resistor.
 - USB-C USB 2.0 device port, separate 5.1 kΩ CC resistors, 27 Ω data series resistors, USBLC6-2SC6 ESD protection, and a 500 mA resettable input fuse. This port uses USB 5 V; it does not negotiate USB PD.
 - Independent 3.3 V regulators for the MCU and display. GP14 enables display power; a pulldown leaves it off during reset.
 - 24-contact, 0.5 mm pitch, bottom-contact ZIF connector. Pin 1 is marked; insert the panel tail with exposed contacts facing the PCB.
 - Si1308EDL boost MOSFET, 10 µH / 1 A inductor, three MBR0530 rectifiers, 0.47 Ω current sensing, and 50 V ceramic reservoir / flying capacitors.
 - BOOTSEL and RESET buttons; six SWD / supply probe pads; four 3.2 mm mounting holes and three assembly fiducials.
-- Four copper layers, with an inner ground pour beneath the signals. An inner1 ground pour provides a ground reference; the native router can use all four layers for signals and power. Components are assembled on the top side; 68 readable reference names are on the component-side top silkscreen.
+- Four copper layers, with an inner ground pour beneath the signals. An inner1 ground pour provides a ground reference; the native router can use all four layers for signals and power. Components are assembled on the top side; 76 readable reference names are on the component-side top silkscreen.
 
 ## Build and inspect
 
 ```sh
 bun install --frozen-lockfile
+bun run refresh:stock
 bun run typecheck
 bun run check:netlist
 bun run check:schematic-placement
@@ -35,14 +36,14 @@ bun run check:continuous-style
 python scripts/validate-circuit.py
 ```
 
-`index.circuit.tsx` is the native product assembly entrypoint. The electronics and tscircuit routing live in `product/controller-board.tsx`; `board.circuit.tsx` selects that board for electrical and placement checks. **All PCB routing is defined and generated with tscircuit.** Local USB power, MCU bypass supplies, crystal connections, ground returns and signal escapes are authored with ordinary `trace` / `pcbPath` and `via` primitives. The flash is oriented so its clock and data pins face the MCU, with its bypass capacitor beside the supply pin. SWD and RESET use short via escapes and straight bottom tracks; BUSY uses inner2 between full-stack vias. TP6 sits beside the reset pull-up and button with fixed local connections. Ground pads reach the inner ground pour through short local via returns; USB shell slots already pass through that plane. The remaining named nets are explicitly assigned to the built-in local router, with implicit routing disabled. Unrouted-connection and physical checks remain enabled. The native router generates the remaining copper from the current placement. The source imports no routed-board paths and defines no routing algorithm callbacks. `tscircuit.config.ts` disables both local and cloud routing caches.
+`index.circuit.tsx` is the native product assembly entrypoint. The electronics and tscircuit routing live in `product/controller-board.tsx`; `board.circuit.tsx` selects that board for electrical and placement checks. **All PCB routing is defined and generated with tscircuit.** Local USB power, MCU bypass supplies, crystal connections, ground returns and signal escapes are authored with ordinary `trace` / `pcbPath` and `via` primitives. RP2354B uses internal flash. A source-authored bottom-layer core supply tree joins the buck output to three local DVDD bypasses, the core probe and feedback divider. BUSY uses inner2 between full-stack vias; SWD, RESET and USB are routed natively from the new pinout. TP6 sits beside the reset pull-up and button with fixed local connections. Ground pads reach the inner ground pour through short local via returns; USB shell slots already pass through that plane. The remaining named nets are explicitly assigned to the built-in local router, with implicit routing disabled. Unrouted-connection and physical checks remain enabled. The native router generates the remaining copper from the current placement. The source imports no routed-board paths and defines no routing algorithm callbacks. `tscircuit.config.ts` disables both local and cloud routing caches.
 ```sh
 bun run --bun tsci build index.circuit.tsx --autorouter-debug --autorouter-debug-dir dist/native-routing-final-release --autorouter-dump-srj all --autorouter-threads 1
 ```
 
 The pinned Core dependency has a reproducible Bun patch in `patches/`. It preserves the declared net and source endpoints on native autorouter branches instead of borrowing an unrelated local trace's identity and width. It also preserves explicitly requested inner-layer via ports, allowing ordinary traces to connect to inner2 on full-stack through vias. These fixes correct native connectivity/API behavior without changing the routing algorithm or disabling checks. `bun install --frozen-lockfile` applies it; `bun test tests` checks both the native-via regression and detection of a real foreign-net short. Keep the patch with the source when rebuilding.
 
-Rev B uses four layers for RP2040 fanout and an inner ground reference. The PCB uses 0.30 mm drilled vias and 0.55 mm pads, avoiding the previous small-drill fabrication charge. Complex parts were imported using `tsci import C… --jlcpcb --use-exact-footprint`; their imported footprints are in `imports/`. Solder mask, stencil apertures and reference markings are adjusted for fabrication; the USB shell slots are enlarged to 0.8 × 1.6 mm while retaining the outer board-edge clearance. Passives also use exact CLI-imported footprints with explicit LCSC codes. `docs/parts/` contains the part discovery responses; inventory is refreshed from exact JLCPCB product records with `bun run refresh:stock`. The supplier engine retains native lookup, footprint and orientation checks; only verified inventory younger than six hours supplements an unknown catalog result. Unknown or expired inventory remains a warning. The previous external-routing release is superseded and excluded from current release packages.
+Rev C uses four layers for RP2354B fanout and an inner ground reference. The PCB uses 0.30 mm drilled vias and 0.55 mm pads, avoiding the previous small-drill fabrication charge. Complex parts were imported using `tsci import C… --jlcpcb --use-exact-footprint`; their imported footprints are in `imports/`. Solder mask, stencil apertures and reference markings are adjusted for fabrication; the USB shell slots are enlarged to 0.8 × 1.6 mm while retaining the outer board-edge clearance. Passives also use exact CLI-imported footprints with explicit LCSC codes. `docs/parts/` contains the part discovery responses; inventory is refreshed from exact JLCPCB product records with `bun run refresh:stock`. The supplier engine retains native lookup, footprint and orientation checks; only verified inventory younger than six hours supplements an unknown catalog result. Unknown or expired inventory remains a warning. The previous external-routing release is superseded and excluded from current release packages.
 
 The native autorouter receives the source-authored local connections and ground vias, then routes the remaining connections from the current placement. Diagnostic route JSON written by the CLI is output only. `manufacturing/checks/routing-provenance.json` records the fresh inputs, source hashes, solver versions and disabled caches.
 
@@ -50,12 +51,12 @@ See `manufacturing/VALIDATION.md` for measured routing counts, Gerber shorts, de
 
 ## Fabrication package
 
-`manufacturing/JLCPCB-Gerbers-RevB.zip`, `BOM.csv`, and `CPL.csv` are the PCB and top-side assembly files, generated from the fresh tscircuit build. `SMT-Stencil-RevB.zip` provides the stencil. The directory also contains three schematic SVG pages, assembly and PCB views, and check reports. See `manufacturing/VALIDATION.md` for the current routing revision's release status and `ORDERING.md` for fabrication settings. The RP2040 exposed pad has four 1.15 mm stencil windows (55% paste coverage). Probe pads have no stencil openings.
+`manufacturing/JLCPCB-Gerbers-RevC.zip`, `BOM.csv`, and `CPL.csv` are the PCB and top-side assembly files, generated from the fresh tscircuit build. `SMT-Stencil-RevC.zip` provides the stencil. The directory also contains five schematic SVG pages, assembly and PCB views, and check reports. See `manufacturing/VALIDATION.md` for the current routing revision's release status and `ORDERING.md` for fabrication settings. The RP2354B exposed pad has four 1.25 mm stencil windows (54% paste coverage). Probe pads have no stencil openings.
 
 To export a newly validated build, use an absolute output path (the CLI resolves relative exports beside the input file):
 
 ```sh
-bun run --bun tsci export dist/index/circuit.json -f gerbers -o "$PWD/manufacturing/JLCPCB-Gerbers-RevB.zip"
+bun run --bun tsci export dist/index/circuit.json -f gerbers -o "$PWD/manufacturing/JLCPCB-Gerbers-RevC.zip"
 python scripts/package-release.py
 python scripts/validate-circuit.py
 python scripts/audit-routing.py
@@ -63,7 +64,7 @@ python scripts/audit-routing.py
 
 ## Firmware connections
 
-**Firmware and host image sender are included.** Flash [`USB-Epaper-RevA-v1.0.0.uf2`](firmware/releases/USB-Epaper-RevA-v1.0.0.uf2), then use the Python USB sender. See [`firmware/README.md`](firmware/README.md) for BOOTSEL installation, image conversion, commands and build instructions.
+**Firmware and host image sender are included.** Flash [`USB-Epaper-RevC-RP2354B-v1.1.0.uf2`](firmware/releases/rp2354b/USB-Epaper-RevC-RP2354B-v1.1.0.uf2), then use the Python USB sender. See [`firmware/README.md`](firmware/README.md) for BOOTSEL installation, image conversion, commands and build instructions.
 
 ```sh
 python -m venv .venv-host
@@ -73,11 +74,11 @@ python -m venv .venv-host
 
 Connect a normal USB-C **data cable** to the left-side socket and a computer USB host. A USB-A-to-C cable also works. Other host devices need an application implementing the included serial image protocol; a charger supplies power only.
 
-Rev B preserves the GPIO assignments and USB protocol, so the supplied Rev A-named UF2 remains compatible.
+Rev C preserves the GPIO assignments and USB protocol, but requires the new RP2354B UF2 in `firmware/releases/rp2354b/`. The archived RP2040 UF2 is incompatible with Rev C.
 
 The firmware validates CRC-checked transfers, finds the changed rectangle, uses fast partial refresh after a full baseline, and runs a clean full refresh after five partial updates. The ready-built UF2 and source are included; software tests pass, while real USB and panel operation await a physical prototype.
 
-| Function | RP2040 GPIO | Raw panel contact |
+| Function | RP2354B GPIO | Raw panel contact |
 |---|---:|---:|
 | SPI1 SCK | 10, via 27 Ω | 13 |
 | SPI1 MOSI | 11, via 27 Ω | 14 |
@@ -87,17 +88,17 @@ The firmware validates CRC-checked transfers, finds the changed rectangle, uses 
 | Busy input | 13 | 9 |
 | Display regulator enable | 14, active high | U4 enable |
 
-Use the **GDEY075T7 / UC8179** driver and its vendor waveforms. For GxEPD2, select `GxEPD2_750_GDEY075T7`. A monochrome framebuffer takes 48,000 bytes; two frames fit in RP2040 RAM. USB-C carries image data through application firmware; it is not a USB video / DisplayPort input.
+Use the **GDEY075T7 / UC8179** driver and its vendor waveforms. For GxEPD2, select `GxEPD2_750_GDEY075T7`. A monochrome framebuffer takes 48,000 bytes; two frames fit in RP2354B RAM. USB-C carries image data through application firmware; it is not a USB video / DisplayPort input.
 
 Startup: keep display power disabled, initialize USB and the MCU, then enable the display regulator before resetting and initializing the panel. Hold SPI/control outputs low or high impedance while display power is off to avoid back-powering the panel through its inputs. Before removing display power, complete the vendor power-off sequence and wait for BUSY. Use a full refresh after at most five consecutive partial/fast updates as an initial policy; tune only after testing the actual panel. Power cycling loses the panel controller's previous-image RAM, so restore the baseline before partial refresh.
 
-BOOTSEL: hold SW1 while pressing and releasing RESET (SW2), then release SW1. The RP2040 ROM exposes a USB mass-storage device for UF2 installation. TP4/TP5 provide SWDIO/SWCLK; TP1 is ground, TP2 is 3.3 V reference, TP3 is core voltage, and TP6 is RUN. Do not drive TP3 from an external supply.
+BOOTSEL: hold SW1 while pressing and releasing RESET (SW2), then release SW1. The RP2354B ROM exposes a USB mass-storage device for UF2 installation. TP4/TP5 provide SWDIO/SWCLK; TP1 is ground, TP2 is 3.3 V reference, TP3 is core voltage, and TP6 is RUN. Do not drive TP3 from an external supply.
 
 ## Sources
 
 - [GDEY075T7 manufacturer specifications and refresh modes](https://www.good-display.com/product/396.html)
 - [GDEY075T7 manufacturer datasheet download](https://www.good-display.com/companyfile/692.html), including the circuit on page 40. Reference links are collected in [`docs/reference/README.md`](docs/reference/README.md).
-- [Hardware design with RP2040](https://datasheets.raspberrypi.com/rp2040/hardware-design-with-rp2040.pdf)
+- [Hardware design with RP2354B](https://datasheets.raspberrypi.com/rp2350/hardware-design-with-rp2350.pdf)
 - [JLCPCB fabrication capabilities](https://jlcpcb.com/capabilities/pcb-capabilities)
 - [JLCPCB BOM/CPL format](https://jlcpcb.com/help/article/how-to-generate-the-bom-and-centroid-file-from-kicad)
 

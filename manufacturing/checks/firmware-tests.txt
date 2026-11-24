@@ -4,8 +4,9 @@ test_alpha_composited_white_and_contain (test_host.ProtocolTests.test_alpha_comp
 test_corrupt_reply_then_recovery (test_host.ProtocolTests.test_corrupt_reply_then_recovery) ... ok
 test_fragmented_reply_and_noise (test_host.ProtocolTests.test_fragmented_reply_and_noise) ... ok
 test_pixel_polarity_and_bit_order (test_host.ProtocolTests.test_pixel_polarity_and_bit_order) ... ok
+test_rp2354b_usb_detection_and_ambiguous_hosts (test_host.ProtocolTests.test_rp2354b_usb_detection_and_ambiguous_hosts) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.057s
+Ran 5 tests in 0.065s
 
 OK

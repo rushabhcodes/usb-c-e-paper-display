@@ -1,7 +1,7 @@
 {
   "name": "@tsci/rushabhcodes.usb-c-e-paper-display",
-  "version": "1.2.0",
-  "description": "USB-C RP2040 controller for the GDEY075T7 7.5-inch raw e-paper panel",
+  "version": "1.3.0",
+  "description": "USB-C RP2354B controller for the GDEY075T7 7.5-inch raw e-paper panel",
   "main": "index.circuit.tsx",
   "keywords": [
     "tscircuit",

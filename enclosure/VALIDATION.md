@@ -1,18 +1,13 @@
-# 18 mm enclosure validation
+# Rev C — 18 mm enclosure validation
 
-The case is **182.2 × 137.2 × 18.0 mm**, 2.75 mm (13.25%) thinner than the previous 20.75 mm housing. USB-C exits the left edge. The shell separates through the socket axis, so either half can be removed without trapping the port.
+The case is 182.2 × 137.2 × 18 mm, with a left-side USB-C opening and separate 15° stand. The RP2354B layout retains the mounting-hole, connector and FPC datums used by the case.
 
-| Check | Result |
-|---|---|
-| Four printed parts | Valid single CAD solids and watertight STL meshes |
-| Nominal glass, PCB and case intersections | 0 mm³ |
-| Supplier component bodies | All 62 checked; minimum rear-floor clearance 2.099 mm |
-| Straight plug insertion | Ordinary and large overmoulds clear a 40 mm insertion sweep |
-| Cable grip | 7 mm finger envelope around the plug; clears the stand |
-| Native tscircuit assembly | 16 mechanical parts; closed geometry for all parts |
-| Assembly disassembly | Native collision checks passed in the fully routed product build |
-| Engineering drawing | Six native drawing pages; 18 mm overall depth |
+- Four printed parts are valid single CAD solids with watertight STL meshes.
+- Nominal glass, PCB and printed-part intersections are zero.
+- All 70 assembled supplier meshes were checked against the 2.4 mm rear floor; minimum clearance is 2.099 mm.
+- Ordinary and large straight USB plugs clear the 40 mm insertion sweep and 7 mm grip envelope with the stand installed.
+- The native tscircuit assembly contains 16 mechanical parts and six dimensioned drawing pages. Its collision and disassembly checks pass without excluded geometry.
 
-The fully routed native product build reports zero errors and warnings, including assembly collision checks. The revised four-layer PCB also passes Gerber shorts, default routing style and continuous-copper style checks. See `../manufacturing/VALIDATION.md` for the measured fabrication report.
+The new inductor uses a closed solid tessellated from its unmodified TSCI-imported supplier STEP model; its bounds match the original OBJ to 0.025 mm. No bounding-box replacement is used for clearance validation.
 
-The enclosure has not yet been printed or physically fitted. The actual display flex, socket insertion depth and cable should be checked on the first prototype. See `fit-report.json`, `usability-report.json`, `component-clearance.json` and the assembly instructions in `README.md`.
+A first print, real cable fit and the actual panel/FPC tolerance stack remain untested.

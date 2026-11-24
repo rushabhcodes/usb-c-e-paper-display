@@ -11,8 +11,8 @@ def text_bounds(t):
  p=t['anchor_position'];f=t['font_size']
  return bounds(p['x'],p['y'],len(t['text'])*f*.6+.1,f+.1)
 labels=[e for e in data if e['type']=='pcb_silkscreen_text' and e['text'] in parts]
-assert len(labels)==len(parts)==68
-assert len({e['text'] for e in labels})==68
+assert len(labels)==len(parts)==76
+assert len({e['text'] for e in labels})==76
 minimum=100
 for label in labels:
  name=label['text'];part=parts[name]
@@ -28,7 +28,7 @@ for label in labels:
  for text in data:
   if text['type']!='pcb_silkscreen_text' or text['layer']!='top' or text is label:continue
   assert gap(b,text_bounds(text))>=.10-1e-6,(name,'text overlap',text['text'])
-report={'result':'PASS','top_references':68,'bottom_references':0,'minimum_font_height_mm':1,
+report={'result':'PASS','top_references':76,'bottom_references':0,'minimum_font_height_mm':1,
         'all_references_associated_with_their_components':True,
         'minimum_label_to_component_bounds_mm':round(minimum,4),
         'minimum_required_clearance_mm':.15,'circuit_sha256':hashlib.sha256(path.read_bytes()).hexdigest()}

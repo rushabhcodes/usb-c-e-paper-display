@@ -1,11 +1,11 @@
 {
   "type": "autorouter_debug_summary",
-  "generatedAt": "2026-11-23T08:44:32.409Z",
+  "generatedAt": "2026-11-24T18:02:10.043Z",
   "phaseCount": 1,
   "phases": [
     {
       "subcircuit_id": "subcircuit_source_group_2",
-      "componentDisplayName": "<board#893(.USB_EPAPER>.CONTROLLER) />",
+      "componentDisplayName": "<board#983(.USB_EPAPER>.CONTROLLER) />",
       "phaseName": "MAIN_ROUTE",
       "phaseStageIndex": 0,
       "phaseStageCount": 1,
@@ -13,23 +13,23 @@
       "phaseOrdinal": 1,
       "_actualRoutingPhaseOrderIndex": 0,
       "phaseCount": 1,
-      "connectionCount": 69,
-      "obstacleCount": 326,
-      "previousTraceCount": 108,
+      "connectionCount": 67,
+      "obstacleCount": 372,
+      "previousTraceCount": 119,
       "autorouterName": "tscircuit",
       "autorouterVersion": "beta_pipeline9",
       "solverName": "AutoroutingPipelineSolver9_PreloadedTraceGraph",
       "effort": 1,
       "cacheStatus": "disabled",
       "cacheDisabledReason": "no_cache_engine",
-      "outputTraceCount": 185,
+      "outputTraceCount": 202,
       "outputJumperCount": 0,
       "errorCount": 0,
-      "elapsedMs": 115295,
-      "startedAt": "2026-11-23T08:42:29.039Z",
-      "completedAt": "2026-11-23T08:44:24.334Z"
+      "elapsedMs": 109644,
+      "startedAt": "2026-11-24T18:00:07.235Z",
+      "completedAt": "2026-11-24T18:01:56.879Z"
     }
   ],
-  "circuitJsonElementCount": 3690,
+  "circuitJsonElementCount": 4052,
   "targetPhaseReached": false
 }

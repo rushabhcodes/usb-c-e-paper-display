@@ -9,8 +9,8 @@ import subprocess
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
-FQBN=("rp2040:rp2040:generic:flash=2097152_0,freq=125,usbstack=picosdk,"
-      "boot2=boot2_generic_03h_4_padded_checksum,opt=Small")
+FQBN=("rp2040:rp2040:generic_rp2350:flash=2097152_0,freq=150,usbstack=picosdk,"
+      "arch=arm,variantchip=RP2350B,opt=Small")
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
@@ -38,31 +38,18 @@ def main():
     for name,sha in lock['vendored_sha256'].items():
         if hashlib.sha256((vendor/name).read_bytes()).hexdigest()!=sha:
             raise SystemExit(f'Vendored driver checksum mismatch: {name}')
-    release=ROOT/'firmware/releases'
-    release.mkdir(exist_ok=True)
+    release=ROOT/'firmware/releases/rp2354b'
+    release.mkdir(parents=True,exist_ok=True)
     subprocess.run(command+['compile','--fqbn',FQBN,'--output-dir',str(release),
-      '--build-path',str(ROOT/'.toolchains/firmware-build'),str(ROOT/'firmware/usb_epaper')],check=True)
+      '--build-path',str(ROOT/'.toolchains/firmware-build-rp2354b'),str(ROOT/'firmware/usb_epaper')],check=True)
     # Preserve the tool's originals and provide a clearly named flash image.
-    shutil.copyfile(release/'usb_epaper.ino.uf2',release/'USB-Epaper-RevA-v1.0.0.uf2')
+    shutil.copyfile(release/'usb_epaper.ino.uf2',release/'USB-Epaper-RevC-RP2354B-v1.1.0.uf2')
     uf2=(release/'usb_epaper.ino.uf2').read_bytes()
-    assert len(uf2)%512==0
-    count=len(uf2)//512
-    blocks={}
-    for i in range(count):
-        b=uf2[i*512:(i+1)*512]
-        m0,m1,flags,addr,size,idx,total,family=struct.unpack('<8I',b[:32])
-        assert (m0,m1)==(0x0a324655,0x9e5d5157) and struct.unpack('<I',b[-4:])[0]==0x0ab16f30
-        assert flags&0x2000 and family==0xe48bff56 and total==count and size==256 and idx not in blocks
-        assert 0x10000000<=addr<0x10200000
-        blocks[idx]=(addr,b[32:32+size])
-    assert set(blocks)==set(range(count))
-    assert all(blocks[i][0]==0x10000000+i*256 for i in range(count))
-    binary=(release/'usb_epaper.ino.bin').read_bytes()
-    assert b''.join(blocks[i][1] for i in range(count))[:len(binary)]==binary
-    audit={'result':'PASS','uf2_family':'RP2040 / 0xe48bff56','blocks':count,
-           'payload_size':256,'flash_base':'0x10000000','uf2_matches_bin':True,'physical_board_tested':False}
-    (release/'uf2-audit.json').write_text(json.dumps(audit,indent=2)+'\n')
-    manifest={'core':'rp2040:rp2040@6.4.0','fqbn':FQBN,'physical_board_tested':False,
+    from audit_uf2 import audit
+    audit(release)
+    manifest={'core':'rp2040:rp2040@6.4.0','fqbn':FQBN,'mcu':'RP2354B','physical_board_tested':False,
+      'usb':{'vid':'2e8a','pid':'f00f','configuration_max_power_ma':250},
+      'source_files_sha256':{str(x.relative_to(ROOT)):hashlib.sha256(x.read_bytes()).hexdigest() for x in [ROOT/'firmware/usb_epaper/usb_epaper.ino',ROOT/'firmware/usb_epaper/src/protocol.h',ROOT/'firmware/vendor-lock.json']},
       'artifacts':{x.name:hashlib.sha256(x.read_bytes()).hexdigest() for x in release.iterdir()
                    if x.is_file() and x.suffix in ['.uf2','.elf','.bin']}}
     (release/'build-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

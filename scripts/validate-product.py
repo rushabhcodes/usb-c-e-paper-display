@@ -14,7 +14,7 @@ for part in manifest['parts']:
  assert parts[part['name']]['source_component_id'] in cad
  assert (root/'enclosure/models'/part['file']).is_file()
 assert counts['system_block_page']==2
-assert counts['system_block_component']==counts['system_block_connection']==16
+assert counts['system_block_component']==17 and counts['system_block_connection']==19
 assert counts['drawing_page']==counts['drawing_page_title_block']==6
 assert counts['drawing_part_view']==18 and counts['drawing_dimension_line']==20
 assert not [x for x in data if x['type'].endswith('_error')]

@@ -1,15 +1,20 @@
 bun test v1.3.3 (274e01c7)
 
 tests/supplier-stock.test.mjs:
-(pass) uses the exact supplier SKU, never stock from a recommendation [4.00ms]
-(pass) retains a confirmed zero quantity [1.00ms]
-(pass) does not invent availability for missing or malformed supplier data
+(pass) uses the exact supplier SKU, never stock from a recommendation [1.00ms]
+(pass) retains a confirmed zero quantity
+(pass) does not invent availability for missing or malformed supplier data [1.00ms]
 
 tests/routing-net-identity.test.tsx:
-(pass) autorouted inner-layer branches retain their declared net at native vias [1635.98ms]
-(pass) explicit full-stack via layers expose native inner-layer trace endpoints [277.00ms]
+(pass) autorouted inner-layer branches retain their declared net at native vias [362.00ms]
+(pass) composite MST metadata does not borrow a fixed bypass trace's width or length [13.00ms]
+(pass) explicit full-stack via layers expose native inner-layer trace endpoints [76.00ms]
 
- 5 pass
+tests/rp2354b-metadata.test.ts:
+(pass) dedicated USB/QMI pins do not inherit supplier-generated GPIO mux functions [1.00ms]
+(pass) power requirements and real GPIO metadata remain intact
+
+ 8 pass
  0 fail
- 14 expect() calls
-Ran 5 tests across 2 files. [7.65s]
+ 45 expect() calls
+Ran 8 tests across 3 files. [1.76s]

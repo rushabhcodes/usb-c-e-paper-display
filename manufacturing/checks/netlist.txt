@@ -8,8 +8,9 @@ COMPONENTS:
  - U2: USBLC6-2SC6
  - U3: AP2112K-3.3TRG1
  - U4: AP2112K-3.3TRG1
- - U1: RP2040
- - U5: W25Q16JVSNIQ
+ - U1: RP2354B
+ - U5: TLV62569DBVR
+ - L2: L2, source_component
  - Y1: Y1, source_component
  - SW1: SW1, source_component
  - SW2: SW2, source_component
@@ -40,6 +41,11 @@ COMPONENTS:
  - C19: 100nF capacitor
  - C20: 15pF capacitor
  - C21: 15pF capacitor
+ - C32: 100nF capacitor
+ - C33: 10uF capacitor
+ - C34: 10uF capacitor
+ - C35: 22uF capacitor
+ - C36: 22uF capacitor
  - C22: 1uF capacitor
  - C23: 1uF capacitor
  - C24: 1uF capacitor
@@ -59,6 +65,8 @@ COMPONENTS:
  - R13: 10kΩ resistor
  - R14: 27Ω resistor
  - R15: 27Ω resistor
+ - R16: 8.2kΩ resistor
+ - R17: 10kΩ resistor
  - C26: 4.7uF capacitor
  - C27: 4.7uF capacitor
  - C28: 10uF capacitor
@@ -72,25 +80,9 @@ COMPONENTS:
  - TP5: TP5, source_component
  - TP6: TP6, source_component
 
-NET: QSPI_SD1
-  - U1 QSPI_SD1
-  - U5 DO
-
-NET: QSPI_SD2
-  - U1 QSPI_SD2
-  - U5 N_WP
-
-NET: QSPI_SD0
-  - U1 QSPI_SD0
-  - U5 DI
-
-NET: QSPI_SCLK
-  - U1 QSPI_SCLK
-  - U5 CLK
-
-NET: QSPI_SD3
-  - U1 QSPI_SD3
-  - U5 N_HOLD
+NET: CORE_SW
+  - U5 SW
+  - L2 pin1 (+)
 
 NET: EPD_BUSY
   - U1 GPIO13
@@ -108,18 +100,20 @@ NET: VBUS
   - C1 pin1
   - J1 VBUS1
 
-NET: VSYS
-  - C5 pin1
-  - C3 pin1
-  - U4 VIN
-  - U3 EN
-  - U3 VIN
-  - F1 pin2
-
 NET: XIN
   - U1 XIN
   - C20 pin1
   - Y1 pin1
+
+NET: VSYS
+  - C5 pin1
+  - C3 pin1
+  - U5 VIN
+  - C34 pin1
+  - U4 VIN
+  - U3 EN
+  - U3 VIN
+  - F1 pin2
 
 NET: EPD_VSHR
   - C22 pin1
@@ -169,9 +163,8 @@ NET: BOOT_N
 
 NET: QSPI_SS
   - R6 pin2
-  - R5 pin1
   - U1 QSPI_SS
-  - U5 N_CS
+  - R5 pin1
 
 NET: XOUT
   - U1 XOUT
@@ -222,6 +215,11 @@ NET: MOSI_MCU
 NET: EPD_MOSI
   - J2 pin14
   - R15 pin2
+
+NET: CORE_FB
+  - R17 pin1
+  - R16 pin2
+  - U5 FB
 
 NET: EPD_3V3
   - C26 pin1
@@ -301,12 +299,21 @@ NET: GND
   - U2 pin2
   - J1 GND2
   - J1 GND1
-  - U1 TESTEN
   - U1 GND
+  - U1 VREG_FB
+  - U1 VREG_PGND
+  - R17 pin2
+  - U5 GND
   - Y1 pin4
   - Y1 pin2
+  - C36 pin2
+  - C35 pin2
+  - C34 pin2
+  - C33 pin2
+  - C32 pin2
   - C21 pin2
   - C20 pin2
+  - C19 pin2
   - C18 pin2
   - C17 pin2
   - C16 pin2
@@ -319,47 +326,55 @@ NET: GND
   - C9 pin2
   - C8 pin2
   - C7 pin2
-  - U5 GND
-  - C19 pin2
 
 NET: V3V3
+  - TP2 pin1
+  - R8 pin1
   - R6 pin1
-  - U1 VREG_IN
+  - U1 VREG_VIN
+  - U1 VREG_AVDD
+  - C33 pin1
+  - U1 IOVDD8
+  - C32 pin1
+  - U1 QSPI_IOVDD
+  - C19 pin1
+  - U1 USB_OTP_VDD
   - C15 pin1
   - U1 ADC_AVDD
   - C14 pin1
-  - U1 IOVDD1
+  - U1 IOVDD7
   - C13 pin1
-  - U1 USB_VDD
-  - C12 pin1
-  - U1 IOVDD2
-  - C11 pin1
-  - U1 IOVDD3
-  - C10 pin1
-  - U1 IOVDD4
-  - C9 pin1
   - U1 IOVDD6
+  - C12 pin1
+  - U1 IOVDD5
+  - C11 pin1
+  - U1 IOVDD4
+  - C10 pin1
+  - U1 IOVDD3
+  - C9 pin1
+  - U1 IOVDD2
+  - C8 pin1
+  - U1 IOVDD1
   - C7 pin1
   - C4 pin1
-  - C19 pin1
-  - U5 VCC
-  - U1 IOVDD5
+  - U5 EN
   - U3 VOUT
-  - TP2 pin1
-  - R8 pin1
-  - C8 pin1
 
 NET: VCORE
+  - U1 DVDD3
   - U1 DVDD2
-  - C17 pin1
-  - U1 VREG_VOUT
-  - C16 pin1
   - U1 DVDD1
+  - R16 pin1
   - TP3 pin1
   - C18 pin1
+  - C17 pin1
+  - C16 pin1
+  - L2 pin2 (-)
+  - C35 pin1
+  - C36 pin1
 
 NET: SWDIO
-  - U1 SWD
+  - U1 SWDIO
   - TP4 pin1
 
 NET: SWCLK
@@ -418,74 +433,99 @@ U4 (AP2112K-3.3TRG1)
 - pin4(NC): NOT_CONNECTED
 - pin5(VOUT): NETS(EPD_3V3)
 
-U1 (RP2040)
-- pin1(IOVDD6): NETS(V3V3)
-- pin2(GPIO0): NOT_CONNECTED
-- pin3(GPIO1): NOT_CONNECTED
-- pin4(GPIO2): NOT_CONNECTED
-- pin5(GPIO3): NOT_CONNECTED
-- pin6(GPIO4): NOT_CONNECTED
-- pin7(GPIO5): NOT_CONNECTED
-- pin8(GPIO6): NOT_CONNECTED
-- pin9(GPIO7): NOT_CONNECTED
-- pin10(IOVDD5): NETS(V3V3)
-- pin11(GPIO8): NETS(EPD_DC)
-- pin12(GPIO9): NETS(EPD_CS)
-- pin13(GPIO10): NETS(SCK_MCU)
-- pin14(GPIO11): NETS(MOSI_MCU)
-- pin15(GPIO12): NETS(EPD_RST)
-- pin16(GPIO13): NETS(EPD_BUSY)
-- pin17(GPIO14): NETS(EPD_EN)
-- pin18(GPIO15): NOT_CONNECTED
-- pin19(TESTEN): NETS(GND)
-- pin20(XIN): NETS(XIN)
-- pin21(XOUT): NETS(XOUT)
-- pin22(IOVDD4): NETS(V3V3)
-- pin23(DVDD2): NETS(VCORE)
-- pin24(SWCLK): NETS(SWCLK)
-- pin25(SWD): NETS(SWDIO)
-- pin26(RUN): NETS(RUN)
-- pin27(GPIO16): NOT_CONNECTED
-- pin28(GPIO17): NOT_CONNECTED
-- pin29(GPIO18): NOT_CONNECTED
-- pin30(GPIO19): NOT_CONNECTED
-- pin31(GPIO20): NOT_CONNECTED
-- pin32(GPIO21): NOT_CONNECTED
-- pin33(IOVDD3): NETS(V3V3)
-- pin34(GPIO22): NOT_CONNECTED
-- pin35(GPIO23): NOT_CONNECTED
-- pin36(GPIO24): NOT_CONNECTED
-- pin37(GPIO25): NOT_CONNECTED
-- pin38(GPIO26_ADC0): NOT_CONNECTED
-- pin39(GPIO27_ADC1): NOT_CONNECTED
-- pin40(GPIO28_ADC2): NOT_CONNECTED
-- pin41(GPIO29_ADC3): NOT_CONNECTED
-- pin42(IOVDD2): NETS(V3V3)
-- pin43(ADC_AVDD): NETS(V3V3)
-- pin44(VREG_IN): NETS(V3V3)
-- pin45(VREG_VOUT): NETS(VCORE)
-- pin46(USB_DM): NETS(USB_DM_MCU)
-- pin47(USB_DP): NETS(USB_DP_MCU)
-- pin48(USB_VDD): NETS(V3V3)
-- pin49(IOVDD1): NETS(V3V3)
-- pin50(DVDD1): NETS(VCORE)
-- pin51(QSPI_SD3): NETS(QSPI_SD3)
-- pin52(QSPI_SCLK): NETS(QSPI_SCLK)
-- pin53(QSPI_SD0): NETS(QSPI_SD0)
-- pin54(QSPI_SD2): NETS(QSPI_SD2)
-- pin55(QSPI_SD1): NETS(QSPI_SD1)
-- pin56(QSPI_SS): NETS(QSPI_SS)
-- pin57(GND): NETS(GND)
+U1 (RP2354B)
+- pin1(GPIO4): NOT_CONNECTED
+- pin2(GPIO5): NOT_CONNECTED
+- pin3(GPIO6): NOT_CONNECTED
+- pin4(GPIO7): NOT_CONNECTED
+- pin5(IOVDD1): NETS(V3V3)
+- pin6(GPIO8): NETS(EPD_DC)
+- pin7(GPIO9): NETS(EPD_CS)
+- pin8(GPIO10): NETS(SCK_MCU)
+- pin9(GPIO11): NETS(MOSI_MCU)
+- pin10(DVDD1): NETS(VCORE)
+- pin11(GPIO12): NETS(EPD_RST)
+- pin12(GPIO13): NETS(EPD_BUSY)
+- pin13(GPIO14): NETS(EPD_EN)
+- pin14(GPIO15): NOT_CONNECTED
+- pin15(IOVDD2): NETS(V3V3)
+- pin16(GPIO16): NOT_CONNECTED
+- pin17(GPIO17): NOT_CONNECTED
+- pin18(GPIO18): NOT_CONNECTED
+- pin19(GPIO19): NOT_CONNECTED
+- pin20(GPIO20): NOT_CONNECTED
+- pin21(GPIO21): NOT_CONNECTED
+- pin22(GPIO22): NOT_CONNECTED
+- pin23(GPIO23): NOT_CONNECTED
+- pin24(IOVDD3): NETS(V3V3)
+- pin25(GPIO24): NOT_CONNECTED
+- pin26(GPIO25): NOT_CONNECTED
+- pin27(GPIO26): NOT_CONNECTED
+- pin28(GPIO27): NOT_CONNECTED
+- pin29(IOVDD4): NETS(V3V3)
+- pin30(XIN): NETS(XIN)
+- pin31(XOUT): NETS(XOUT)
+- pin32(DVDD2): NETS(VCORE)
+- pin33(SWCLK): NETS(SWCLK)
+- pin34(SWDIO): NETS(SWDIO)
+- pin35(RUN): NETS(RUN)
+- pin36(GPIO28): NOT_CONNECTED
+- pin37(GPIO29): NOT_CONNECTED
+- pin38(GPIO30): NOT_CONNECTED
+- pin39(GPIO31): NOT_CONNECTED
+- pin40(GPIO32): NOT_CONNECTED
+- pin41(IOVDD5): NETS(V3V3)
+- pin42(GPIO33): NOT_CONNECTED
+- pin43(GPIO34): NOT_CONNECTED
+- pin44(GPIO35): NOT_CONNECTED
+- pin45(GPIO36): NOT_CONNECTED
+- pin46(GPIO37): NOT_CONNECTED
+- pin47(GPIO38): NOT_CONNECTED
+- pin48(GPIO39): NOT_CONNECTED
+- pin49(GPIO40_ADC0): NOT_CONNECTED
+- pin50(IOVDD6): NETS(V3V3)
+- pin51(DVDD3): NETS(VCORE)
+- pin52(GPIO41_ADC1): NOT_CONNECTED
+- pin53(GPIO42_ADC2): NOT_CONNECTED
+- pin54(GPIO43_ADC3): NOT_CONNECTED
+- pin55(GPIO44_ADC4): NOT_CONNECTED
+- pin56(GPIO45_ADC5): NOT_CONNECTED
+- pin57(GPIO46_ADC6): NOT_CONNECTED
+- pin58(GPIO47_ADC7): NOT_CONNECTED
+- pin59(ADC_AVDD): NETS(V3V3)
+- pin60(IOVDD7): NETS(V3V3)
+- pin61(VREG_AVDD): NETS(V3V3)
+- pin62(VREG_PGND): NETS(GND)
+- pin63(VREG_LX): NOT_CONNECTED
+- pin64(VREG_VIN): NETS(V3V3)
+- pin65(VREG_FB): NETS(GND)
+- pin66(USB_DM): NETS(USB_DM_MCU)
+- pin67(USB_DP): NETS(USB_DP_MCU)
+- pin68(USB_OTP_VDD): NETS(V3V3)
+- pin69(QSPI_IOVDD): NETS(V3V3)
+- pin70(QSPI_SD3): NOT_CONNECTED
+- pin71(QSPI_SCLK): NOT_CONNECTED
+- pin72(QSPI_SD0): NOT_CONNECTED
+- pin73(QSPI_SD2): NOT_CONNECTED
+- pin74(QSPI_SD1): NOT_CONNECTED
+- pin75(QSPI_SS): NETS(QSPI_SS)
+- pin76(IOVDD8): NETS(V3V3)
+- pin77(GPIO0): NOT_CONNECTED
+- pin78(GPIO1): NOT_CONNECTED
+- pin79(GPIO2): NOT_CONNECTED
+- pin80(GPIO3): NOT_CONNECTED
+- pin81(GND): NETS(GND)
 
-U5 (W25Q16JVSNIQ)
-- pin1(N_CS): NETS(QSPI_SS)
-- pin2(DO, IO1): NETS(QSPI_SD1)
-- pin3(N_WP, IO2): NETS(QSPI_SD2)
-- pin4(GND): NETS(GND)
-- pin5(DI, IO0): NETS(QSPI_SD0)
-- pin6(CLK): NETS(QSPI_SCLK)
-- pin7(N_HOLD, N_RESET, IO3): NETS(QSPI_SD3)
-- pin8(VCC): NETS(V3V3)
+U5 (TLV62569DBVR)
+- pin1(EN): NETS(V3V3)
+- pin2(GND): NETS(GND)
+- pin3(SW): NETS(CORE_SW)
+- pin4(VIN): NETS(VSYS)
+- pin5(FB): NETS(CORE_FB)
+
+L2 (MWSA0402S-2R2MT)
+- pin1(anode, pos, left): NETS(CORE_SW)
+- pin2(cathode, neg, right): NETS(VCORE)
 
 Y1 (ABM8-272-T3)
 - pin1(left1, X1): NETS(XIN)
@@ -634,6 +674,26 @@ C21 (15pF undefined)
 - pin1: NETS(XOSC_OUT)
 - pin2: NETS(GND)
 
+C32 (100nF undefined)
+- pin1: NETS(V3V3)
+- pin2: NETS(GND)
+
+C33 (10uF undefined)
+- pin1: NETS(V3V3)
+- pin2: NETS(GND)
+
+C34 (10uF undefined)
+- pin1: NETS(VSYS)
+- pin2: NETS(GND)
+
+C35 (22uF undefined)
+- pin1: NETS(VCORE)
+- pin2: NETS(GND)
+
+C36 (22uF undefined)
+- pin1: NETS(VCORE)
+- pin2: NETS(GND)
+
 C22 (1uF undefined)
 - pin1: NETS(EPD_VSHR)
 - pin2: NETS(GND)
@@ -709,6 +769,14 @@ R14 (27Ω undefined)
 R15 (27Ω undefined)
 - pin1(anode, pos, left): NETS(MOSI_MCU)
 - pin2(cathode, neg, right): NETS(EPD_MOSI)
+
+R16 (8.2kΩ undefined)
+- pin1(anode, pos, left): NETS(VCORE)
+- pin2(cathode, neg, right): NETS(CORE_FB)
+
+R17 (10kΩ undefined)
+- pin1(anode, pos, left): NETS(CORE_FB)
+- pin2(cathode, neg, right): NETS(GND)
 
 C26 (4.7uF undefined)
 - pin1: NETS(EPD_3V3)

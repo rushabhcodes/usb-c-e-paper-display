@@ -3,7 +3,7 @@ import { Fragment } from "react"
 
 const sheets = [
   {name:"BEZEL",sheet:"02-front-bezel",title:"FRONT BEZEL",note:"Glass pocket 171.2 x 112.2; window 165.2 x 99.92. Four blind 2.6 mm pilots."},
-  {name:"CARRIER",sheet:"03-panel-carrier",title:"PANEL / PCB CARRIER",note:"PCB Rev B: four blind 2.6 mm pilots; right lower fastener offset to clear the flex notch. Unbroken upper glass support ledge."},
+  {name:"CARRIER",sheet:"03-panel-carrier",title:"PANEL / PCB CARRIER",note:"PCB Rev C: four blind 2.6 mm pilots; right lower fastener offset to clear the flex notch. Unbroken upper glass support ledge."},
   {name:"REAR",sheet:"04-rear-cover",title:"REAR COVER",note:"Wall 2.4; case screw pattern 156 x 125.5; four 3.4 mm clearance holes. Left-side USB-C aperture 14 x 8. Rear BOOTSEL / RESET service holes; closed top edge."},
   {name:"STAND",sheet:"05-desk-stand",title:"15 DEGREE DESK CRADLE",note:"Print envelope 110 x 70 x 26. Slot 18.6 wide; 0.6 total case clearance. Print STL sets the bed orientation."},
 ] as const
@@ -14,7 +14,7 @@ const notes = (text:string) => {
 }
 
 const title = (text:string,index:number) => <assembly.drawing.titleblock title={text}
-  identificationNumber={`USB-EPD-B-${String(index).padStart(2,"0")}`} revisionIndex="B"
+  identificationNumber={`USB-EPD-C-${String(index).padStart(2,"0")}`} revisionIndex="C"
   dateOfIssue="2026-11-22" creator="Rushabh Patil" legalOwner="Rushabh Patil"
   approvalPerson="PROTOTYPE / FIT UNTESTED" sheetNumber={index} numberOfSheets={6} />
 
@@ -36,7 +36,7 @@ export function EngineeringDrawings() {
       <assembly.drawing.partview name="PCB_ISO" stageRef=".PCB_SUBSTRATE" displayName="PCB ISOMETRIC" direction="isometric"
         centerX={77} centerY={22} width={115} height={105} />
       {notes("All dimensions mm. 100 x 60 x 1.6 FR-4 envelope; chamfered outline with USB tongue. Mounting holes: (-45,-25), (-45,25), (45,-25), (23,25); diameter 3.2. Four copper layers; 1 oz; ENIG. Use the validated JLCPCB Gerbers.")}
-      {title("RP2040 E-PAPER CONTROLLER - MECHANICAL",1)}
+      {title("RP2354B E-PAPER CONTROLLER - MECHANICAL",1)}
     </assembly.drawing.page>
     {sheets.map((sheet,i) => <Fragment key={sheet.name}>
       <assembly.drawing.page name={sheet.sheet} displayName={sheet.title} size="iso_a4">
@@ -76,7 +76,7 @@ export function EngineeringDrawings() {
         "1     Rear cover",
         "1     15 degree desk cradle",
         "1     GDEY075T7 panel + FPC",
-        "1     RP2040 controller PCB",
+        "1     RP2354B controller PCB",
         "4     M3 x 14 case screws",
         "4     M3 x 4 PCB screws",
         "1     0.5 mm front gasket",

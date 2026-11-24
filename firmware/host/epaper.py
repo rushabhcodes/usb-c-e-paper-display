@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Send images to the USB-C RP2040 GDEY075T7 controller (USB CDC protocol v1)."""
+"""Send images to the USB-C RP2354B GDEY075T7 controller (USB CDC protocol v1)."""
 import argparse
 import json
 import secrets
@@ -104,15 +104,15 @@ def convert_image(path, fit="contain", dither=False, threshold=128, rotate=0, in
 
 def choose_port():
     from serial.tools import list_ports
-    ports = [p.device for p in list_ports.comports() if p.vid == 0x2E8A and p.pid == 0xF00A]
+    ports = [p.device for p in list_ports.comports() if p.vid == 0x2E8A and p.pid in (0xF00A, 0xF00F)]
     if len(ports) != 1:
-        raise RuntimeError("Specify --port /dev/ttyACM0 (or COMn); cannot select one RP2040 CDC device")
+        raise RuntimeError("Specify --port /dev/ttyACM0 (or COMn); cannot select one RP2040/RP2350 CDC device")
     return ports[0]
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--port", help="Serial device; otherwise detect one RP2040 USB CDC device")
+    ap.add_argument("--port", help="Serial device; otherwise detect one RP2040/RP2350 USB CDC device")
     sub = ap.add_subparsers(dest="command", required=True)
     sub.add_parser("info")
     sub.add_parser("sleep")

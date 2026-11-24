@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "mcu": "RP2354B",
+  "uf2_family": "RP2350 ARM secure / 0xe48bff59",
+  "absolute_family": "RP2350 / 0xe48bff57",
+  "absolute_blocks": 1,
+  "payload_blocks": 315,
+  "payload_size": 256,
+  "flash_base": "0x10000000",
+  "flash_capacity_bytes": 2097152,
+  "uf2_matches_bin": true,
+  "physical_board_tested": false
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Parametric FDM enclosure for PCB Rev B + raw GDEY075T7; dimensions in mm.
+"""Parametric FDM enclosure for PCB Rev C + raw GDEY075T7; dimensions in mm.
 
 Assembly coordinates: X right, Y up when viewing screen, Z rear-to-front.
 Case Z=0 is rear exterior. Parts are also exported flat in printing orientation.

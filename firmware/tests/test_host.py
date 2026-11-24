@@ -4,10 +4,21 @@ import tempfile
 import unittest
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/"host"))
-from epaper import packet, ReplyReader, convert_image, FRAME_SIZE
+from epaper import packet, ReplyReader, convert_image, FRAME_SIZE, choose_port
+from unittest.mock import patch
+from types import SimpleNamespace
 from PIL import Image
 
 class ProtocolTests(unittest.TestCase):
+    def test_rp2354b_usb_detection_and_ambiguous_hosts(self):
+        new=SimpleNamespace(device="/dev/ttyACM1",vid=0x2e8a,pid=0xf00f)
+        unrelated=SimpleNamespace(device="/dev/ttyUSB0",vid=0x1234,pid=0xf00f)
+        old=SimpleNamespace(device="/dev/ttyACM0",vid=0x2e8a,pid=0xf00a)
+        with patch("serial.tools.list_ports.comports",return_value=[new,unrelated]):
+            self.assertEqual(choose_port(),new.device)
+        with patch("serial.tools.list_ports.comports",return_value=[new,old]):
+            with self.assertRaises(RuntimeError): choose_port()
+
     def test_fragmented_reply_and_noise(self):
         data = b"noise" + packet(0x82, 123, json.dumps({"mode":"partial"}).encode(), magic=b"EPA1")
         reader = ReplyReader(); replies=[]

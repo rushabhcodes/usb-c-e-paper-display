@@ -2,21 +2,19 @@ Building 1 file(s)...
 Building index.circuit.tsx...
 Generating circuit JSON...
 Wrote debug artifact: dist/native-routing-final-release/placement-unrouted.png
-Autorouting <board#893(.USB_EPAPER>.CONTROLLER) /> phase 1/1 "MAIN_ROUTE" start: connections=69, obstacles=326, previous_traces=108, router=tscircuit, version=beta_pipeline9, solver=AutoroutingPipelineSolver9_PreloadedTraceGraph, effort=1x, cache=disabled(no_cache_engine)
-  connections: MCU_pin46, MCU_pin47, MCU_pin54, MCU_pin55, MCU_pin56, MCU_pin13, MCU_pin14, net.VBUS, net.VSYS, net.V3V3, net.VCORE, net.EPD_3V3, net.EPD_SW, net.EPD_PUMP, net.EPD_VGH, net.EPD_VGL, net.EPD_VSH, net.EPD_VSL, net.EPD_VCOM, net.EPD_VSHR, net.CC1, net.CC2, net.USB_DP, net.USB_DM, net.EPD_EN, net.USB_DM_MCU, net.USB_DP_MCU, net.XIN, net.XOUT, net.QSPI_SD3, net.QSPI_SCLK, net.QSPI_SD0, net.QSPI_SD2, net.QSPI_SD1, net.QSPI_SS, net.SWCLK, net.SWDIO, net.RUN, net.EPD_DC, net.EPD_CS, net.SCK_MCU, net.MOSI_MCU, net.EPD_RST, net.EPD_BUSY, net.XOSC_OUT, net.BOOT_N, net.EPD_GDR, net.EPD_RESE, net.EPD_SCK, net.EPD_MOSI, net.EPD_VDD, 
+Autorouting <board#983(.USB_EPAPER>.CONTROLLER) /> phase 1/1 "MAIN_ROUTE" start: connections=67, obstacles=372, previous_traces=119, router=tscircuit, version=beta_pipeline9, solver=AutoroutingPipelineSolver9_PreloadedTraceGraph, effort=1x, cache=disabled(no_cache_engine)
+  connections: MCU_pin66, MCU_pin67, MCU_pin75, MCU_pin33, MCU_pin34, MCU_pin35, MCU_pin8, MCU_pin9, net.VBUS, net.VSYS, net.V3V3, net.VCORE, net.EPD_3V3, net.EPD_SW, net.EPD_PUMP, net.EPD_VGH, net.EPD_VGL, net.EPD_VSH, net.EPD_VSL, net.EPD_VCOM, net.EPD_VSHR, net.CC1, net.CC2, net.USB_DP, net.USB_DM, net.EPD_EN, net.USB_DM_MCU, net.USB_DP_MCU, net.XIN, net.XOUT, net.QSPI_SS, net.CORE_SW, net.CORE_FB, net.SWCLK, net.SWDIO, net.RUN, net.EPD_DC, net.EPD_CS, net.SCK_MCU, net.MOSI_MCU, net.EPD_RST, net.EPD_BUSY, net.XOSC_OUT, net.BOOT_N, net.EPD_GDR, net.EPD_RESE, net.EPD_SCK, net.EPD_MOSI, net.EPD_VDD,
 Wrote debug artifact: dist/native-routing-final-release/phase-1.input.simple-route.json
-  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=topologyPlanningSolver steps=1 progress=16% iterations_per_second=888 elapsed=3.0s
-  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=portPointPathingSolver steps=15 progress=45% iterations_per_second=57036 elapsed=13.2s
-  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=18 progress=53% iterations_per_second=197404 elapsed=23.7s
-  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=20 progress=53% iterations_per_second=166692 elapsed=33.8s
-  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=33 progress=53% iterations_per_second=100988 elapsed=50.2s
-  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=60 progress=54% iterations_per_second=1848 elapsed=60.5s
-  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=87 progress=55% iterations_per_second=20432 elapsed=70.7s
-  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=traceWidthSolver steps=113 progress=76% iterations_per_second=30780 elapsed=80.8s
-  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=pipeline9JointDrcRepairSolver steps=134 progress=86% iterations_per_second=13404 elapsed=90.9s
-  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=pipeline9JointDrcRepairSolver steps=157 progress=87% iterations_per_second=50 elapsed=101.1s
-  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=pipeline9JointDrcRepairSolver steps=181 progress=87% iterations_per_second=1233 elapsed=111.2s
-  phase 1/1 "MAIN_ROUTE" done: routed_traces=185, jumpers=0, errors=0, elapsed=115.3s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=topologyPlanningSolver steps=1 progress=16% iterations_per_second=292 elapsed=6.1s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=portPointPathingSolver steps=9 progress=44% iterations_per_second=186500 elapsed=16.9s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=11 progress=52% iterations_per_second=2074 elapsed=31.6s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=14 progress=55% iterations_per_second=112216 elapsed=42.8s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=34 progress=56% iterations_per_second=308760 elapsed=65.6s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=highDensityRouteSolver steps=58 progress=56% iterations_per_second=1164 elapsed=75.8s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=pipeline9JointDrcRepairSolver steps=78 progress=86% iterations_per_second=54 elapsed=86.1s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=pipeline9JointDrcRepairSolver steps=98 progress=86% iterations_per_second=16712 elapsed=96.7s
+  phase 1/1 "MAIN_ROUTE" progress: solver=AutoroutingPipelineSolver9_PreloadedTraceGraph solver_phase=lengthMatchingPostProcessingSolver steps=115 progress=92% iterations_per_second=156 elapsed=107.4s
+  phase 1/1 "MAIN_ROUTE" done: routed_traces=202, jumpers=0, errors=0, elapsed=109.6s
 Wrote debug artifact: dist/native-routing-final-release/phase-1.output.traces.json
 Wrote debug artifact: dist/native-routing-final-release/phase-1-routed.png
 Could not save autorouting paths for subcircuit_source_group_2: Only port-anchored wire/via routes can be saved

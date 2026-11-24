@@ -1,7 +1,7 @@
 import { convertCircuitJsonToSchematicSvg, convertCircuitJsonToPcbSvg } from "circuit-to-svg"
 import { readFileSync, writeFileSync } from "node:fs"
 const circuit = JSON.parse(readFileSync("dist/index/circuit.json", "utf8")).filter(e => !e.type.startsWith("drawing_") && !e.type.startsWith("cad_") && !e.type.startsWith("system_"))
-for (const [index, name] of ["usb-power", "rp2040", "raw-panel"].entries()) {
+for (const [index, name] of ["usb-power", "rp2354b", "raw-panel", "core-power", "service"].entries()) {
   writeFileSync(`manufacturing/schematic-${index+1}-${name}.svg`, convertCircuitJsonToSchematicSvg(circuit, {schematicSheetId: circuit.find(e => e.type === "schematic_sheet" && e.sheet_index === index+1).schematic_sheet_id, width: 1800, height: 1273, includeVersion: false}))
 }
 for (const layer of ["top", "bottom"]) {

@@ -1,6 +1,7 @@
 import { getPlatformConfig } from "@tscircuit/eval"
 import type { PartAvailability, PartsEngine } from "@tscircuit/props"
 import snapshot from "../docs/parts/stock-snapshot.json"
+import { correctRp2354bPinMetadata } from "./rp2354b-pin-metadata"
 
 type StockRecord = PartAvailability & {sourceUrl: string}
 const verified = snapshot as Record<string, StockRecord>
@@ -41,7 +42,11 @@ const base = getPlatformConfig().partsEngine!
 export const supplierPartsEngine: PartsEngine = {
   ...base,
   findPart: base.findPart.bind(base),
-  fetchPartCircuitJson: base.fetchPartCircuitJson?.bind(base),
+  async fetchPartCircuitJson(request) {
+    const elements = await base.fetchPartCircuitJson?.(request)
+    return elements && (request.supplierPartNumber === "C39843328" || request.manufacturerPartNumber === "RP2354B")
+      ? correctRp2354bPinMetadata(elements) : elements
+  },
   async fetchPartAvailability(request) {
     const entry = request.supplierName === "jlcpcb" ? verified[request.supplierPartNumber] : undefined
     const age = typeof entry?.checkedAt === "string" ? Date.now()-Date.parse(entry.checkedAt) : NaN

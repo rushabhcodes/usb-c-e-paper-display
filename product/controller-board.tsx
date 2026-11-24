@@ -1,5 +1,6 @@
 import mechanical from "./mechanical-layout.json"
 import { DisplayRouting } from "./display-routing"
+import { CoreDistribution } from "./core-distribution"
 import { GroundReturns } from "./ground-returns"
 import { ReferenceLabel } from "./reference-label"
 import { supplierPartsEngine } from "./supplier-stock"
@@ -19,8 +20,11 @@ import { A_0603WAF1002T5E } from "../imports/A_0603WAF1002T5E"
 import { A_0603WAF1004T5E } from "../imports/A_0603WAF1004T5E"
 import { TYPE_C_31_M_12 } from "../imports/TYPE_C_31_M_12"
 import { FBF05FT_R470_00L } from "../imports/FBF05FT_R470_00L"
-import { RP2040 } from "../imports/RP2040"
-import { W25Q16JVSNIQ } from "../imports/W25Q16JVSNIQ"
+import { RP2354B } from "../imports/RP2354B"
+import { TLV62569DBVR } from "../imports/TLV62569DBVR"
+import { MWSA0402S_2R2MT } from "../imports/MWSA0402S_2R2MT"
+import { CL21A226MAQNNNE } from "../imports/CL21A226MAQNNNE"
+import { A_0603WAF8201T5E } from "../imports/A_0603WAF8201T5E"
 import { AP2112K_3_3TRG1 } from "../imports/AP2112K_3_3TRG1"
 import { ABM8_272_T3 } from "../imports/ABM8_272_T3"
 import { AFC01_S24FCA_00 } from "../imports/AFC01_S24FCA_00"
@@ -40,6 +44,7 @@ const capacitorParts: Record<string, ComponentType<Omit<CapacitorProps, "capacit
   C1548: A_0402CG150J500NT,
   C412634: UMK212BBJ475KG_T,
   C13585: CL31A106KBHNNNE,
+  C45783: CL21A226MAQNNNE,
 }
 const resistorParts: Record<string, ComponentType<Omit<ResistorProps, "resistance">>> = {
   C23186: A_0603WAF5101T5E,
@@ -48,12 +53,13 @@ const resistorParts: Record<string, ComponentType<Omit<ResistorProps, "resistanc
   C25804: A_0603WAF1002T5E,
   C22935: A_0603WAF1004T5E,
   C382278: FBF05FT_R470_00L,
+  C25981: A_0603WAF8201T5E,
 }
 
 // Physical pin numbers are intentional: they make the datasheet audit explicit.
 // Panel: GDEY075T7, UC8179, 800x480, 24-contact / 0.5-mm FPC.
 // Manufacturer datasheet: docs/reference/README.md, pin table and circuit (p. 40).
-const sheetOf = (section: string) => ["USB", "Power"].includes(section) ? "SHEET_POWER" : ["Panel", "PanelPower", "Boost", "PanelCaps"].includes(section) ? "SHEET_DISPLAY" : "SHEET_MCU"
+const sheetOf = (section: string) => ["Flash","Control"].includes(section) ? "SHEET_SERVICE" : section === "CorePower" ? "SHEET_CORE" : ["USB", "Power"].includes(section) ? "SHEET_POWER" : ["Panel", "PanelPower", "Boost", "PanelCaps"].includes(section) ? "SHEET_DISPLAY" : "SHEET_MCU"
 const net = (name: string) => `net.${name}`
 
 type CapRow = readonly [string, string, string, string, string, number, number, number, string, number, number]
@@ -68,21 +74,26 @@ const caps: readonly CapRow[] = [
   ["C4", "10uF", "0805", "C15850", "V3V3", -27, 15, 90, "Power", 7, -5.5],
   ["C5", "1uF", "0603", "C15849", "VSYS", 44.5, -2.5, 180, "PanelPower", -11, -6],
   ["C6", "10uF", "0805", "C15850", "EPD_3V3", 44.5, 4.2, 0, "PanelPower", -7, -6],
-  ["C7", "100nF", "0402", "C1525", "V3V3", -17, -5.4, 270, "Decoupling", 3.5, -1.5],
-  ["C8", "100nF", "0402", "C1525", "V3V3", -13, -5.4, 270, "Decoupling", 4.9, -1.5],
-  ["C9", "100nF", "0402", "C1525", "V3V3", -8.079884, 1.2, 0, "Decoupling", 6.3, -1.5],
-  ["C10", "100nF", "0402", "C1525", "V3V3", -13, 5.4, 90, "Decoupling", 7.699999999999999, -1.5],
-  ["C11", "100nF", "0402", "C1525", "V3V3", -16.6, 5.4, 90, "Decoupling", 9.1, -1.5],
-  ["C12", "100nF", "0402", "C1525", "V3V3", -20, 0.2, 180, "Decoupling", 3.5, -3.0],
-  ["C13", "100nF", "0402", "C1525", "V3V3", -20.3, -1.0, 180, "Decoupling", 4.9, -3.0],
-  ["C14", "100nF", "0402", "C1525", "V3V3", -20.3, 4.0, 180, "Decoupling", 6.3, -3.0],
-  ["C15", "1uF", "0603", "C15849", "V3V3", -18.5, 5.6, 90, "Decoupling", 7.699999999999999, -3.0],
-  ["C16", "1uF", "0603", "C15849", "VCORE", -20, 2.6, 180, "Decoupling", 3.5, -5],
-  ["C17", "100nF", "0402", "C1525", "VCORE", -7.7, 2.5, 0, "Decoupling", 4.9, -5],
-  ["C18", "100nF", "0402", "C1525", "VCORE", -20, -2.2, 180, "Decoupling", 6.3, -5],
-  ["C19", "100nF", "0402", "C1525", "V3V3", -19.15, -4.095, 0, "Decoupling", 9.1, -3.0],
-  ["C20", "15pF", "0402", "C1548", "XIN", -5.7, -4.8, 270, "Clock", 3.5, 2.8],
-  ["C21", "15pF", "0402", "C1548", "XOSC_OUT", -0.8, -1.3, 0, "Clock", 7, 2.8],
+  ["C7", "100nF", "0402", "C1525", "V3V3", -17.5, -7.6, 270, "Decoupling", 3.5, -1.5],
+  ["C8", "100nF", "0402", "C1525", "V3V3", -11.6, -7, 270, "Decoupling", 4.9, -1.5],
+  ["C9", "100nF", "0402", "C1525", "V3V3", -6.8, -3.6, 0, "Decoupling", 6.3, -1.5],
+  ["C10", "100nF", "0402", "C1525", "V3V3", -6.8, -1.6, 0, "Decoupling", 7.699999999999999, -1.5],
+  ["C11", "100nF", "0402", "C1525", "V3V3", -10.2, 7, 90, "Decoupling", 9.1, -1.5],
+  ["C12", "100nF", "0402", "C1525", "V3V3", -12.6, 7, 90, "Decoupling", 10.5, -1.5],
+  ["C13", "100nF", "0402", "C1525", "V3V3", -19.4, 7, 90, "Decoupling", 3.5, -3.0],
+  ["C14", "100nF", "0402", "C1525", "V3V3", -17.4, 9, 90, "Decoupling", 4.9, -3.0],
+  ["C15", "1uF", "0603", "C15849", "V3V3", -21, 0.7, 180, "Decoupling", 6.3, -3.0],
+  ["C16", "1uF", "0603", "C15849", "VCORE", -14.2, -7, 270, "Decoupling", 3.5, -5],
+  ["C17", "100nF", "0402", "C1525", "VCORE", -6.8, 1.6, 0, "Decoupling", 4.9, -5],
+  ["C18", "100nF", "0402", "C1525", "VCORE", -15, 7, 90, "Decoupling", 6.3, -5],
+  ["C19", "100nF", "0402", "C1525", "V3V3", -20.5, -0.55, 180, "Decoupling", 7.699999999999999, -3.0],
+  ["C20", "15pF", "0402", "C1548", "XIN", 0.1, -1.100074, 0, "Clock", 3.5, 2.8],
+  ["C21", "15pF", "0402", "C1548", "XOSC_OUT", -3.850011, 3.4, 90, "Clock", 7, 2.8],
+  ["C32", "100nF", "0402", "C1525", "V3V3", -21, -3.5, 180, "Decoupling", 9.1, -3.0],
+  ["C33", "10uF", "0805", "C15850", "V3V3", -22, 4.5, 180, "Decoupling", 10.5, -3.0],
+  ["C34", "10uF", "0805", "C15850", "VSYS", -34.3, -7, 270, "CorePower", -6, 2],
+  ["C35", "22uF", "0805", "C45783", "VCORE", -20.5, -8, 0, "CorePower", 2, 2],
+  ["C36", "22uF", "0805", "C45783", "VCORE", -20.5, -11, 0, "CorePower", 3.4, 2],
   // Display high-voltage rail capacitors; selected parts are all rated 50 V.
   ["C22", "1uF", "0603", "C15849", "EPD_VSHR", 43.2, 17.3, 180, "PanelCaps", 1, -5],
   ["C23", "1uF", "0603", "C15849", "EPD_3V3", 39.1, 18, 180, "PanelPower", -5.6, -6],
@@ -93,19 +104,21 @@ const caps: readonly CapRow[] = [
 const resistors: readonly ResRow[] = [
   ["R1", "5.1k", "0603", "C23186", "CC1", "GND", -42, -7, 90, "USB", -4, -0.5],
   ["R2", "5.1k", "0603", "C23186", "CC2", "GND", -39.5, -7, 90, "USB", -2, -0.5],
-  ["R3", "27", "0603", "C25190", "USB_DM", "USB_DM_MCU", -26.5, 1.4, 0, "USB", 3, 2],
-  ["R4", "27", "0603", "C25190", "USB_DP", "USB_DP_MCU", -26.5, -0.5, 0, "USB", 3, 0.1],
-  ["R5", "1k", "0402", "C11702", "QSPI_SS", "BOOT_N", -25, -10.5, 180, "Flash", -5.5, 2],
-  ["R6", "10k", "0603", "C25804", "V3V3", "QSPI_SS", -21, -11, 0, "Flash", -5.0, 4.2],
-  ["R7", "1k", "0402", "C11702", "XOUT", "XOSC_OUT", -7.4, 0, 0, "Clock", 8, 5],
+  ["R3", "27", "0603", "C25190", "USB_DM", "USB_DM_MCU", -25, 1.8, 0, "USB", 3, 2],
+  ["R4", "27", "0603", "C25190", "USB_DP", "USB_DP_MCU", -25, -0.3, 0, "USB", 3, 0.1],
+  ["R5", "1k", "0402", "C11702", "QSPI_SS", "BOOT_N", -25, -12.8, 180, "Flash", -5.5, 2],
+  ["R6", "10k", "0603", "C25804", "V3V3", "QSPI_SS", -21, -15, 180, "Flash", -5.0, 4.2],
+  ["R7", "1k", "0402", "C11702", "XOUT", "XOSC_OUT", -5.7, 0.5, 0, "Clock", 8, 5],
   ["R8", "10k", "0603", "C25804", "V3V3", "RUN", -6, -11, 0, "Control", -9, -4],
   ["R9", "10k", "0603", "C25804", "EPD_EN", "GND", 41.5, -2.5, 0, "PanelPower", -11, -3.5],
   ["R10", "1M", "0603", "C22935", "EPD_GDR", "GND", 45.9, 9.3, 90, "Boost", -6, 2],
   ["R11", "0.47", "0805", "C382278", "EPD_RESE", "GND", 45.9, 14.3, 90, "Boost", -3, 2],
   ["R12", "10k", "0603", "C25804", "EPD_3V3", "EPD_CS", 47.7, 12.3, 90, "Panel", 3, 3],
   ["R13", "10k", "0603", "C25804", "EPD_3V3", "EPD_RST", 47.7, 16.3, 90, "Panel", 5, 3],
-  ["R14", "27", "0603", "C25190", "SCK_MCU", "EPD_SCK", -11, -8, 90, "Panel", 4.5, -1.2],
-  ["R15", "27", "0603", "C25190", "MOSI_MCU", "EPD_MOSI", -13.5, -8, 90, "Panel", 12, -1.2],
+  ["R14", "27", "0603", "C25190", "SCK_MCU", "EPD_SCK", -15, -10, 270, "Panel", 4.5, -1.2],
+  ["R15", "27", "0603", "C25190", "MOSI_MCU", "EPD_MOSI", -11, -10, 270, "Panel", 12, -1.2],
+  ["R16", "8.2k", "0603", "C25981", "VCORE", "CORE_FB", -30, -12, 180, "CorePower", 1, -1],
+  ["R17", "10k", "0603", "C25804", "CORE_FB", "GND", -33, -12, 0, "CorePower", 1, -3],
 ] as const
 
 const highVoltageCaps: readonly HvCapRow[] = [
@@ -117,40 +130,20 @@ const highVoltageCaps: readonly HvCapRow[] = [
   ["C31", "10uF", "C13585", "1206", "EPD_VGL", "GND", 19.9, 9.3, "PanelCaps", 7, -7],
 ] as const
 
+// RP2354B QFN-80 physical pins; QSPI data/clock stay internal to the package.
 const mcuEndpointConnections = {
-          pin1: ".C7 > .pin1",
-          pin10: ".C8 > .pin1",
-          pin22: ".C9 > .pin1",
-          pin33: ".C10 > .pin1",
-          pin42: ".C11 > .pin1",
-          pin43: ".C14 > .pin1",
-          pin44: ".C15 > .pin1",
-          pin48: ".C12 > .pin1",
-          pin49: ".C13 > .pin1",
-          pin23: ".C17 > .pin1",
-          pin45: ".C16 > .pin1",
-          pin50: ".C18 > .pin1",
-          pin46: ".R3 > .pin2",
-          pin47: ".R4 > .pin2",
-          pin20: ".Y1 > .pin1",
-          pin21: ".R7 > .pin1",
-          pin51: ".U5 > .pin7",
-          pin52: ".U5 > .pin6",
-          pin53: ".U5 > .pin5",
-          pin54: ".U5 > .pin3",
-          pin55: ".U5 > .pin2",
-          pin56: ".U5 > .pin1",
-          pin24: ".TP5 > .pin1",
-          pin25: ".TP4 > .pin1",
-          pin26: ".SW2 > .pin1",
-          pin11: ".DC_FROM_VIA > .top",
-          pin12: ".CS_FROM_VIA > .top",
-          pin13: ".R14 > .pin1",
-          pin14: ".R15 > .pin1",
-          pin15: ".RST_FROM_VIA > .top",
-          pin16: ".BUSY_FROM_VIA > .top",
-          pin17: ".EN_FROM_VIA > .top",
-
+  pin5: ".C7 > .pin1", pin15: ".C8 > .pin1", pin24: ".C9 > .pin1",
+  pin29: ".C10 > .pin1", pin41: ".C11 > .pin1", pin50: ".C12 > .pin1",
+  pin60: ".C13 > .pin1", pin59: ".C14 > .pin1", pin68: ".C15 > .pin1",
+  pin69: ".C19 > .pin1", pin76: ".C32 > .pin1",
+  pin61: ".C33 > .pin1", pin64: ".C33 > .pin1",
+  pin10: ".C16 > .pin1", pin32: ".C17 > .pin1", pin51: ".C18 > .pin1",
+  pin66: ".R3 > .pin2", pin67: ".R4 > .pin2",
+  pin30: ".Y1 > .pin1", pin31: ".R7 > .pin1", pin75: ".R5 > .pin1",
+  pin33: ".TP5 > .pin1", pin34: ".TP4 > .pin1", pin35: ".SW2 > .pin1",
+  pin6: ".DC_FROM_VIA > .top", pin7: ".CS_FROM_VIA > .top",
+  pin8: ".R14 > .pin1", pin9: ".R15 > .pin1",
+  pin11: ".RST_FROM_VIA > .top", pin12: ".BUSY_FROM_VIA > .top", pin13: ".EN_FROM_VIA > .top",
 } as const
 
 const panelEndpointConnections = {pin2: net("EPD_GDR"), pin3: net("EPD_RESE"), pin5: net("EPD_VSHR"),
@@ -161,98 +154,53 @@ const panelEndpointConnections = {pin2: net("EPD_GDR"), pin3: net("EPD_RESE"), p
           pin23: net("EPD_VGL"), pin24: net("EPD_VCOM"), pin25: net("GND"), pin26: net("GND")
 } as const
 
-// Short local supply/clock copper, authored here rather than recovered from a routed board.
-// Coordinates below are board millimetres. U1's footprint is rotated 90 degrees.
+// Authored pad-to-bypass fanouts; board-space points, independent of router output.
 const mcuLocalWaypoints: Record<string, readonly (readonly [number, number])[]> = {
-  pin1: [[-17, -3.824865]],
-  pin10: [[-13.000129, -4.2]],
-  pin22: [[-9.500102, 0.199898]],
-  pin33: [[-13.000129, 4.2]],
-  pin42: [[-16.600071, 4.2]],
-  pin43: [[-17.9, 2.599944], [-19.300056, 4.0]],
-  pin44: [[-18.05, 2.199894], [-18.05, 4.449976]],
-  pin48: [[-19.179936, 0.599948]],
-  pin49: [[-18.679986, 0.199898]],
-  pin50: [[-17.95, -0.200152], [-19.579884, -1.830036]],
-  pin23: [[-10.020168, 0.599948]],
-  pin45: [[-18.49982, 1.799844]],
-  pin20: [[-8.5, -0.599948], [-6.249937, -2.850011]],
-  pin21: [[-8.032968, -0.200152]],
-  pin16: [[-11.3,-2.200148]],
-  pin11: [[-12.600079,-2.6],[-12.3,-2.299921]],
-  pin12: [[-12.200029,-4.100029]],
-  pin15: [[-9.100056,-2.599944]],
-  pin17: [[-10,-1.800098]],
+  pin6: [[-15.8,-4]], pin7: [[-15.4,-4.1],[-15,-3.7]],
+  pin11: [[-13.8,-4]], pin12: [[-13.4,-4.05],[-13.1,-3.75],[-13.1,-3]],
+  pin13: [[-13,-4.25],[-12.25,-3.5]],
+  pin24: [[-8.22,-2.6]], pin29: [[-8.22,-.6]],
+  pin32: [[-7.62,.6]],
+  pin68: [[-19.5,1]], pin69: [[-19.5,.6],[-20.08,.020002]],
+  pin76: [[-19.88,-2.2],[-20.58,-2.9]],
+  pin61: [[-20.300094,3.8]], pin64: [[-19.7,2.599944],[-20.2,3.099944],[-20.2,3.7]],
+  pin30: [[-5.9,-.2],[-5.7,0],[-3.250011,0]],
+  pin31: [[-6.420116,.2]],
+  pin5: [[-16.2,-5.879884]], pin15: [[-12.2,-5.979884]],
+  pin10: [[-14.2,-5.5]], pin41: [[-10.2,5.8]],
+  pin50: [[-13.8,5.379884]], pin51: [[-14.2,5.779884]],
+  pin60: [[-18.42635,5.607534]], pin59: [[-17.4,7.5]],
 }
-// Fixed signal escapes use ordinary through vias and
-// explicit wire landings. These board-space points are authored with the layout.
-const mcuViaWaypoints: Record<string, NonNullable<TraceProps["pcbPath"]>> = {
-  // Service signals use separate through-via escapes and simple bottom tracks.
-  pin24: [
-    {x:-11.5,y:0.999998},
-    {x:-11.5,y:0.999998,via:true,fromLayer:"top",toLayer:"bottom"},
-    {x:-11.5,y:0.999998}, {x:-8.499998,y:4}, {x:-1.3,y:4},
-    {x:-1.3,y:4,via:true,fromLayer:"bottom",toLayer:"top"}, {x:-1.3,y:4},
-  ],
-  pin25: [
-    {x:-11.1,y:1.400048}, {x:-11.5,y:1.800048},
-    {x:-11.5,y:1.800048,via:true,fromLayer:"top",toLayer:"bottom"},
-    {x:-11.5,y:1.800048}, {x:-11.5,y:2.5}, {x:-7,y:7}, {x:-2.3,y:7}, {x:-1.3,y:8},
-    {x:-1.3,y:8,via:true,fromLayer:"bottom",toLayer:"top"}, {x:-1.3,y:8},
-  ],
-  pin26: [
-    {x:-9.9,y:1.799844}, {x:-9.2,y:2.499844},
-    {x:-9.2,y:2.499844,via:true,fromLayer:"top",toLayer:"bottom"},
-    {x:-9.2,y:2.499844}, {x:-9.2,y:-16.615092}, {x:-10.184908,y:-17.6},
-    {x:-10.184908,y:-17.6,via:true,fromLayer:"bottom",toLayer:"top"}, {x:-10.184908,y:-17.6},
-  ],
-  pin51: [
-    {x:-16.9,y:-0.599948}, {x:-16.700052,y:-0.4}, {x:-16,y:-0.4},
-    {x:-16,y:-0.4,via:true,fromLayer:"top",toLayer:"bottom"},
-    {x:-16,y:-0.4}, {x:-16,y:0.8}, {x:-22.5,y:0.8},
-    {x:-22.5,y:-5.365}, {x:-19.8,y:-5.365},
-    {x:-19.8,y:-5.365,via:true,fromLayer:"bottom",toLayer:"top"},
-    {x:-19.8,y:-5.365},
-  ],
-  pin52: [
-    {x:-16.8,y:-0.999998}, {x:-16.6,y:-1},
-    {x:-16.6,y:-1,via:true,fromLayer:"top",toLayer:"bottom"},
-    {x:-16.6,y:-1}, {x:-19,y:-3.4}, {x:-19,y:-6.635}, {x:-19.8,y:-6.635},
-    {x:-19.8,y:-6.635,via:true,fromLayer:"bottom",toLayer:"top"},
-    {x:-19.8,y:-6.635},
-  ],
-  pin53: [
-    {x:-16.9,y:-1.400048}, {x:-16.700048,y:-1.6}, {x:-16,y:-1.6},
-    {x:-16,y:-1.6,via:true,fromLayer:"top",toLayer:"bottom"},
-    {x:-16,y:-1.6}, {x:-15.8,y:-1.6}, {x:-15.8,y:-7.905}, {x:-19.8,y:-7.905},
-    {x:-19.8,y:-7.905,via:true,fromLayer:"bottom",toLayer:"top"},
-    {x:-19.8,y:-7.905},
-  ],
-}
-const toMcuFrame = (points: NonNullable<TraceProps["pcbPath"]>) => points.map(p =>
-  typeof p === "string" ? p : {...p, x:Number(p.y), y:-(Number(p.x)+14)})
-const coreSupplyPins = new Set(["pin23", "pin45", "pin50"])
-const ioSupplyPins = new Set(["pin1", "pin10", "pin22", "pin33", "pin42", "pin43", "pin44", "pin48", "pin49"])
-
-// Deliberately placed through vias beside the bypass pads, with short top returns.
-// The inner1 GND plane physically joins these vias; no routed-board data is imported.
+const inMcuFrame = (points: readonly (readonly [number,number])[]) => points.map(([x,y]) => ({x:y,y:-(x+14)}))
+const coreSupplyPins = new Set(["pin10", "pin32", "pin51"])
+const ioSupplyPins = new Set(["pin5","pin15","pin24","pin29","pin41","pin50","pin59","pin60","pin61","pin64","pin68","pin69","pin76"])
 const groundDrops = [
-  {name:"C7_GND",from:".C7 > .pin2",x:-17,y:-6.8,path:[{x:1,y:0}]},
-  {name:"C8_GND",from:".C8 > .pin2",x:-12,y:-6.4,path:[{x:0.420116,y:0.420116}]},
-  {name:"C9_GND",from:".C9 > .pin2",x:-6.679884,y:1.2,path:[{x:1,y:0}]},
-  {name:"C10_GND",from:".C10 > .pin2",x:-13,y:6.8,path:[{x:1,y:0}]},
-  {name:"C11_GND",from:".C11 > .pin2",x:-16.6,y:6.8,path:[{x:1,y:0}]},
-  {name:"C12_GND",from:".C12 > .pin2",x:-21.4,y:0.2,path:[{x:1,y:0}]},
-  {name:"C13_GND",from:".C13 > .pin2",x:-21.7,y:-1,path:[{x:1,y:0}]},
-  {name:"C14_GND",from:".C14 > .pin2",x:-21.7,y:4,path:[{x:1,y:0}]},
-  {name:"C15_GND",from:".C15 > .pin2",x:-18.5,y:7,path:[{x:1,y:0}]},
-  {name:"C16_GND",from:".C16 > .pin2",x:-21.4,y:2.6,path:[{x:1,y:0}]},
-  {name:"C17_GND",from:".C17 > .pin2",x:-6.3,y:2.5,path:[{x:1,y:0}]},
-  {name:"C18_GND",from:".C18 > .pin2",x:-21.4,y:-2.2,path:[{x:1,y:0}]},
-  {name:"C20_GND",from:".C20 > .pin2",x:-5.7,y:-6.2,path:[{x:1,y:0}]},
-  {name:"C21_GND",from:".C21 > .pin2",x:1,y:-1.3,path:[{x:1,y:0}]},
-  {name:"Y1_CASE_2",from:".Y1 > .pin2",x:-2,y:-3.8,path:[{x:2.050063,y:-1.8}]},
-  {name:"Y1_CASE_4",from:".Y1 > .pin4",x:-6.6,y:-1.15,path:[{x:-1.7,y:0.850011}]},
+  {name:"C7_GND",from:".C7 > .pin2",x:-17.5,y:-9},
+  {name:"C8_GND",from:".C8 > .pin2",x:-11.6,y:-8.4},
+  {name:"C9_GND",from:".C9 > .pin2",x:-5.4,y:-3.6},
+  {name:"C10_GND",from:".C10 > .pin2",x:-5.4,y:-1.6},
+  {name:"C11_GND",from:".C11 > .pin2",x:-10.2,y:8.4},
+  {name:"C12_GND",from:".C12 > .pin2",x:-12.6,y:8.4},
+  {name:"C13_GND",from:".C13 > .pin2",x:-19.4,y:8.4},
+  {name:"C14_GND",from:".C14 > .pin2",x:-17.4,y:10.4},
+  {name:"C15_GND",from:".C15 > .pin2",x:-23,y:.7},
+  {name:"C16_GND",from:".C16 > .pin2",x:-14.2,y:-8.6},
+  {name:"C17_GND",from:".C17 > .pin2",x:-5.4,y:1.6},
+  {name:"C18_GND",from:".C18 > .pin2",x:-15,y:8.4},
+  {name:"C19_GND",from:".C19 > .pin2",x:-21.9,y:-.55},
+  {name:"C20_GND",from:".C20 > .pin2",x:1.5,y:-1.100074},
+  {name:"C21_GND",from:".C21 > .pin2",x:-3.850011,y:4.8},
+  {name:"C32_GND",from:".C32 > .pin2",x:-22.4,y:-3.5},
+  {name:"C33_GND",from:".C33 > .pin2",x:-24.4,y:4.5},
+  {name:"C34_GND",from:".C34 > .pin2",x:-34.3,y:-9.4},
+  {name:"C35_GND",from:".C35 > .pin2",x:-18.1,y:-8},
+  {name:"C36_GND",from:".C36 > .pin2",x:-18.1,y:-11},
+  {name:"Y1_CASE_2",from:".Y1 > .pin2",x:-1,y:2},
+  {name:"Y1_CASE_4",from:".Y1 > .pin4",x:-4.6,y:-2.2},
+  {name:"CORE_REG_GND",from:".U5 > .pin2",x:-30.7,y:-8},
+  {name:"CORE_FB_GND",from:".R17 > .pin2",x:-33,y:-13.6},
+  {name:"MCU_PGND",from:".U1 > .pin62",x:-17.5,y:3.400044},
+  {name:"MCU_FB_GND",from:".U1 > .pin65",x:-17.5,y:2.199894},
 ]
 const localGroundCapNames = new Set(groundDrops.filter(d => d.name.startsWith("C")).map(d => d.name.split("_")[0]))
 
@@ -260,7 +208,7 @@ export function ControllerBoard({children}: {children?: ReactNode} = {}) {
   return (
     <board name="CONTROLLER" width="100mm" height="60mm" thickness="1.6mm" layers={4} outline={mechanical.board_outline_mm.map(([x,y]) => ({x,y}))}
       partsEngine={supplierPartsEngine} schTraceAutoLabelEnabled
-      title="USB-C E-PAPER / RP2040 / GDEY075T7"
+      title="USB-C E-PAPER / RP2354B / GDEY075T7"
       fabricatorPreset="jlcpcb_standard" solderMaskColor="black" silkscreenColor="white"
       minTraceWidth="0.15mm" minTraceToPadEdgeClearance="0.15mm"
       minPadEdgeToPadEdgeClearance="0.15mm" minBoardEdgeClearance="0.3mm"
@@ -272,12 +220,14 @@ export function ControllerBoard({children}: {children?: ReactNode} = {}) {
       autorouter={{local: true, preset: "tscircuit", serverCacheEnabled: false}}>
       <autoroutingphase name="MAIN_ROUTE" phaseIndex={1} autorouter="tscircuit" />
       <schematicsheet name="SHEET_POWER" displayName="USB-C and main power" sheetIndex={1} />
-      <schematicsheet name="SHEET_MCU" displayName="RP2040, flash, clock and debug" sheetIndex={2} />
+      <schematicsheet name="SHEET_MCU" displayName="RP2354B, core supply, clock and debug" sheetIndex={2} />
+      <schematicsheet name="SHEET_SERVICE" displayName="BOOTSEL, reset and SWD service" sheetIndex={5} />
+      <schematicsheet name="SHEET_CORE" displayName="RP2354B external core supply" sheetIndex={4} />
       <schematicsheet name="SHEET_DISPLAY" displayName="7.5-inch raw panel and boost supply" sheetIndex={3} />
       {[
         ["USB", "USB-C / 5 V input"], ["Power", "3.3 V MCU supply"],
-        ["MCU", "RP2040"], ["Decoupling", "Local MCU bypass capacitors"],
-        ["Flash", "2 MB QSPI / BOOTSEL"], ["Clock", "12 MHz reference"],
+        ["MCU", "RP2354B"], ["Decoupling", "Local MCU bypass capacitors"],
+        ["Flash", "Internal flash / BOOTSEL"], ["CorePower", "External 1.092 V core supply"], ["Clock", "12 MHz reference"],
         ["Control", "Reset and debug"], ["Panel", "Raw 7.5-inch panel interface"],
         ["PanelPower", "Switched panel supply"], ["Boost", "Panel boost / charge pump"],
         ["PanelCaps", "50 V display rail reservoirs"],
@@ -292,7 +242,7 @@ export function ControllerBoard({children}: {children?: ReactNode} = {}) {
       {["EPD_SW", "EPD_PUMP", "EPD_VGH", "EPD_VGL", "EPD_VSH", "EPD_VSL", "EPD_VCOM", "EPD_VSHR"].map(name =>
         <Fragment key={name}><net routingPhaseIndex={1} name={name} nominalTraceWidth="0.2mm" minTraceClearance="0.12mm" /></Fragment>)}
       {["CC1", "CC2", "USB_DP", "USB_DM", "EPD_EN", "USB_DM_MCU", "USB_DP_MCU",
-        "XIN", "XOUT", "QSPI_SD3", "QSPI_SCLK", "QSPI_SD0", "QSPI_SD2", "QSPI_SD1", "QSPI_SS",
+        "XIN", "XOUT", "QSPI_SS", "CORE_SW", "CORE_FB",
         "SWCLK", "SWDIO", "RUN", "EPD_DC", "EPD_CS", "SCK_MCU", "MOSI_MCU", "EPD_RST", "EPD_BUSY",
         "XOSC_OUT", "BOOT_N", "EPD_GDR", "EPD_RESE", "EPD_SCK", "EPD_MOSI", "EPD_VDD"].map(name =>
         <Fragment key={name}><net routingPhaseIndex={1} name={name} /></Fragment>)}
@@ -304,47 +254,33 @@ export function ControllerBoard({children}: {children?: ReactNode} = {}) {
         thickness="0.4mm" pcbPathRelativeTo=".J1 > .VBUS2"
         pcbPath={[{x:-2.3999571,y:3.25}, {x:-3.1499571,y:4}]} />
 
-      {/* Place the flash bypass beside pin 8 and preserve its short supply
-          connection. The supply-facing capacitor uses the unrotated footprint frame. */}
-      <trace routingPhaseIndex={1} name="FLASH_VCC_DECOUPLING" from=".C19 > .pin1" to=".U5 > .pin8"
-        thickness="0.25mm" maxLength="2mm" pcbPathRelativeTo=".C19 > .pin1"
-        pcbPath={[{x:-1.25,y:0}]} />
-
-      {/* Explicit native vias reserve their complete copper diameter during routing. */}
-      <via name="FLASH_CAP_GND_VIA" pcbX={-17.75} pcbY={-4.095}
-        fromLayer="top" toLayer="bottom" holeDiameter="0.3mm" outerDiameter="0.55mm"
-        connectsTo="net.GND" tented="both_sides" />
-      <via name="FLASH_IC_GND_VIA" pcbX={-28} pcbY={-7.905}
-        fromLayer="top" toLayer="bottom" holeDiameter="0.3mm" outerDiameter="0.55mm"
-        connectsTo="net.GND" tented="both_sides" />
-      <trace routingPhaseIndex={1} name="FLASH_GND_RETURN" from=".C19 > .pin2" to=".FLASH_CAP_GND_VIA > .top"
-        thickness="0.15mm" maxLength="2mm" pcbPathRelativeTo=".C19 > .pin2"
-        pcbPath={[{x:1.4,y:0}]} />
-      <trace routingPhaseIndex={1} name="FLASH_IC_GND" from=".FLASH_IC_GND_VIA > .top" to=".U5 > .pin4"
-        thickness="0.15mm" maxLength="2mm" pcbPathRelativeTo=".FLASH_IC_GND_VIA > .top"
-        pcbPath={[{x:0.5,y:0}]} />
-
+      {/* External core supply: RP2350 datasheet Figure 24. VREG_FB and
+          VREG_PGND are grounded; VREG_LX is open; AVDD/VIN remain at 3.3 V. */}
+      <trace name="CORE_INPUT_LOCAL" routingPhaseIndex={1} from=".U5 > .pin4" to=".C34 > .pin1"
+        thickness="0.4mm" pcbPathRelativeTo=".U5 > .pin4" pcbPath={[{x:-2.350137,y:1.999998}]} />
+      <trace name="CORE_SWITCH_LOCAL" routingPhaseIndex={1} from=".U5 > .pin3" to=".L2 > .pin1"
+        thickness="0.4mm" pcbPathRelativeTo=".U5 > .pin3" pcbPath={[{x:2.222104,y:0.94996}]} />
+      <trace name="CORE_OUTPUT_LOCAL" routingPhaseIndex={1} from=".L2 > .pin2" to=".C35 > .pin1"
+        thickness="0.4mm" pcbPathRelativeTo=".C35 > .pin1" pcbPath={[{x:-2.3,y:0}]} />
+      <trace name="CORE_RESERVOIR_LOCAL" routingPhaseIndex={1} from=".C35 > .pin1" to=".C36 > .pin1"
+        thickness="0.4mm" pcbPathRelativeTo=".C35 > .pin1" pcbPath={[{x:-.999998,y:-1.5}]} />
       {groundDrops.map(drop => <Fragment key={drop.name}>
         <via name={`${drop.name}_VIA`} pcbX={drop.x} pcbY={drop.y}
           fromLayer="top" toLayer="bottom" holeDiameter="0.3mm" outerDiameter="0.55mm"
           connectsTo="net.GND" tented="both_sides" />
         <trace routingPhaseIndex={1} name={`${drop.name}_RETURN`} from={drop.from} to={`.${drop.name}_VIA > .top`}
-          thickness="0.15mm" maxLength="2mm" pcbPathRelativeTo={drop.from} pcbPath={drop.path} />
+          thickness="0.15mm" maxLength="2mm" pcbPathRelativeTo={`.${drop.name}_VIA > .top`} pcbPath={[{x:0,y:0}]} />
       </Fragment>)}
       <via name="MCU_GND_VIA" pcbX={-11.7} pcbY={0} fromLayer="top" toLayer="bottom"
         holeDiameter="0.3mm" outerDiameter="0.55mm" connectsTo="net.GND" tented="both_sides" />
-      <trace routingPhaseIndex={1} name="MCU_EXPOSED_GND" from=".U1 > .pin57" to=".MCU_GND_VIA > .top"
+      <trace routingPhaseIndex={1} name="MCU_EXPOSED_GND" from=".U1 > .pin81" to=".MCU_GND_VIA > .top"
         thickness="0.25mm" maxLength="3mm" pcbPath={[{x:0,y:-1.8}]} />
-      <trace routingPhaseIndex={1} name="MCU_TESTEN_GND" from=".U1 > .pin19" to=".MCU_GND_VIA > .top"
-        thickness="0.15mm" maxLength="3mm" pcbPath={[{x:-0.999998,y:-2.8},{x:-0.499998,y:-2.3}]} />
-      <trace routingPhaseIndex={1} name="CRYSTAL_DRIVE" from=".R7 > .pin2" to=".Y1 > .pin3" thickness="0.15mm"
-        maxLength="6mm" pcbPath={[{x:3.150085,y:0}]} />
-      <trace routingPhaseIndex={1} name="CRYSTAL_LOAD_IN" from=".C20 > .pin1" to=".Y1 > .pin1" thickness="0.15mm"
-        maxLength="3mm" pcbPath={[{x:-1.550063,y:0}]} />
-      <trace routingPhaseIndex={1} name="CRYSTAL_LOAD_OUT" from=".C21 > .pin1" to=".Y1 > .pin3" thickness="0.15mm"
-        maxLength="3mm" pcbPath={[{x:-0.570127,y:0.150011}]} />
+      <trace routingPhaseIndex={1} name="CRYSTAL_DRIVE" from=".R7 > .pin2" to=".Y1 > .pin3" thickness="0.15mm" maxLength="6mm" pcbPath={[{x:1.03345,y:.600074}]} />
+      <trace routingPhaseIndex={1} name="CRYSTAL_LOAD_IN" from=".C20 > .pin1" to=".Y1 > .pin1" thickness="0.15mm" maxLength="3mm" pcbPath={[{x:-.420116,y:0}]} />
+      <trace routingPhaseIndex={1} name="CRYSTAL_LOAD_OUT" from=".C21 > .pin1" to=".Y1 > .pin3" thickness="0.15mm" maxLength="3mm" pcbPath={[{x:-1.4,y:0}]} />
 
       <DisplayRouting />
+      <CoreDistribution />
       <GroundReturns />
       <trace routingPhaseIndex={1} name="RUN_PULLUP" from=".R8 > .pin2" to=".TP6 > .pin1" thickness="0.15mm"
         pcbPathRelativeTo=".R8 > .pin2" pcbPath={[{x:1.246636,y:-1.246636}]} />
@@ -353,7 +289,7 @@ export function ControllerBoard({children}: {children?: ReactNode} = {}) {
 
       <bus name="VBUS_WIDTH" connections={["C2.pin1"]} pcbTraceWidth="0.4mm" />
       <bus name="LOGIC_POWER_WIDTH" connections={["C4.pin1"]} pcbTraceWidth="0.25mm" />
-      <bus name="CORE_POWER_WIDTH" connections={["CORE_PROBE_LINK"]} pcbTraceWidth="0.2mm" />
+      <bus name="CORE_POWER_WIDTH" connections={["CORE_OUTPUT_LOCAL"]} pcbTraceWidth="0.2mm" />
 
       <TYPE_C_31_M_12 name="J1" standard="usb_c" allowOffBoard schWidth={1.771}
         pcbX={-46} pcbY={0} pcbRotation={270} schX={-7} schY={2} schSectionName="USB" schSheetName={sheetOf("USB")}
@@ -379,19 +315,20 @@ export function ControllerBoard({children}: {children?: ReactNode} = {}) {
       <group name="MCU_ESCAPE" pcbX={-14} pcbY={0} padding={2}
         minTraceToPadEdgeClearance="0.15mm" minViaEdgeToPadEdgeClearance="0.15mm"
         minTraceToHoleEdgeClearance="0.35mm" minViaHoleEdgeToViaHoleEdgeClearance="0.4mm">
-      <RP2040 name="U1" pcbX={0} pcbY={0} pcbRotation={90}
-        schX={-1} schY={0} schSectionName="MCU" schSheetName={sheetOf("MCU")} schWidth={2.8} schHeight={6}
+      <RP2354B name="U1" pcbX={0} pcbY={0} pcbRotation={90}
+        schX={-9} schY={0} schSectionName="MCU" schSheetName={sheetOf("MCU")} schWidth={2.8} schHeight={8.4}
          />
       </group>
       {Object.entries(mcuEndpointConnections).map(([pin,target]) =>
         <Fragment key={`U1-${pin}`}><trace routingPhaseIndex={1} name={`MCU_${pin}`} from={`.U1 > .${pin}`} to={target}
           thickness={ioSupplyPins.has(pin) ? "0.25mm" : coreSupplyPins.has(pin) ? "0.2mm" : "0.15mm"}
-          pcbPath={mcuViaWaypoints[pin] ? toMcuFrame(mcuViaWaypoints[pin]) : mcuLocalWaypoints[pin]?.map(([x,y]) => ({x:y,y:-(x+14)}))} /></Fragment>)}
-      <W25Q16JVSNIQ name="U5" schHeight={0.903} pcbX={-24} pcbY={-6} pcbRotation={270}
-        schX={-8} schY={4} schPinArrangement={{leftSide: {pins: [1, 3, 7], direction: "top-to-bottom"}, rightSide: {pins: [5, 2, 6], direction: "top-to-bottom"}, topSide: {pins: [8], direction: "left-to-right"}, bottomSide: {pins: [4], direction: "left-to-right"}}} schSectionName="Flash" schSheetName={sheetOf("Flash")}
-        connections={{pin1: net("QSPI_SS"), pin2: net("QSPI_SD1"), pin3: net("QSPI_SD2"), pin4: net("GND"),
-          pin5: net("QSPI_SD0"), pin6: net("QSPI_SCLK"), pin7: net("QSPI_SD3"), pin8: net("V3V3")}} />
-      <ABM8_272_T3 name="Y1" pcbX={-4.2} pcbY={-2} loadCapacitance="10pF"
+          pcbPath={mcuLocalWaypoints[pin] ? inMcuFrame(mcuLocalWaypoints[pin]) : undefined} /></Fragment>)}
+      <TLV62569DBVR name="U5" pcbX={-31} pcbY={-8} schX={-3} schY={2}
+        schSectionName="CorePower" schSheetName="SHEET_CORE"
+        connections={{pin1:net("V3V3"),pin2:net("GND"),pin3:net("CORE_SW"),pin4:net("VSYS"),pin5:net("CORE_FB")}} />
+      <MWSA0402S_2R2MT name="L2" pcbX={-25.8} pcbY={-8} pcbRotation={180} schX={0} schY={2}
+        schSectionName="CorePower" schSheetName="SHEET_CORE" connections={{pin1:net("CORE_SW"),pin2:net("VCORE")}} />
+      <ABM8_272_T3 name="Y1" pcbX={-3} pcbY={0} pcbRotation={90} loadCapacitance="10pF"
         schX={5} schY={5} schSectionName="Clock" schSheetName={sheetOf("Clock")}
         connections={{pin1: net("XIN"), pin3: net("XOSC_OUT")}} />
       <TS_1088_AR02016 name="SW1" schRotation={-90} pcbX={-28} pcbY={-19} schX={-8} schY={1} schSectionName="Flash" schSheetName={sheetOf("Flash")}
@@ -423,13 +360,13 @@ export function ControllerBoard({children}: {children?: ReactNode} = {}) {
         return <Part key={name} name={name} pcbX={pcbX} pcbY={pcbY} pcbRotation={pcbRotation}
           maxDecouplingTraceLength={name === "C19" ? "2mm" : ["C15", "C16"].includes(name) ? "6mm" : Number(name.slice(1)) >= 7 && Number(name.slice(1)) <= 18 ? "4mm" : undefined}
           schX={schX} schY={schY} schSectionName={schSectionName} schSheetName={sheetOf(schSectionName)} schOrientation="vertical"
-          connections={name === "C19" || localGroundCapNames.has(name) ? {pin1: net(rail)} : {pin1: net(rail), pin2: net("GND")}} />
+          connections={localGroundCapNames.has(name) ? {pin1: net(rail)} : {pin1: net(rail), pin2: net("GND")}} />
       })}
       {resistors.map(([name, resistance, footprint, sku, a, b, pcbX, pcbY, pcbRotation, schSectionName, schX, schY]) => {
         const Part = resistorParts[sku]
         return <Part key={name} name={name} pcbX={pcbX} pcbY={pcbY} pcbRotation={pcbRotation}
           schX={schX} schY={schY} schSectionName={schSectionName} schSheetName={sheetOf(schSectionName)}
-          schRotation={name === "R15" ? 180 : b === "GND" || a === "V3V3" || a === "EPD_3V3" ? -90 : 0}
+          schRotation={name === "R15" ? 180 : b === "GND" || a === "V3V3" || a === "VCORE" || a === "EPD_3V3" ? -90 : 0}
           connections={{pin1: net(a), pin2: net(b)}} />
       })}
       {highVoltageCaps.map(([name, capacitance, sku, footprint, a, b, pcbX, pcbY, schSectionName, schX, schY]) => {
@@ -453,8 +390,8 @@ export function ControllerBoard({children}: {children?: ReactNode} = {}) {
           </footprint>} pcbX={i < 3 ? -17+i*3.5 : i === 5 ? -4 : 0} pcbY={i < 3 ? -24 : [8,4,-14][i-3]}
           schX={i === 5 ? -3.5 : -9+i*2} schY={i === 5 ? -3.33 : -7} schSectionName="Control" schSheetName={sheetOf("Control")} connections={{pin1: net(rail)}} />)}
       <silkscreentext text="USB-C E-PAPER" pcbX={-11} pcbY={23} fontSize={2} />
-      <silkscreentext text="RP2040 / 7.5 IN / 800 x 480" pcbX={-8} pcbY={19.5} fontSize={1} />
-      <silkscreentext text="REV B / GDEY075T7" pcbX={20} pcbY={-23} fontSize={1} />
+      <silkscreentext text="RP2354B / 7.5 IN / 800 x 480" pcbX={-8} pcbY={19.5} fontSize={1} />
+      <silkscreentext text="REV C / RP2354B" pcbX={20} pcbY={-23} fontSize={1} />
       <silkscreentext text="BOOT" pcbX={-28} pcbY={-15.5} fontSize={1} />
       <silkscreentext text="RESET" pcbX={-8} pcbY={-15.5} fontSize={1} />
       <silkscreentext text="RAW EPD / CONTACTS DOWN" pcbX={24} pcbY={-18} fontSize={1} />

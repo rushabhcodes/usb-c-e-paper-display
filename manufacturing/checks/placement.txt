@@ -1,11 +1,11 @@
 placement summary: no placement issues
 
 board top-layer utilization:
-- occupied: 10.902% (654.104mm^2 of 6000mm^2)
+- occupied: 12.441% (746.48mm^2 of 6000mm^2)
 - empty spaces over 5% of board area:
-  - 23.93% (1435.806mm^2); bounds=(minX=-4.593mm, maxX=50mm, minY=-30mm, maxY=-3.7mm)
+  - 24.385% (1463.103mm^2); bounds=(minX=-4.593mm, maxX=50mm, minY=-30mm, maxY=-3.2mm)
   - 17.437% (1046.211mm^2); bounds=(minX=-50mm, maxX=30.2mm, minY=16.955mm, maxY=30mm)
-  - 6.82% (409.197mm^2); bounds=(minX=-50mm, maxX=-31.05mm, minY=-30mm, maxY=-8.407mm)
+  - 5.47% (328.178mm^2); bounds=(minX=-50mm, maxX=-31.05mm, minY=-30mm, maxY=-12.682mm)
 
 board-edge status:
 - J1: 0.326mm inside left edge
@@ -13,9 +13,10 @@ board-edge status:
 - U2: 9.315mm inside left edge
 - U3: 13.739mm inside top edge
 - U4: 2.239mm inside right edge
-- U1: 26.15mm inside bottom edge
-- U5: 21.78mm inside bottom edge
-- Y1: 26.55mm inside bottom edge
+- U1: 24.76mm inside bottom edge
+- U5: 17.15mm inside left edge
+- L2: 20.94mm inside bottom edge
+- Y1: 28.2mm inside bottom edge
 - SW1: 10.07mm inside bottom edge
 - SW2: 10.07mm inside bottom edge
 - J2: 2.65mm inside right edge
@@ -30,40 +31,47 @@ board-edge status:
 - C4: 13.295mm inside top edge
 - C5: 4.4mm inside right edge
 - C6: 3.795mm inside right edge
-- C7: 23.93mm inside bottom edge
-- C8: 23.93mm inside bottom edge
-- C9: 28.53mm inside top edge
-- C10: 23.93mm inside top edge
-- C11: 23.93mm inside top edge
-- C12: 29.33mm inside left edge
-- C13: 28.73mm inside bottom edge
-- C14: 25.73mm inside top edge
-- C15: 23.3mm inside top edge
-- C16: 26.95mm inside top edge
-- C17: 27.23mm inside top edge
-- C18: 27.53mm inside bottom edge
-- C19: 25.635mm inside bottom edge
-- C20: 24.53mm inside bottom edge
-- C21: 28.43mm inside bottom edge
+- C7: 21.73mm inside bottom edge
+- C8: 22.33mm inside bottom edge
+- C9: 26.13mm inside bottom edge
+- C10: 28.13mm inside bottom edge
+- C11: 22.33mm inside top edge
+- C12: 22.33mm inside top edge
+- C13: 22.33mm inside top edge
+- C14: 20.33mm inside top edge
+- C15: 27.9mm inside left edge
+- C16: 21.9mm inside bottom edge
+- C17: 28.13mm inside top edge
+- C18: 22.33mm inside top edge
+- C19: 28.83mm inside left edge
+- C20: 28.63mm inside bottom edge
+- C21: 25.93mm inside top edge
+- C32: 26.23mm inside bottom edge
+- C33: 24.825mm inside top edge
+- C34: 15.025mm inside left edge
+- C35: 21.325mm inside bottom edge
+- C36: 18.325mm inside bottom edge
 - C22: 5.7mm inside right edge
 - C23: 9.8mm inside right edge
 - C24: 11.55mm inside top edge
 - C25: 11.55mm inside top edge
 - R1: 7.568mm inside left edge
 - R2: 10.068mm inside left edge
-- R3: 22.343mm inside left edge
-- R4: 22.343mm inside left edge
-- R5: 19.23mm inside bottom edge
-- R6: 18.568mm inside bottom edge
-- R7: 29.73mm inside bottom edge
+- R3: 23.843mm inside left edge
+- R4: 23.843mm inside left edge
+- R5: 16.93mm inside bottom edge
+- R6: 14.568mm inside bottom edge
+- R7: 29.23mm inside top edge
 - R8: 18.568mm inside bottom edge
 - R9: 7.343mm inside right edge
 - R10: 3.668mm inside right edge
 - R11: 3.411mm inside right edge
 - R12: 1.868mm inside right edge
 - R13: 1.868mm inside right edge
-- R14: 20.843mm inside bottom edge
-- R15: 20.843mm inside bottom edge
+- R14: 18.843mm inside bottom edge
+- R15: 18.843mm inside bottom edge
+- R16: 17.568mm inside bottom edge
+- R17: 15.843mm inside left edge
 - C26: 6.395mm inside right edge
 - C27: 10.195mm inside right edge
 - C28: 14.836mm inside top edge

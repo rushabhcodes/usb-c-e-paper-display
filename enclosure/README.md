@@ -1,4 +1,4 @@
-# Printable enclosure — GDEY075T7 + PCB Rev B
+# Printable enclosure — GDEY075T7 + PCB Rev C
 
 A landscape desk frame, **182.2 × 137.2 × 18.0 mm**, with a separate **15° desk cradle**. The raw display and all electronics are inside the case. USB-C exits flush from the left side above the stand, with rear access to BOOTSEL and RESET. The files use millimetres and are already oriented for printing.
 
@@ -43,7 +43,7 @@ Use a USB **data** cable to a computer, then the image sender in `firmware/host/
 
 ## Fit basis and limits
 
-Dimensions come from the manufacturer's mechanical drawing on page 7 of the [GDEY075T7 datasheet](../docs/reference/README.md) and the controller outline, mounting holes and connector datums in `product/mechanical-layout.json`. The revised PCB fabrication release is still awaiting routing validation. The physical board is flipped in the case, while the displayed image remains normal landscape.
+Dimensions come from the manufacturer's mechanical drawing on page 7 of the [GDEY075T7 datasheet](../docs/reference/README.md) and the controller outline, mounting holes and connector datums in `product/mechanical-layout.json`. The Rev C electronics use RP2354B and an external core buck supply. The PCB outline, port and mounting datums match this 18 mm housing; the release includes a supplier-mesh clearance report for the new layout. The physical board is flipped in the case, while the displayed image remains normal landscape.
 
 The flex is only **24 ±0.3 mm long**, 12.5 mm wide, with a 6 mm stiffened end. The modeled return uses a nominal **3.65 mm bend radius**, a 3.2 mm straight neck and an 8.6 mm straight insertion run: estimated path **23.27 mm**. The FPC contact plane (6.55 mm from the rear exterior), insertion depth, panel revision and USB overmould are assumptions to confirm on the first prototype. The generous bottom cavity and open carrier notch keep plastic away from the bend. The CAD report checks nominal geometry; it does not establish connector contact orientation or tolerance-stack fit on supplied parts.
 

@@ -1,8 +1,11 @@
+diff --git a/node_modules/@tscircuit/core/.bun-tag-79333f5d88396d75 b/.bun-tag-79333f5d88396d75
+new file mode 100644
+index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/node_modules/@tscircuit/core/.bun-tag-e9e8e569633571ed b/.bun-tag-e9e8e569633571ed
 new file mode 100644
 index 0000000000000000000000000000000000000000..e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
 diff --git a/dist/index.js b/dist/index.js
-index 51d45824e812e6a4db9e26181e5685be5d5122bf..19b6410569ac8e011c2231e7e401a44ed4144637 100644
+index 51d45824e812e6a4db9e26181e5685be5d5122bf..b604c4d61d33a28f1245942e0e0dc199c478ee6f 100644
 --- a/dist/index.js
 +++ b/dist/index.js
 @@ -4020,7 +4020,7 @@ var Via = class extends PrimitiveComponent {
@@ -25,14 +28,22 @@ index 51d45824e812e6a4db9e26181e5685be5d5122bf..19b6410569ac8e011c2231e7e401a44e
    for (const point12 of trace.route) {
      for (const pcbPortId of [point12.start_pcb_port_id, point12.end_pcb_port_id]) {
        if (!pcbPortId) continue;
-@@ -24601,7 +24605,22 @@ function getSourceTraceIdForRoutedTrace({
-   if (trace.source_trace_id && db2.source_trace.get(trace.source_trace_id)) {
+@@ -24598,10 +24602,29 @@ function getSourceTraceIdForRoutedTrace({
+   trace,
+   subcircuit_id
+ }) {
+-  if (trace.source_trace_id && db2.source_trace.get(trace.source_trace_id)) {
++  // Native shared-net MST branches may retain a local source_trace_id as
++  // their connection_name. The composite PCB ID carries the actual net.
++  const encodedSourceNetId = [trace.connection_name, trace.pcb_trace_id]
++    .map((name) => name?.match(/(?:^|__)source_net_\d+(?=__|_mst|$)/)?.[0].replace(/^__/, ""))
++    .find((id) => id && db2.source_net.get(id));
++  if (trace.source_trace_id && db2.source_trace.get(trace.source_trace_id) && !encodedSourceNetId) {
      return trace.source_trace_id;
    }
 -  const routedSourceNet = trace.source_trace_id ? db2.source_net.get(trace.source_trace_id) : void 0;
-+  const routedSourceNetId = trace.source_trace_id && db2.source_net.get(trace.source_trace_id)
-+    ? trace.source_trace_id
-+    : trace.connection_name?.match(/(?:^|__)source_net_\d+(?=__|$)/)?.[0].replace(/^__/, "");
++  const routedSourceNetId = encodedSourceNetId ?? (trace.source_trace_id && db2.source_net.get(trace.source_trace_id)
++    ? trace.source_trace_id : void 0);
 +  const routedSourceNet = routedSourceNetId ? db2.source_net.get(routedSourceNetId) : void 0;
 +  const getRoutedNetTraceId = () => {
 +    const name = `AUTOROUTED_${trace.pcb_trace_id}`;
@@ -49,7 +60,7 @@ index 51d45824e812e6a4db9e26181e5685be5d5122bf..19b6410569ac8e011c2231e7e401a44e
    const sourceTraces = db2.source_trace.list();
    const connMap = buildSourceConnectivityMap(sourceTraces);
    const routedSourceNetConnectivityId = routedSourceNet ? connMap.getNetConnectedToId(routedSourceNet.source_net_id) : void 0;
-@@ -24611,7 +24630,7 @@ function getSourceTraceIdForRoutedTrace({
+@@ -24611,7 +24634,7 @@ function getSourceTraceIdForRoutedTrace({
    const soleRoutedNetSourceTrace = routedNetSourceTraces.length === 1 ? routedNetSourceTraces[0] : void 0;
    const sourcePortIds = getSourcePortIdsFromRoutedTrace(db2, trace);
    if (sourcePortIds.length === 0) {
@@ -58,7 +69,7 @@ index 51d45824e812e6a4db9e26181e5685be5d5122bf..19b6410569ac8e011c2231e7e401a44e
    }
    const endpointNetIds = sourcePortIds.map((sourcePortId) => connMap.getNetConnectedToId(sourcePortId)).filter((netId) => Boolean(netId));
    const exactSourceTrace = sourcePortIds.length >= 2 ? sourceTraces.find(
-@@ -24620,8 +24639,8 @@ function getSourceTraceIdForRoutedTrace({
+@@ -24620,8 +24643,8 @@ function getSourceTraceIdForRoutedTrace({
      )
    ) : void 0;
    if (exactSourceTrace) return exactSourceTrace.source_trace_id;

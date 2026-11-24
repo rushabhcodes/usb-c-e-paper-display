@@ -13,8 +13,10 @@ from build123d import import_step
 root=Path(__file__).resolve().parent
 source=Path(sys.argv[1])
 out=root/'component-models';out.mkdir(exist_ok=True)
-rows=[]
+manifest=root/'component-models.json'
+rows=json.loads(manifest.read_text()) if manifest.exists() else []
 for sku,filename in [('C165948','TYPE_C_31_M_12'),('C13585','CL31A106KBHNNNE')]:
+    rows=[row for row in rows if row['lcsc']!=sku]
     origin=np.array([0,-2.7500289000000517,.000010999999999872223] if sku=='C165948' else [0,0,-.65])
     step=source/filename/f'{filename}.step';obj=source/filename/f'{filename}.obj'
     shape=import_step(step)

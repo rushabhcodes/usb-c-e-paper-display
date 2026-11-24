@@ -28,7 +28,7 @@ def main():
     assert json.loads((fab/'checks/electrical-audit.json').read_text())['result']=='PASS'
     for report in ['enclosure/usability-report.json','enclosure/fit-report.json']:
         assert json.loads((ROOT/report).read_text()).get('result','PASS')=='PASS'
-    assert json.loads((fab/'checks/reference-labels.json').read_text())['top_references']==68
+    assert json.loads((fab/'checks/reference-labels.json').read_text())['top_references']==76
     assert json.loads((fab/'checks/diagnostics.json').read_text())['warning_count']==0
     entries=[p for p in fab.rglob('*') if p.is_file() and p.name!='SHA256SUMS.txt']
     (fab/'SHA256SUMS.txt').write_text(''.join(f'{digest(p)}  {p.relative_to(fab)}\n' for p in sorted(entries)))
@@ -36,14 +36,14 @@ def main():
     for directory in ['product','imports','scripts','manufacturing','firmware','enclosure','docs/parts','tests','patches']:
         files.extend(p for p in (ROOT/directory).rglob('*') if p.is_file() and
                      '__pycache__' not in p.parts and p.suffix not in ['.blend1','.pyc'] and p.name!='USB-C-Epaper-18mm-Enclosure.zip')
-    files.append(ROOT/'docs/reference/README.md')
+    files.extend([ROOT/'docs/reference/README.md',ROOT/'docs/RP2354B.md'])
     files=sorted(set(files))
     checksum=ROOT/'RELEASE-SHA256SUMS.txt'
     checksum.write_text(''.join(f'{digest(p)}  {p.relative_to(ROOT)}\n' for p in files))
     files.append(checksum)
-    archive=ROOT/'USB-C-Epaper-RevB-Complete.zip'
+    archive=ROOT/'USB-C-Epaper-RevC-Complete.zip'
     with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
-        for p in files:z.write(p,str(Path('USB-C-Epaper-RevB')/p.relative_to(ROOT)))
+        for p in files:z.write(p,str(Path('USB-C-Epaper-RevC')/p.relative_to(ROOT)))
     with zipfile.ZipFile(archive) as z:assert z.testzip() is None
     print(json.dumps({'archive':str(archive),'files':len(files),'bytes':archive.stat().st_size,
                       'sha256':digest(archive),'routing':'Fresh native tscircuit routing; source-authored local power/clock/ground connections and native via primitives; no imported copper paths; caches disabled'},indent=2))

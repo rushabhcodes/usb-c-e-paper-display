@@ -1,4 +1,5 @@
 import {expect,test} from "bun:test"
+import {readFileSync} from "node:fs"
 import {RootCircuit} from "@tscircuit/core"
 import {checkEachPcbTraceNonOverlapping} from "@tscircuit/checks"
 import type {AnyCircuitElement} from "circuit-json"
@@ -36,6 +37,33 @@ test("autorouted inner-layer branches retain their declared net at native vias",
   ]
   expect(checkEachPcbTraceNonOverlapping([...data,...foreignCopper]).length).toBeGreaterThan(0)
 },120_000)
+
+test("composite MST metadata does not borrow a fixed bypass trace's width or length",()=>{
+  // Exercise the pinned Core's real private metadata mapper without adding a
+  // public API or requiring the router to pick a particular spanning tree.
+  const bundle=readFileSync(new URL(import.meta.resolve("@tscircuit/core")),"utf8")
+  const start=bundle.indexOf("function getSourceTraceIdForRoutedTrace(")
+  const end=bundle.indexOf("\n// lib/",start)
+  expect(start).toBeGreaterThan(0)
+  const mapper=new Function("buildSourceConnectivityMap","getSourcePortIdsFromRoutedTrace",
+    "getSourceIdsFromConnectedPcbTraces",bundle.slice(start,end)+";return getSourceTraceIdForRoutedTrace;")(
+      ()=>({getNetConnectedToId:()=>"rail"}), (_db:any,t:any)=>t.connectsTo,()=>[])
+  const local:any[]=[
+    {source_trace_id:"source_trace_0",connected_source_port_ids:["mcuA","capA"],connected_source_net_ids:[],min_trace_thickness:.25,max_length:3},
+    {source_trace_id:"source_trace_1",connected_source_port_ids:["mcuB","capB"],connected_source_net_ids:[],min_trace_thickness:.25,max_length:3},
+  ]
+  const db={source_net:{get:(id:string)=>id==="source_net_0"?{source_net_id:id}:undefined},
+    source_trace:{get:(id:string)=>local.find(t=>t.source_trace_id===id),list:()=>local,
+      insert:(row:any)=>{const added={...row,source_trace_id:"new_branch"};local.push(added);return added}}}
+  const id=mapper({db,subcircuit_id:"board",trace:{
+    pcb_trace_id:"source_trace_0__source_trace_1__source_net_0_mst0_0",
+    source_trace_id:"source_trace_0",connection_name:"source_trace_0",connectsTo:["capA","capB"],route:[]}})
+  const branch=db.source_trace.get(id)
+  expect(branch.connected_source_net_ids).toEqual(["source_net_0"])
+  expect(branch.connected_source_port_ids).toEqual(["capA","capB"])
+  expect(branch).not.toHaveProperty("min_trace_thickness")
+  expect(branch).not.toHaveProperty("max_length")
+})
 
 test("explicit full-stack via layers expose native inner-layer trace endpoints",async()=>{
   const circuit=new RootCircuit({platform:{useCloudAutorouter:false,autorouterThreads:1}})

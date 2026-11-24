@@ -1,12 +1,12 @@
-# USB image firmware — PCB Rev A
+# USB image firmware — PCB Rev C / RP2354B
 
-The ready-to-flash image is `releases/USB-Epaper-RevA-v1.0.0.uf2`. It targets this project's bare RP2040, 12 MHz crystal, 2 MB Winbond flash and **raw Good Display GDEY075T7 / UC8179**. It does not target the earlier Waveshare 3.97-inch display or a generic e-paper HAT.
+The ready-to-flash image is `releases/rp2354b/USB-Epaper-RevC-RP2354B-v1.1.0.uf2`. It targets this project's bare RP2354B, 12 MHz crystal, 2 MB internal flash and **raw Good Display GDEY075T7 / UC8179**. It does not target the earlier Waveshare 3.97-inch display or a generic e-paper HAT.
 
 ## Install and send an image
 
 1. Connect the panel to J2 with USB disconnected. Confirm contact orientation and close the ZIF latch.
 2. Connect USB-C with a data cable. Hold **BOOTSEL / SW1**, press and release **RESET / SW2**, then release BOOTSEL.
-3. Copy `USB-Epaper-RevA-v1.0.0.uf2` to the **RPI-RP2** USB drive. The board restarts as USB CDC serial (VID `2e8a`, PID `f00a`).
+3. Copy `USB-Epaper-RevC-RP2354B-v1.1.0.uf2` to the **RP2350** USB drive. The board restarts as USB CDC serial (VID `2e8a`, PID `f00f`).
 4. Install the host dependencies and upload:
 
 ```sh
@@ -18,7 +18,9 @@ python firmware/host/epaper.py --port /dev/ttyACM0 send firmware/examples/dashbo
 python firmware/host/epaper.py --port /dev/ttyACM0 send firmware/examples/dashboard-42.png
 ```
 
-Use `COM5` on Windows or `/dev/cu.usbmodem…` on macOS. `--port` may be omitted when exactly one matching RP2040 device is connected. Linux serial access depends on your local device permissions; close other serial monitors before using the sender.
+Use `COM5` on Windows or `/dev/cu.usbmodem…` on macOS. `--port` may be omitted when exactly one matching RP2040/RP2350 device is connected. Linux serial access depends on your local device permissions; close other serial monitors before using the sender.
+
+RP2354B runs at 150 MHz with 520 KB RAM. The compiler reports 62,052 bytes of program storage and 106,656 bytes of global RAM for this build. Archived files directly under `releases/` target the older RP2040 board.
 
 The first image gets a full refresh; the second example changes only the minute and progress bar and gets a fast partial update. USB-C carries this application protocol, rather than USB video or DisplayPort. A full 48,000-byte monochrome image is transferred each time; the MCU computes the changed rectangle.
 
@@ -61,7 +63,7 @@ python firmware/build.py
 python firmware/test.py
 ```
 
-Pinned Arduino-Pico **6.4.0**, Generic RP2040, **125 MHz**, 2 MB flash/no filesystem, Pico SDK USB CDC, generic SPI flash boot2 `/4`, size optimization. The conservative `03h` flash bootloader works without relying on a flash-specific quad-enable configuration. The compiled build uses **64,800 bytes flash / 105,884 bytes static RAM** (40%); stack/heap and USB buffers have remaining headroom. `releases/build-manifest.json` records FQBN and SHA256 hashes.
+Pinned Arduino-Pico **6.4.0**, Generic RP2350 with **RP2350B** variant, Arm Cortex-M33, **150 MHz**, 2 MB internal flash/no filesystem, Pico SDK USB CDC and size optimization. The build uses **62,052 bytes program storage / 106,656 bytes static RAM** (20%). `releases/rp2354b/build-manifest.json` records the complete FQBN and SHA256 hashes. The UF2 auditor checks the RP2350 secure-Arm family and the ROM compatibility block, then compares the flash payload against the compiled binary.
 
 The tests cover CRC vectors, corrupt headers and payloads, resynchronization, bounded payload sizes, fragmented replies, timeouts, image packing, transparency, byte-aligned differences, first-frame baseline, cleanup cadence, no-op images, sleep, power sequencing, BUSY faults and retry replay. The application tests compile the actual sketch against fake hardware boundaries. They do not establish physical USB enumeration or waveform performance.
 

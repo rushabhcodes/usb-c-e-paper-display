@@ -54,5 +54,33 @@
       ]
     ],
     "model_frame": "native tscircuit GLB loader: CAD Z-up; board-surface origin baked to zero"
+  },
+  {
+    "lcsc": "C408335",
+    "source": "tsci import --jlcpcb --use-exact-footprint --download",
+    "step_sha256": "d7d4ae11847672895de58abf53dde868bfaffabf09d078c17a92ff54dd68409c",
+    "obj_sha256": "9d040e78e3ea998afad13a9535963ca3acbc375871f7da1e500de69bbd774152",
+    "glb_sha256": "3582bc4ce98bcf3eda76580ab8e08c45006e242c8ca11cb7cff27b7a49d85d2a",
+    "solid_count": 1,
+    "each_mesh_watertight": true,
+    "matches_original_bounds_mm": 0.025,
+    "source_origin_baked_mm": [
+      0,
+      0,
+      0
+    ],
+    "model_bounds_mm": [
+      [
+        -2.200000000000001,
+        -2.1000000000000005,
+        -8.131516293641283e-17
+      ],
+      [
+        2.200000000000001,
+        2.1,
+        2.1000000000000005
+      ]
+    ],
+    "model_frame": "native tscircuit GLB loader: CAD Z-up; supplier board-surface origin unchanged"
   }
 ]

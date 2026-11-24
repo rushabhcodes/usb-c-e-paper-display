@@ -6,7 +6,7 @@ import zipfile
 from pathlib import Path
 
 root = Path('manufacturing')
-archive = root/'JLCPCB-Gerbers-RevB.zip'
+archive = root/'JLCPCB-Gerbers-RevC.zip'
 with zipfile.ZipFile(archive) as z:
     files = {f:z.read(f) for f in z.namelist()}
 bom_data = files.pop('bom.csv') if 'bom.csv' in files else (root/'BOM.csv').read_bytes()
@@ -17,7 +17,7 @@ data = json.loads(Path('dist/index/circuit.json').read_text())
 src = {e['source_component_id']:e for e in data if e['type']=='source_component'}
 pcbs = {src[e['source_component_id']]['name']:e for e in data if e['type']=='pcb_component'
         and e.get('source_component_id') in src and not e.get('do_not_place')}
-assert len(bom)==len(cpl)==len(pcbs)==62
+assert len(bom)==len(cpl)==len(pcbs)==70
 assert {r['Designator'] for r in bom}=={r['Designator'] for r in cpl}==set(pcbs)
 for row in cpl:
     component = pcbs[row['Designator']]
@@ -39,13 +39,13 @@ with (root/'CPL.csv').open('w',newline='') as f:
     writer = csv.DictWriter(f,fieldnames=['Designator','Mid X','Mid Y','Layer','Rotation'])
     writer.writeheader()
     writer.writerows(cpl)
-with zipfile.ZipFile(root/'SMT-Stencil-RevB.zip','w',zipfile.ZIP_DEFLATED) as z:
+with zipfile.ZipFile(root/'SMT-Stencil-RevC.zip','w',zipfile.ZIP_DEFLATED) as z:
     for name in ['F_Paste.gbr','Edge_Cuts.gbr']:
         z.writestr(name,files[name])
 files.pop('F_Fab.gbr',None)
 with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
     for name,content in files.items(): z.writestr(name,content)
-report = {'result':'PASS','assembled_refs':62,'bom_cpl_match':True,
+report = {'result':'PASS','assembled_refs':70,'bom_cpl_match':True,
           'all_supplier_codes_match':True,'coordinate_origin':'PCB centre, matching Gerbers; mm',
           'position_reference':'footprint_origin','side':'Top'}
 report['all_supplier_orientations_resolved']=True

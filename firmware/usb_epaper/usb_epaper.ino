@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
-// USB-C raw GDEY075T7 controller, PCB Rev A. See ../README.md.
+// USB-C raw GDEY075T7 controller, PCB Rev C / RP2354B. See ../README.md.
 #include <Arduino.h>
 #include <SPI.h>
+#if defined(ARDUINO_ARCH_RP2040) && (!defined(PICO_RP2350) || !PICO_RP2350)
+#error "PCB Rev C requires the RP2350B target; RP2040 UF2 files are incompatible"
+#endif
 #include "src/protocol.h"
 #include "src/vendor/gdey/GxEPD2_750_GDEY075T7.h"
 
@@ -73,7 +76,7 @@ void handle(epd::Event e) {
   }
   const char* name=actual==epd::FULL?"full":actual==epd::PARTIAL?"partial":"unchanged";
   snprintf(lastJson,sizeof(lastJson),
-    "{\"device\":\"usb-epaper-reva\",\"firmware\":\"1.0.0\",\"panel\":\"GDEY075T7\","
+    "{\"device\":\"usb-epaper-revc-rp2354b\",\"firmware\":\"1.1.0\",\"panel\":\"GDEY075T7\","
     "\"width\":800,\"height\":480,\"baseline\":%s,\"powered\":%s,\"partials\":%u,"
     "\"max_partials\":5,\"mode\":\"%s\",\"bbox\":[%u,%u,%u,%u],\"elapsed_ms\":%lu}",
     policy.baseline?"true":"false",powered?"true":"false",policy.partials,name,

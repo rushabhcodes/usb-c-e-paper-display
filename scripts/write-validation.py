@@ -1,66 +1,77 @@
-"""Write measured release facts after every fabrication gate has passed."""
-import hashlib,json,math,zipfile
+"""Write measured Rev C release facts only after the fabrication gates pass."""
+import json,zipfile,hashlib,math
 from pathlib import Path
 from collections import Counter
-ROOT=Path(__file__).resolve().parents[1]
-fab=ROOT/'manufacturing';checks=fab/'checks'
-read=lambda path:json.loads((ROOT/path).read_text())
+ROOT=Path(__file__).resolve().parents[1];fab=ROOT/'manufacturing'
+read=lambda n:json.loads((ROOT/n).read_text())
 circuit=read('dist/index/circuit.json');counts=Counter(e['type'] for e in circuit)
 assert not [e for e in circuit if 'error' in e['type'] or 'warning' in e['type']]
-provenance=read('manufacturing/checks/routing-provenance.json')
-style=read('manufacturing/checks/pcb-style-review.json')
-stock=read('manufacturing/checks/diagnostics.json')
-assembly=read('manufacturing/checks/assembly-audit.json')
-product=read('manufacturing/checks/product-views.json')
-for report in [provenance,style,stock,assembly,product]:assert report['result']=='PASS'
-sha=hashlib.sha256((ROOT/'dist/index/circuit.json').read_bytes()).hexdigest()
-assert provenance['circuit_sha256']==style['circuit_sha256']==stock['circuit_sha256']==sha
-vias=[e for e in circuit if e['type']=='pcb_via']
-drill_gap=min(math.hypot(a['x']-b['x'],a['y']-b['y'])-(a['hole_diameter']+b['hole_diameter'])/2 for i,a in enumerate(vias) for b in vias[i+1:])
-assert drill_gap>=.2-1e-5
-with zipfile.ZipFile(fab/'JLCPCB-Gerbers-RevB.zip') as archive:gerber_count=len(archive.namelist())
-fit=read('enclosure/fit-report.json');clearance=read('enclosure/component-clearance.json')
-access=read('enclosure/usability-report.json')
-text=f'''# Rev B — native tscircuit fabrication release
+p=read('manufacturing/checks/routing-provenance.json');style=read('manufacturing/checks/pcb-style-review.json');stock=read('manufacturing/checks/diagnostics.json');assembly=read('manufacturing/checks/assembly-audit.json');labels=read('manufacturing/checks/reference-labels.json');electrical=read('manufacturing/checks/electrical-audit.json');clearance=read('enclosure/component-clearance.json');fit=read('enclosure/fit-report.json');access=read('enclosure/usability-report.json');uf2=read('firmware/releases/rp2354b/uf2-audit.json')
+for report in [p,style,stock,assembly,labels,electrical,clearance,uf2]:assert report['result']=='PASS'
+vias=[e for e in circuit if e['type']=='pcb_via'];gap=min(math.hypot(a['x']-b['x'],a['y']-b['y'])-(a['hole_diameter']+b['hole_diameter'])/2 for i,a in enumerate(vias) for b in vias[i+1:]);assert gap>=.2-1e-5
+with zipfile.ZipFile(fab/'JLCPCB-Gerbers-RevC.zip') as z:gerbers=len(z.namelist())
+text=f'''# Rev C — RP2354B native tscircuit release
 
 **PASS for prototype fabrication: zero circuit errors and zero warnings.**
 
-Checked {stock['verified_at']}. USB-C exits the left side of an 18 mm case. The PCB is installed horizontally; the display connector stays beside the short raw-panel flex. The shell seam crosses the USB axis so the housing can open without trapping the connector.
+Validated {stock['verified_at']}. The RP2354B replaces RP2040 and external flash. U5 now supplies the 1.092 V core rail. USB-C remains accessible from the left of the 18 mm enclosure. See [hardware rationale](../docs/RP2354B.md).
 
 | Check | Measured result |
 |---|---|
-| TypeScript / native full-product build | PASS |
-| Electrical netlist and both placement checks | 0 errors, 0 warnings |
-| Independent pin / supply audit | 68 electrical components, 45 nets |
-| Native routing | {counts['pcb_trace']} traces, {len(vias)} through vias, four copper layers |
-| Inner ground pour | {counts['pcb_copper_pour']} connected regions; no isolated-island warnings |
-| Routing inputs | {provenance['source_authored_trace_count']} source-authored local paths and {provenance['source_authored_via_count']} native through vias; zero imported routes; caches disabled |
+| TypeScript, netlist and schematic / PCB placement | PASS |
+| Independent physical pin and supply audit | {electrical['electrical_components']} electrical components, {electrical['source_nets']} nets |
+| Fresh native routing | {counts['pcb_trace']} traces, {len(vias)} through vias, four layers |
+| Inner ground pour | {counts['pcb_copper_pour']} connected region(s); no isolated warnings |
+| Routing input | {p['source_authored_trace_count']} authored local paths; zero imported traces / vias; caches disabled |
 | Gerber-derived shorts | No shorts detected |
 | Default PCB style | 0 issues |
 | Continuous-copper style | 0 issues across {style['continuous_chain_count']} chains |
-| Minimum via drill-edge spacing | {drill_gap:.3f} mm; required 0.20 mm |
-| Via geometry | 0.30 mm drill / 0.55 mm pad, tented both sides |
-| Top reference labels | 68 readable, component-associated labels; zero bottom labels |
-| Supplier inventory | 25 exact SKUs with recent primary JLCPCB observations |
-| BOM / CPL | 62 matched top-side assembly references; supplier orientations resolved |
-| Stencil | Four 1.15 mm RP2040 pad windows; no paste on probe pads |
-| Native product views | 16 mechanical parts, two System pages, six Drawing pages |
-| Enclosure | Four valid single solids and watertight print meshes; nominal fit checks pass |
-| Disassembly | Native closed-geometry sweep checks pass |
-| Component rear clearance | Minimum {clearance['minimum_clearance_mm']:.3f} mm across all 62 supplier meshes |
-| USB usability | Full 40 mm insertion stroke and 7 mm grip allowance, including stand clearance |
+| Minimum via drill-edge spacing | {gap:.3f} mm; minimum 0.20 mm |
+| Through-via geometry | 0.30 mm drill / 0.55 mm pad; both sides tented |
+| Reference labels | {labels['top_references']} component-associated top labels; zero bottom labels |
+| Supplier inventory | {stock['verified_supplier_skus']} exact SKUs with primary JLCPCB observations younger than six hours |
+| BOM / CPL | {assembly['assembled_refs']} matched top-side assembly references; supplier rotations resolved |
+| QFN stencil | Four 1.25 mm windows; 54% exposed-pad coverage; no paste on probe pads |
+| Product views | 16 mechanical parts, two System pages, six Drawing pages |
+| New component / enclosure clearance | All 70 supplier meshes; minimum rear-floor gap {clearance['minimum_clearance_mm']:.3f} mm |
+| Case and cable access | Four valid solids and watertight STLs; 40 mm insertion sweep and 7 mm grip allowance |
+| RP2354B firmware | Compiled at 150 MHz; correct RP2350 UF2 family and binary equality |
 
-All PCB copper is created through tscircuit. The USB entry, local bypass supplies, crystal connections and ground returns use ordinary `trace` / `pcbPath` declarations and native `via` primitives. Ground pads have short local via returns to inner1; the plated USB shell slots already cross the plane. Ground is connected by the pour rather than globally routed tracks, and all other named nets are explicitly assigned to native routing. Connectivity checks remain enabled. The crystal and its load capacitors stay on top with no signal-layer changes. The native {provenance['solver']} routes the remaining connections from the current component placement. All {provenance['source_authored_trace_count']} declared local paths remain fixed. No KiCad, external router, custom algorithm callback or saved-board-route input is used.
+The layout uses ordinary tscircuit `trace` / `pcbPath` declarations for local connections and native `via` primitives. The built-in {p['solver']} routes the remaining connections from current placement. All declared paths remain fixed. No KiCad, external router, custom router callback, imported routes or route caches are used. Electrical checks, stock warnings, shorts and default style rules remain enabled.
 
-The build uses tscircuit {provenance['tscircuit_version']}, Core {json.loads((ROOT/'node_modules/@tscircuit/core/package.json').read_text())['version']} and capacity-autorouter {provenance['autorouter_version']}. A pinned Bun Core patch preserves native branch net/endpoints and avoids borrowing unrelated local width constraints; it also creates explicitly requested inner-layer via ports; the routing algorithm and all diagnostics remain enabled. Its regression also verifies that a real foreign-net short is detected. `checks/routing-provenance.json` records the patch, dependency/source hashes and every native stage. `checks/native-routing/` contains fresh diagnostic output; these files are never imported by the circuit.
+The pinned Core patch preserves branch net identity and explicitly requested via layer ports; it does not replace the routing algorithm. The RP2354B supplier pin-metadata correction removes incorrect UART/I2C assignments from dedicated USB/QMI pins using Raspberry Pi's physical pin table. Regression tests retain real short detection and power-pin requirements.
 
-`JLCPCB-Gerbers-RevB.zip` contains {gerber_count} fabrication files. `BOM.csv`, `CPL.csv` and `SMT-Stencil-RevB.zip` come from the same validated Circuit JSON. Six engineering SVGs and two system diagrams accompany the editable design, compatible firmware and enclosure files.
+`JLCPCB-Gerbers-RevC.zip` contains {gerbers} fabrication files. BOM, CPL and stencil derive from this same validated Circuit JSON. Five schematic SVGs, six engineering drawings, two system diagrams, firmware, printable STLs and editable STEP files accompany the source.
 
-The case is {fit['case_size_mm'][0]} × {fit['case_size_mm'][1]} × {fit['case_size_mm'][2]} mm. It retains the R3.65 flex return and uses M3 × 14 case screws. The 14 × 8 mm port admits the mating shell while the complete plug body stays outside; nominal straight-plug profiles are 14 × 8 × 24 and 22 × 10 × 30 mm. The lower display-window edge clears the stand lip by {access['front_window_clearance_above_stand_lip_mm']:.3f} mm.
+The enclosure is {fit['case_size_mm'][0]} × {fit['case_size_mm'][1]} × {fit['case_size_mm'][2]} mm. Its USB-C aperture, PCB posts and short-panel-flex datums remain aligned. The lower display window clears the stand lip by {access['front_window_clearance_above_stand_lip_mm']:.3f} mm. The native full-product build includes assembly collision / disassembly checks.
 
-Supplier observations expire after six hours; run `bun run refresh:stock` before a later build or order. Unknown or expired inventory retains the native warning. Inventory can change during quoting.
-
-This validates prototype files and nominal CAD. A first print, supplied-panel/FPC fit, USB bring-up, power rails and real refresh behavior still require physical hardware. No JLCPCB order has been placed.
+This is software and nominal CAD validation. Physical power-rail measurements, USB enumeration, supplied-panel/FPC fit, waveform performance and a first printed fit remain untested. The archived RP2040 UF2 must not be used on Rev C. No fabrication order has been placed.
 '''
 (fab/'VALIDATION.md').write_text(text)
-print('Wrote measured Rev B validation report')
+(ROOT/'firmware/VALIDATION.md').write_text(f'''# Firmware v1.1.0 — RP2354B Rev C
+
+Arduino-Pico 6.4.0 compiled the real sketch for Generic RP2350B, Arm, 150 MHz and 2 MB flash. Program storage: 62,052 bytes. Static RAM: 106,656 bytes (of 524,288).
+
+The UF2 audit passed: {uf2['payload_blocks']} secure-Arm payload blocks, one absolute compatibility block, family 0xe48bff59, flash address bounds and exact equality with the compiler binary. Artifact SHA256 values are in `releases/rp2354b/build-manifest.json`.
+
+The protocol / refresh-policy and actual-sketch tests passed under AddressSanitizer and UndefinedBehaviorSanitizer. Five host tests passed, covering framing, corrupt replies, pixel packing, alpha compositing and RP2350 serial discovery / ambiguous-port handling. Eight native circuit regression tests passed.
+
+The host protocol and GP8–GP14 mapping remain compatible. The new RP2354B UF2 is required; root-level release binaries are archived RP2040 images. USB uses VID 2e8a / PID f00f and the core's 250 mA configuration descriptor.
+
+No physical USB, flash, power-rail or display test has been performed. Partial-refresh timing remains limited by the UC8179 panel waveforms.
+''')
+(ROOT/'enclosure/VALIDATION.md').write_text(f'''# Rev C — 18 mm enclosure validation
+
+The case is 182.2 × 137.2 × 18 mm, with a left-side USB-C opening and separate 15° stand. The RP2354B layout retains the mounting-hole, connector and FPC datums used by the case.
+
+- Four printed parts are valid single CAD solids with watertight STL meshes.
+- Nominal glass, PCB and printed-part intersections are zero.
+- All 70 assembled supplier meshes were checked against the 2.4 mm rear floor; minimum clearance is {clearance['minimum_clearance_mm']:.3f} mm.
+- Ordinary and large straight USB plugs clear the 40 mm insertion sweep and 7 mm grip envelope with the stand installed.
+- The native tscircuit assembly contains 16 mechanical parts and six dimensioned drawing pages. Its collision and disassembly checks pass without excluded geometry.
+
+The new inductor uses a closed solid tessellated from its unmodified TSCI-imported supplier STEP model; its bounds match the original OBJ to 0.025 mm. No bounding-box replacement is used for clearance validation.
+
+A first print, real cable fit and the actual panel/FPC tolerance stack remain untested.
+''')
+print('Wrote measured Rev C fabrication, firmware and enclosure reports')
