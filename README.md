@@ -43,6 +43,19 @@ bun run --bun tsci build index.circuit.tsx --autorouter-debug --autorouter-debug
 
 The pinned Core dependency has a reproducible Bun patch in `patches/`. It preserves the declared net and source endpoints on native autorouter branches instead of borrowing an unrelated local trace's identity and width. It also preserves explicitly requested inner-layer via ports, allowing ordinary traces to connect to inner2 on full-stack through vias. These fixes correct native connectivity/API behavior without changing the routing algorithm or disabling checks. `bun install --frozen-lockfile` applies it; `bun test tests` checks both the native-via regression and detection of a real foreign-net short. Keep the patch with the source when rebuilding.
 
+The tsci download includes the helper scripts, tests, firmware, enclosure sources and fabrication inputs used by these commands. Download the entire package into an empty directory before installing; the embedded `tsci-package-manifest.json` lists the source files and SHA256 hashes. Its `package.json` hash excludes only the release version, which the CLI may increment during publication. A clean rebuild uses the commands above; Python 3 is required for the audit helpers. Firmware and enclosure regeneration additionally require the tools described in their respective READMEs.
+
+Publish through the checked-in packaging command so helper scripts cannot be omitted by a hand-selected staging list:
+
+```sh
+python scripts/publish-tsci.py --stage-only  # inspect dist/tsci-package-* first
+python scripts/publish-tsci.py               # stage and run tsci push --compress --include-dist
+```
+
+The packager copies every non-hidden Git-tracked file, verifies the validated design inputs, and records the exact source manifest. It also works from a downloaded package using that manifest when no Git checkout is present. Local toolchains, caches and untracked files are excluded.
+
+Verify a published version with `python scripts/verify-tsci-package.py VERSION`. This downloads its source files into a new directory, checks the manifest, installs the pinned dependencies, exercises the stock and test helpers, and performs a fresh native build plus all release checks. Generated `dist` files are excluded from the download. The rebuilt PCB and CAD must match the included fabrication release.
+
 Rev C uses four layers for RP2354B fanout and an inner ground reference. The PCB uses 0.30 mm drilled vias and 0.55 mm pads, avoiding the previous small-drill fabrication charge. Complex parts were imported using `tsci import C… --jlcpcb --use-exact-footprint`; their imported footprints are in `imports/`. Solder mask, stencil apertures and reference markings are adjusted for fabrication; the USB shell slots are enlarged to 0.8 × 1.6 mm while retaining the outer board-edge clearance. Passives also use exact CLI-imported footprints with explicit LCSC codes. `docs/parts/` contains the part discovery responses; inventory is refreshed from exact JLCPCB product records with `bun run refresh:stock`. The supplier engine retains native lookup, footprint and orientation checks; only verified inventory younger than six hours supplements an unknown catalog result. Unknown or expired inventory remains a warning. The previous external-routing release is superseded and excluded from current release packages.
 
 The native autorouter receives the source-authored local connections and ground vias, then routes the remaining connections from the current placement. Diagnostic route JSON written by the CLI is output only. `manufacturing/checks/routing-provenance.json` records the fresh inputs, source hashes, solver versions and disabled caches.

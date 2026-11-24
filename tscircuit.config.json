@@ -4,13 +4,14 @@
   "ignoredFiles": [
     ".legacy-external-routing/**",
     ".toolchains/**",
-    "firmware/**",
-    "manufacturing/**",
+    "logs/**",
     "checks/**",
-    "enclosure/exports/**",
-    "enclosure/*.png",
-    "enclosure/*.blend",
-    "tests/**"
+    "**/__pycache__/**",
+    "**/*.pyc",
+    "**/*.blend1",
+    "USB-C-Epaper-*.zip",
+    "docs/reference/*.pdf",
+    "docs/reference/*.txt"
   ],
   "includeBoardFiles": [
     "index.circuit.tsx"
