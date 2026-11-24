@@ -62,7 +62,11 @@ def main():
         raise SystemExit("Validate the fabrication circuit before publishing")
     provenance = json.loads((fab / "checks/routing-provenance.json").read_text())
     if provenance["circuit_sha256"] != hashlib.sha256(circuit_bytes).hexdigest():
-        raise SystemExit("Fabrication circuit does not match its routing audit")
+        published = json.loads((ROOT / MANIFEST).read_text()) if (ROOT / MANIFEST).is_file() else {}
+        canonical = json.dumps(circuit, separators=(",", ":")).encode()
+        if (published.get("fabrication_circuit_original_sha256") != provenance["circuit_sha256"]
+                or published.get("fabrication_circuit_canonical_sha256") != hashlib.sha256(canonical).hexdigest()):
+            raise SystemExit("Fabrication circuit does not match its routing audit")
     for name, expected in provenance["source_files_sha256"].items():
         if hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != expected:
             # A registry download has a CLI-assigned version. Its manifest still
@@ -83,10 +87,19 @@ def main():
         target = stage / name
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(ROOT / name, target)
+        if name == "manufacturing/design.circuit.json":
+            # The registry's per-file request limit rejects the formatted JSON.
+            # Keep every record and value, changing only its whitespace.
+            target.write_text(json.dumps(circuit, separators=(",", ":")))
+            if json.loads(target.read_text()) != circuit:
+                raise SystemExit("Fabrication JSON changed during minification")
         hashes[name] = digest(name, target.read_bytes())
     manifest = {"format_version": 1, "hash_algorithm": "sha256",
                 "package_json_hash_excludes": ["version"],
-                "files": hashes, "helper_scripts": helpers}
+                "files": hashes, "helper_scripts": helpers,
+                "fabrication_circuit_original_sha256": provenance["circuit_sha256"],
+                "fabrication_circuit_canonical_sha256": hashlib.sha256(
+                    json.dumps(circuit, separators=(",", ":")).encode()).hexdigest()}
     (stage / MANIFEST).write_text(json.dumps(manifest, indent=2) + "\n")
     dist = stage / "dist/index"
     dist.mkdir(parents=True)

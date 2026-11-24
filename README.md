@@ -52,7 +52,7 @@ python scripts/publish-tsci.py --stage-only  # inspect dist/tsci-package-* first
 python scripts/publish-tsci.py               # stage and run tsci push --compress --include-dist
 ```
 
-The packager copies every non-hidden Git-tracked file, verifies the validated design inputs, and records the exact source manifest. It also works from a downloaded package using that manifest when no Git checkout is present. Local toolchains, caches and untracked files are excluded.
+The packager includes every non-hidden Git-tracked file, verifies the validated design inputs, and records the exact package manifest. The generated fabrication Circuit JSON is minified without changing its records or values to fit the registry's per-file upload limit; the manifest records both its original and canonical hashes. It also works from a downloaded package using that manifest when no Git checkout is present. Local toolchains, caches and untracked files are excluded.
 
 Verify a published version with `python scripts/verify-tsci-package.py VERSION`. This downloads its source files into a new directory, checks the manifest, installs the pinned dependencies, exercises the stock and test helpers, and performs a fresh native build plus all release checks. Generated `dist` files are excluded from the download. The rebuilt PCB and CAD must match the included fabrication release.
 
